@@ -17,11 +17,11 @@
 (*SelectionEvaluate[nb]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Preliminary code: various definitions*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Creating relevant directories and critical definitions*)
 
 
@@ -33,11 +33,11 @@
 (*<<FeynCalc`*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Parameters*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Conversion units*)
 
 
@@ -47,32 +47,33 @@
 (*\[Alpha]EMval=1/137.;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Kinematics at various beam dump facilities*)
 
 
 (* ::Input:: *)
-(*FacilitiesList={"FermilabBD","SPS","LHC","FCC-hh","Serpukhov","ESS"}//Sort;*)
+(*FacilitiesList={"FermilabBD","SPS","LHC","FCC-hh","Serpukhov","ESS", "LHC_fixed_target"}//Sort;*)
 (*EmaxFacility["SPS"]=400.;*)
 (*EmaxFacility["FermilabBD"]=120.;*)
 (*EmaxFacility["Serpukhov"]=70.;*)
 (*EmaxFacility["LHC"]=6500.;*)
 (*EmaxFacility["FCC-hh"]=50000.;*)
 (*EmaxFacility["ESS"]=2.;*)
+(*EmaxFacility["LHC_fixed_target"]=7000.;*)
 (*Do[*)
 (*EcmFacility[Fac]=Sqrt[(EmaxFacility[Fac]+0.938)^2-(EmaxFacility[Fac]^2-0.938^2)]*)
-(*,{Fac,{"Serpukhov","SPS","FermilabBD","ESS"}}]*)
+(*,{Fac,{"Serpukhov","SPS","FermilabBD","ESS", "LHC_fixed_target"}}]*)
 (*Do[EcmFacility[Fac]=2EmaxFacility[Fac],{Fac,{"LHC","FCC-hh"}}]*)
 (**)
 (*vCMbeamDump[Eplab_,MP_]=v/.Solve[Sqrt[Eplab^2-MP^2]-Eplab*v==MP*v,v][[1]];*)
 (*\[Gamma]CMbeamDump[Eplab_,MP_]=1/Sqrt[1-vCMbeamDump[Eplab,MP]^2]//Simplify;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Fragmentation fractions of mesons*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*LHC and FCC-hh*)
 
 
@@ -87,7 +88,7 @@
 (*fbtob0["LHC"]=fbtobplus["LHC"]=fbtob0["FCC-hh"]=fbtobplus["FCC-hh"]=0.324;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*SPS*)
 
 
@@ -106,7 +107,7 @@
 (*\[Chi]ssbarSPS=1/7;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*FermilabBD (assumed to be the same as at SPS; to be fixed)*)
 
 
@@ -117,9 +118,28 @@
 (*fbtobplus["FermilabBD"]=0.4;*)
 (*fbtob0["FermilabBD"]=0.4;*)
 (*fbtobc["FermilabBD"]=0;*)
+(**)
+(**)
 
 
-(* ::Section::Closed:: *)
+(* ::Subsection:: *)
+(*LHC_fixed_target*)
+
+
+(* ::Input:: *)
+(**)
+
+
+(* ::Input:: *)
+(*fctod0["SPS"]= 0.593;*)
+(*fctodplus["SPS"]=0.287;*)
+(*fctods["SPS"]=0.086;*)
+(*fbtobplus["SPS"]=0.4;*)
+(*fbtob0["SPS"]=0.4;*)
+(*fbtobc["SPS"]=0;*)
+
+
+(* ::Section:: *)
 (*Masses and other parameters of SM particles*)
 
 
@@ -157,10 +177,10 @@
 (*(*Nucleus-proton cross-section in pb*)*)
 (*Do[\[Sigma]pNucleus[Z]=53*10^9*anucleus[Z]^0.77,{Z,{"Mo","Fe","C"}}];*)
 (*(*proton-proton cross-section in pb*)*)
-(*{\[Sigma]pp["Serpukhov"],\[Sigma]pp["FermilabBD"],\[Sigma]pp["SPS"],\[Sigma]pp["LHC"],\[Sigma]pp["FCC-hh"],\[Sigma]pp["ESS"]}={40.,40.,40.,78.,104.,44.}*10^9;*)
+(*{\[Sigma]pp["Serpukhov"],\[Sigma]pp["FermilabBD"],\[Sigma]pp["SPS"],\[Sigma]pp["LHC"],\[Sigma]pp["FCC-hh"],\[Sigma]pp["ESS"], \[Sigma]pp["LHC_fixed_target"] }={40.,40.,40.,78.,104.,44.,42.5}*10^9;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Energy-angle grid for the distribution function*)
 
 
@@ -188,15 +208,19 @@
 (*\[Theta]Nlist["Serpukhov"]=\[Theta]NlistLight["Serpukhov"]=\[Theta]Nlist["SPS"];*)
 (*\[Theta]Nlist["ESS"]=\[Theta]NlistLight["ESS"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)10^-4.,10^-3.,10^-2.},Table[10^\[Theta]N,{\[Theta]N,Log10[3*10^-2.],Log10[0.5],0.25}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.01}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*ENlist["ESS"]=Join[Table[e,{e,0.0051,0.1401,0.001}],Table[10^EN,{EN,Log10[0.145],Log10[2.],0.02}],{EmaxFacility["ESS"]}]//N;*)
+(*ENlist["LHC_fixed_target"]=Join[With[{start=0.02,end=EmaxFacility["LHC_fixed_target"]},*)
+(*NestWhileList[#+StepEtemp[#]&,start,#<=end&,1,\[Infinity],-1]],{EmaxFacility["LHC_fixed_target"]}]//N;*)
+(*\[Theta]Nlist["LHC_fixed_target"]=\[Theta]NlistLight["LHC_fixed_target"]=Join[{10^-5.,5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.8],0.05}],{0.85,0.95,1.05,1.2,1.4,1.6,1.9,2.2,2.4,2.7,3.,Pi}]//N;*)
+(*\[Theta]NlistB["LHC_fixed_target"]=Join[{10^-5.,5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.8],0.03}],{0.85,0.95,1.05,1.2,1.4,1.6,1.9,2.2,2.4,2.7,3.,Pi}]//N;*)
 (*ELLPfromKlistSPS={0.02,0.05,0.1,0.25,0.5,1.,1.5,2.,2.5,3.,3.5,4.,5.,6.,7.,8.};*)
 (**)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Preliminary code: mother particles sampling*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Importing tabulated mother particles distributions*)
 
 
@@ -218,15 +242,15 @@
 (*sortedDataPairs=SortBy[Join[sortedDataPairs,Table[{Facility,"p"},{Facility,FacilitiesList}],{{"ESS","PiCharged"},{"ESS","mu"}}],{#[[1]],#[[2]]}&];*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Code that samples 4-momenta of mother particles given the tabulated distribution*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Preliminary definitions*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quick mapping the data {x,y,f[x,y]} ->{x',y',f[x',y']} for some structured grids {x,y} and {x', y'}*)
 
 
@@ -240,7 +264,7 @@
 (*eval@Total[Times@@#[[All,1]] Compile`GetElement[y,Sequence@@#[[All,2]]]&/@Tuples@Transpose[{{svars,ivars},{tvars,ivars+1}},{2,3,1}]],seq@{jvars,Length@igvars}]],CompilationTarget->"C",RuntimeAttributes->{Listable},Parallelization->True,RuntimeOptions->"Speed"],Except[seq|eval|indexed]]/.seq[expr_]:>RuleCondition@(Sequence@@Table[Inactivate[expr,Except[slist|indexed]]/.{l_slist:>l[[i]],indexed[l_]:>Inactive[Compile`GetElement][l,i]},{i,nd}])/.eval@expr_:>RuleCondition[Activate[expr/.slist->List]]]//Activate;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Compiled linear interpolations - for mapping from {x,y,f[x,y]} to {Subscript[x, random],Subscript[y, random],f[Subscript[x, random],Subscript[y, random]]}*)
 
 
@@ -286,7 +310,7 @@
 (*CompilePrint@linint1;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Finding Subscript[E, max](\[Theta]) - for efficient energy sampling for the given \[Theta]*)
 
 
@@ -335,7 +359,7 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Sampling points*)
 
 
@@ -391,11 +415,11 @@
 (*{px,py,pz,e,m}],CompilationTarget->"C",RuntimeOptions->"Speed",RuntimeAttributes->{Listable},Parallelization->True]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Interpolation and phase space sampling*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Phase space sampling*)
 
 
@@ -411,10 +435,10 @@
 (*IfMotherInterpolated[Facility_,Mother_]:=MemberQ[{Keys[DownValues@DoubleDistrMotherInt][[All,1,-2]],Keys[DownValues@DoubleDistrMotherInt][[All,1,-1]]}//Transpose,{Facility,Mother}]*)
 (*{IfMotherInterpolated["LHC","Upsilon"],IfMotherInterpolated["SPS","Kplus"]}*)
 (*(*For the moment, for some distributions that are absent, they will be approximated by the distributions of similar particles*)*)
-(*SimilarParticle["FCC-hh","Bc"]=SimilarParticle["LHC","Bc"]=SimilarParticle["SPS","Bc"]=SimilarParticle["FermilabBD","Bc"]="Bplus";*)
-(*SimilarParticle["FCC-hh","B0"]=SimilarParticle["LHC","B0"]=SimilarParticle["SPS","B0"]=SimilarParticle["FermilabBD","B0"]="Bplus";*)
-(*SimilarParticle["FCC-hh","Bs"]=SimilarParticle["LHC","Bs"]=SimilarParticle["SPS","Bs"]=SimilarParticle["FermilabBD","Bs"]="Bplus";*)
-(*SimilarParticle["FCC-hh","tau"]=SimilarParticle["LHC","tau"]=SimilarParticle["SPS","tau"]=SimilarParticle["FermilabBD","tau"]="Ds";*)
+(*SimilarParticle["FCC-hh","Bc"]=SimilarParticle["LHC","Bc"]=SimilarParticle["SPS","Bc"]=SimilarParticle["FermilabBD","Bc"]=SimilarParticle["LHC_fixed_target","Bc"]="Bplus";*)
+(*SimilarParticle["FCC-hh","B0"]=SimilarParticle["LHC","B0"]=SimilarParticle["SPS","B0"]=SimilarParticle["FermilabBD","B0"]=SimilarParticle["LHC_fixed_target","B0"]="Bplus";*)
+(*SimilarParticle["FCC-hh","Bs"]=SimilarParticle["LHC","Bs"]=SimilarParticle["SPS","Bs"]=SimilarParticle["FermilabBD","Bs"]=SimilarParticle["LHC_fixed_target","Bs"]="Bplus";*)
+(*SimilarParticle["FCC-hh","tau"]=SimilarParticle["LHC","tau"]=SimilarParticle["SPS","tau"]=SimilarParticle["FermilabBD","tau"]=SimilarParticle["LHC_fixed_target","tau"]="Ds";*)
 (*SimilarParticle["FCC-hh","D0"]=SimilarParticle["FCC-hh","Ds"]="Dplus";*)
 (*PointsSampler[Facility_,Particle_,Nevents_,IfTwo_]:=Module[{data,Nev,IfPresent,particle,motherpoints,datafin},*)
 (*(*For the moment, for some distributions that are absent, they will be approximated by the distributions of similar particles*)*)
@@ -435,7 +459,7 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Test*)
 
 
@@ -459,15 +483,15 @@
 (*Quiet[LogLogPlot[{1/norm1angdistrInt[x]/x,1/norm2pdfint[x]/x},{x,10^-5.,Pi/2}]]*)*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Preliminary code: LLP production phenomenology*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Preliminary definitions*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Kinematics of 3-body decays in terms of energies Subscript[E, 1],Subscript[E, 3]*)
 
 
@@ -496,7 +520,7 @@
 (*Q2[E1_,E3_,m_,m2_]=(m^2+m2^2-2*m*E2valEnergies[m,E1,E3]);*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Scalar products for 3-body decays at rest*)
 
 
@@ -513,7 +537,7 @@
 (*ProductK2K3energy=(m^2+m1^2-2*m*E1-m2^2-m3^2)/2;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Proton bremsstrahlung: limitations, angle-energy grid for the tabulation*)
 
 
@@ -524,9 +548,9 @@
 (* ::Input:: *)
 (*ApplicabilityParameter[z_,pT_,mV_,Pp_,mX_]=(mV^2 (-(z-1))+pT^2+mX^2 z^2)/((z-1) (mV^2+4 Pp^2 (z-1) z));*)
 (*(*Limitations of applicability of the approximation used to derive the bremsstrahlung probability. z = Subscript[E, LLP]/Subscript[E, p], Subscript[p, T] is the transverse momentum carried by the LLP*)*)
-(*{pTmaxBrem["FermilabBD"],pTmaxBrem["SPS"],pTmaxBrem["LHC"],pTmaxBrem["FCC-hh"],pTmaxBrem["Serpukhov"],pTmaxBrem["ESS"]}={1.,1.,1.,1.,1.,1.};*)
-(*{zMinBrem["FermilabBD"],zMinBrem["SPS"],zMinBrem["LHC"],zMinBrem["FCC-hh"],zMinBrem["Serpukhov"],zMinBrem["ESS"]}={0.1,0.1,0.005,0.001,0.1,0.4};*)
-(*{zMaxBrem["FermilabBD"],zMaxBrem["SPS"],zMaxBrem["LHC"],zMaxBrem["FCC-hh"],zMaxBrem["Serpukhov"],zMaxBrem["ESS"]}={0.9,0.95,0.99,0.99,0.9,0.6};*)
+(*{pTmaxBrem["FermilabBD"],pTmaxBrem["SPS"],pTmaxBrem["LHC"],pTmaxBrem["FCC-hh"],pTmaxBrem["Serpukhov"],pTmaxBrem["ESS"],pTmaxBrem["LHC_fixed_target"]}={1.,1.,1.,1.,1.,1.,1.};*)
+(*{zMinBrem["FermilabBD"],zMinBrem["SPS"],zMinBrem["LHC"],zMinBrem["FCC-hh"],zMinBrem["Serpukhov"],zMinBrem["ESS"],zMinBrem["LHC_fixed_target"]}={0.1,0.1,0.005,0.001,0.1,0.4,0.005};*)
+(*{zMaxBrem["FermilabBD"],zMaxBrem["SPS"],zMaxBrem["LHC"],zMaxBrem["FCC-hh"],zMaxBrem["Serpukhov"],zMaxBrem["ESS"],zMaxBrem["LHC_fixed_target"]}={0.9,0.95,0.99,0.99,0.9,0.6,0.99};*)
 (*{mVminFromBrem,mVmaxFromBrem}={0.02,8.};*)
 (*(*Subscript[p, T],z \[Rule] Subscript[\[Theta], V],Subscript[E, V]*)*)
 (*pTv[mV_,EV_,\[Theta]_]=Sqrt[EV^2-mV^2]*Sin[\[Theta]];*)
@@ -595,11 +619,11 @@
 (**)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Coherent EM processes (WW approximation)*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*EM elastic form-factors*)
 
 
@@ -620,7 +644,7 @@
 (**)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Equivalent photon distribution functions*)
 
 
@@ -633,11 +657,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*HNL*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Relevant processes*)
 
 
@@ -671,11 +695,11 @@
 (*LLPname//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Weights for the different processes of D/B decays*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*From B*)
 
 
@@ -695,7 +719,7 @@
 (**)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Decays of D/\[Tau]*)
 
 
@@ -716,13 +740,14 @@
 (*]*)
 (*NeventsSplitterHNL[ListHNLs[[3]],"SPS",{"D-2-body","D-3-body","\[Tau]-2-body","\[Tau]-3-body"},0.9,20]*)
 (*NeventsSplitterHNL[ListHNLs[[3]],"LHC",{"B-2-body","B-3-body","Bc"},2.9,20]*)
+(**)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Squared matrix elements for 3-body processes (Figs. 4,5 + Appendix A.2 from https://arxiv.org/pdf/1805.08567.pdf)*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Definitions*)
 
 
@@ -734,7 +759,7 @@
 (*MS=Association[{Kplus-> 1.43,Dplus->2.4,D0->2.4,Ds->2.32,Bplus->5.68,B0->5.68,Bs->5.68,Bc->6.42}];*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*B->SuperStar[D]+N+l*)
 
 
@@ -762,7 +787,7 @@
 (*Msquared3Body[ListHNLs[[3]],"B-3-body",mLLP_,E1_,E3_]=MBdecay3BodySquaredTemp/.{m->mSM["Bplus"],m1-> mSM["Dstar"],m2->mSM["tau"],m3->mLLP}//Simplify;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*SuperPlus[D]->K^0+N+l*)
 
 
@@ -785,7 +810,7 @@
 (*Msquared3Body[ListHNLs[[2]],"D-3-body",mLLP_,E1_,E3_]=MDdecay3BodySquaredTemp/.{m->mSM["Dplus"],m1-> mSM["K0"],m2->mSM["mu"],m3->mLLP}//Simplify;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\[Tau] ->Subscript[\!\(\*OverscriptBox[\(\[Nu]\), \(_\)]\), l]+l+N*)
 
 
@@ -796,7 +821,7 @@
 (*Msquared3Body[ListHNLs[[3]],"\[Tau]-3-body",mLLP_,E1_,E3_]=M\[Tau]decay3BodySquaredTemp/.{m->mSM["tau"],m1->0,m2->mSM["e"],m3->mLLP}//Simplify;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\[Mu] ->Subscript[\!\(\*OverscriptBox[\(\[Nu]\), \(_\)]\), e]+e+N/Subscript[\[Nu], \[Mu]]+e+N*)
 
 
@@ -812,11 +837,11 @@
 (*Msquared3Body[ListHNLs[[1]],"mu",mLLP_,E1_,E3_]=M\[Mu]decay3BodySquaredTemp/.{m->mSM["mu"],m1->0,m2->mSM["e"],m3->mLLP}//Simplify;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Angle-energy distributions of LLPs if mother particle is at rest*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*\[Mu] ->Subscript[\!\(\*OverscriptBox[\(\[Nu]\), \(_\)]\), e]+e+N/N+e+Subscript[\[Nu], \[Mu]]*)
 
 
@@ -827,7 +852,7 @@
 (*,{HNL,Drop[ListHNLs,-1]}]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\[Pi] -> N + l *)
 
 
@@ -839,11 +864,11 @@
 (*,{HNL,Drop[ListHNLs,-1]}]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-gluon*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Relevant processes*)
 
 
@@ -860,11 +885,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-photon*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Relevant processes*)
 
 
@@ -888,11 +913,11 @@
 (*NucleiList["LHC","Photon-fusion"]=NucleiList["FCC-hh","Photon-fusion"]={"p"};*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Matrix elements of 3-body decays*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Decay of \[Pi]^0/\[Eta]*)
 
 
@@ -906,11 +931,11 @@
 (*LLPname//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Primakov cross-section*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kinematics*)
 
 
@@ -939,7 +964,7 @@
 (*E\[Gamma]min[ma_,mt_]=(ma^2+2*mt*ma)/(2*mt);*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Primakov cross-section*)
 
 
@@ -958,11 +983,11 @@
 (*(*Table[{E\[Gamma],\[Sigma]PrimakovNucleusAlt[1,E\[Gamma]],\[Sigma]PrimakovNucleus[1,E\[Gamma]]},{E\[Gamma],3,200,10}];*)*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Photon fusion (following Felix and https://arxiv.org/abs/1512.03069)*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Effective maximal and minimal energy fractions of equivalent photons *)
 
 
@@ -982,7 +1007,7 @@
 (*\[Epsilon]Regularization=10^-9.;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Differential cross-section - beam dumps*)
 
 
@@ -1007,7 +1032,7 @@
 (*IntegrandFusionBeamDump[ma_,\[Theta]a_,Ea_,pT1_,pT2_,EpLab_,mNucleus_,Anucleus_,Znucleus_]=Abs[JacobiankzCMkTto\[Theta]aEa[ma,\[Theta]a,Ea,EpLab,mNucleus]]*IntegrandFusionBeamDumpCMframe[ma,kzCMtoEa[ma,\[Theta]a,Ea,EpLab,mNucleus],kTto\[Theta]a[ma,\[Theta]a,Ea],pT1,pT2,EpCMvalBD[EpLab,mNucleus],EnucleusCMvalBD[EpLab,mNucleus],mNucleus,Anucleus,Znucleus];*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Explicit form (with all parameters inserted)*)
 
 
@@ -1071,11 +1096,11 @@
 (*{#,d2Pd\[Theta]adEaFusion[1.3,0.00001,#,"SPS","Mo"]}&/@Table[x,{x,1.31,400,5}]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Tests  (compare with Fig. 4 from https://arxiv.org/abs/1512.03069, results should be larger by the factor (Subscript[Z, mo]/Subscript[Z, copper])^2=2.1)*)
 
 
-(* ::Item::Closed:: *)
+(* ::Item:: *)
 (*Test 1*)
 
 
@@ -1088,7 +1113,7 @@
 (*ListLogLogPlot[{tabb,tabb2},PlotRange\[Rule]{{1,100},{5,1100}},Joined\[Rule]True,ImageSize\[Rule]Large,Frame\[Rule]True,GridLines\[Rule]Automatic]*)*)
 
 
-(* ::Item::Closed:: *)
+(* ::Item:: *)
 (*Test 2*)
 
 
@@ -1101,7 +1126,7 @@
 (**)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Differential cross-section - colliders*)
 
 
@@ -1122,7 +1147,7 @@
 (*xp2\[Theta]aEaColliders[ma_,\[Theta]a_,Ea_,EpCM_]=xp2kzColliders[kzCMto\[Theta]aCMEaCM[ma,\[Theta]a,Ea],ma,EpCM];*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Explicit form (with all parameters inserted)*)
 
 
@@ -1172,11 +1197,11 @@
 (*tttt2=Take[SortBy[tabb,-Abs[(#[[5,2]]-#[[7,2]])/#[[5,2]]]&],{1,Min[50,Length[tabb]]}]*)*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-fermion*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Relevant processes*)
 
 
@@ -1192,11 +1217,11 @@
 (*LLPname//Clear*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*DP*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Relevant processes*)
 
 
@@ -1212,11 +1237,11 @@
 (*LLPname//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Proton bremsstrahlung probability*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Proton form-factor in timelike region*)
 
 
@@ -1238,7 +1263,7 @@
 (*(*LogLogPlot[{Abs[FormFactorBremDP[mV]]},{mV,0.1,2},PlotRange\[Rule]All,Frame\[Rule]True,ImageSize\[Rule]Large]*)*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Bremsstrahlung probability*)
 
 
@@ -1267,11 +1292,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-Subscript[L, \[Alpha]]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Relevant processes*)
 
 
@@ -1290,11 +1315,11 @@
 (*LLPname//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Proton bremsstrahlung probability*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Proton form-factor in timelike region*)
 
 
@@ -1319,7 +1344,7 @@
 (*(*LogPlot[FormFactorBremBL[mV]^2,{mV,0.0,5},PlotRange\[Rule]All,Frame\[Rule]True,ImageSize\[Rule]Large]*)*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Bremsstrahlung probability*)
 
 
@@ -1337,11 +1362,11 @@
 (*,{fipname,BLlist},{Facility,FacilitiesList}];*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Scalar*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Relevant processes*)
 
 
@@ -1356,7 +1381,7 @@
 (*MapThread[(ReactionProductsList[LLPname,#1]=#2)&,{ProcessesListAll[LLPname],{{"Bplus","PiCharged",LLPname},{"Bs",LLPname,LLPname},{"Bplus","Kplus",LLPname,LLPname},{"h",LLPname,LLPname},{"Kplus","PiCharged",LLPname},{"p",LLPname}}}];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Squared matrix elements for 3-body processes (https://arxiv.org/abs/1904.10447)*)
 
 
@@ -1366,11 +1391,11 @@
 (*LLPname//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Proton bremsstrahlung probability*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Various parameters*)
 
 
@@ -1393,7 +1418,7 @@
 (*FormFactorSquaredBrem[mS_,"Scalar"]=Interpolation[Import[FileNameJoin[{NotebookDirectory[],"phenomenology/Scalar/Production probabilities/proton-timelike-form-factor-scalar.txt"}],"Table"],InterpolationOrder->1][mS];*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Differential probability calculation*)
 
 
@@ -1431,11 +1456,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*MCPs*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Relevant processes*)
 
 
@@ -1449,11 +1474,11 @@
 (*MapThread[(ReactionProductsList[LLPname,#1]=#2)&,{ProcessesListAll[LLPname],{{"Pi0","photon",LLPname,LLPname},{"Eta","photon",LLPname,LLPname},{"Phi",LLPname,LLPname},{"JPsi",LLPname,LLPname},{"Rho0",LLPname,LLPname},{"Omega",LLPname,LLPname},{"Upsilon",LLPname,LLPname}}}];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Matrix elements of 3-body decays*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Decay of \[Pi]^0/\[Eta]*)
 
 
@@ -1466,11 +1491,11 @@
 (*LLPname//Clear*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Common definitions*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Threshold mass for all processes*)
 
 
@@ -1507,7 +1532,7 @@
 (*MaxMass[HNL,Facility,"D"]=Max[MaxMass[HNL,Facility,#]&/@prl],{HNL,ListHNLs},{Facility,FacilitiesList}]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*List of facility-specific channels*)
 
 
@@ -1550,19 +1575,19 @@
 (*TabProcesses=Flatten[Table[{LLP,Facility,ProcessesListFacility[LLP,Facility]},{LLP,LLPlist},{Facility,FacilitiesList}],1]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Preliminary code: PDFs of LLPs*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Production via decays: sampling boosted LLPs*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Generic code for phase space of 2-body and 3-body decays  at rest frame of the decaying particle*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*2-body*)
 
 
@@ -1595,11 +1620,11 @@
 (*Histogram[tabtest[[All,3]]/Sqrt[tabtest[[1]][[4]]^2-tabtest[[1]][[5]]^2],100,"ProbabilityDensity"]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*3-body*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Full phase space in terms of energies Subscript[E, 1],Subscript[E, 3], and uniformly distributed angles*)
 
 
@@ -1619,7 +1644,7 @@
 (*{p3rotatedX[E1_,E3_,m_,m1_,m2_,m3_,\[Theta]V_,\[Phi]V_,\[Kappa]_],p3rotatedY[E1_,E3_,m_,m1_,m2_,m3_,\[Theta]V_,\[Phi]V_,\[Kappa]_],p3rotatedZ[E1_,E3_,m_,m1_,m2_,m3_,\[Theta]V_,\[Phi]V_,\[Kappa]_]}=pvecRotated[p3unrotated[[1]],p3unrotated[[2]],p3unrotated[[3]],\[Theta]V,\[Phi]V]//Simplify;*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Table with distributions*)
 
 
@@ -1717,7 +1742,7 @@
 (*]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Test - Dalitz plot for spinless decays*)
 
 
@@ -1731,11 +1756,11 @@
 (*ListPlot[{Testm12m23,Table[{(mass13bodyProcess["test","test"]+mass23bodyProcess["test","test",0,0])^2,x},{x,0,massM3bodyProcess["test","test"],0.05}],Table[{x,(mass23bodyProcess["test","test",0,0]+mtest)^2},{x,0,massM3bodyProcess["test","test"],0.05}],Table[{x,(massM3bodyProcess["test","test"]-mass13bodyProcess["test","test"])^2},{x,0,massM3bodyProcess["test","test"],0.05}],Table[{(massM3bodyProcess["test","test"]-mtest)^2,x},{x,0,massM3bodyProcess["test","test"],0.05}]},Frame\[Rule]True,Joined\[Rule]{False,True,True,True,True},FrameLabel\[Rule]{"Subscript[m, 12] [GeV^2]" , "Subscript[m, 23] [GeV^2]"},FrameStyle\[Rule]Directive[Black, 23],PlotStyle\[Rule]{{Thick,Blue},{Thick,Black,Dashing[0.01]},{Thick,Black,Dashing[0.02]},{Thick,Black,Dashing[0.03]},{Thick,Black,Dashing[0.04]},{Thick,Darker@Cyan,PointSize[0.01]},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green,Dashing[0.02]},{Darker@Red,PointSize[0.04]}},ImageSize\[Rule]Large,PlotRange\[Rule]{{0,massM3bodyProcess["test","test"]},All},PlotLabel\[Rule]Style[Row[{"Dalitz plot for M^2 = const, Subscript[m, mother] = ",massM3bodyProcess["test","test"]," GeV, Subscript[m, 1] = ",mass13bodyProcess["test","test"]," GeV, Subscript[m, 2] = ",mass23bodyProcess["test","test",0,0] ," GeV, Subscript[m, 3] = ",mtest, " GeV"}],15,Black],PlotLegends\[Rule]Placed[Style[#,15]&/@{"Dalitz plot","(Subscript[m, 1]+Subscript[m, 2])^2","(Subscript[m, 2]+Subscript[m, 3])^2","(m - Subscript[m, 1])^2","(m - Subscript[m, 3])^2"},Right]]*)*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Lorentz boosts*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Boosting to the lab frame of the decaying mother particle*)
 
 
@@ -1760,7 +1785,7 @@
 (*expr=((EProdLab[EmotherLab,mMother,pMotherLab1,pMotherLab2,pMotherLab3,EProdRest,pProdRest1,pProdRest2,pProdRest3]^2-pProductLab1[EmotherLab,mMother,pMotherLab1,pMotherLab2,pMotherLab3,EProdRest,pProdRest1,pProdRest2,pProdRest3]^2-pProductLab2[EmotherLab,mMother,pMotherLab1,pMotherLab2,pMotherLab3,EProdRest,pProdRest1,pProdRest2,pProdRest3]^2-pProductLab3[EmotherLab,mMother,pMotherLab1,pMotherLab2,pMotherLab3,EProdRest,pProdRest1,pProdRest2,pProdRest3]^2)//Expand//Simplify)/.{EmotherLab->Sqrt[mMother^2+pMotherLab1^2+pMotherLab2^2+pMotherLab3^2]}/.{EProdRest->Sqrt[pProdRest1^2+pProdRest2^2+pProdRest3^2+mProd^2]}//Simplify*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Table with 4-momentum of boosted LLPs*)
 
 
@@ -1795,11 +1820,11 @@
 (**)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Block computing the phase space at rest and boosting it*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*If no averaging over various channels is performed*)
 
 
@@ -1827,7 +1852,7 @@
 (*Histogram[{DataBoosted[[All,4]],pts[[All,4]]},1000,ScalingFunctions->{"Log","Log"}]*)*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Averaging over several production channels (complicated HNL case)*)
 
 
@@ -1877,16 +1902,16 @@
 (*]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Production via decays: converting boosted LLPs data into PDF*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Converting data Log[\[Theta]], Log[E] into PDF*)
 
 
 (* ::Input:: *)
-(*\[Theta]listBinning["SPS"]=\[Theta]listBinning["Serpukhov"]=\[Theta]listBinning["FermilabBD"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*),10^-4.,5*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.015}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
+(*\[Theta]listBinning["SPS"]=\[Theta]listBinning["Serpukhov"]=\[Theta]listBinning["FermilabBD"]=\[Theta]listBinning["LHC_fixed_target"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*),10^-4.,5*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.015}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*\[Theta]listBinning["LHC"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2.],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[1.],0.015}],Table[10^\[Theta]N,{\[Theta]N,Log10[1.02],Log10[Pi/2],0.01}],{Pi/2}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*\[Theta]listBinning["FCC-hh"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)7*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi/2],0.02}],{Pi/2}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*\[Theta]listBinning["ESS"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)10^-4.,10^-3.,10^-2.},Table[10^\[Theta]N,{\[Theta]N,Log10[3*10^-2.],Log10[0.5],0.25}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.1}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
@@ -1931,7 +1956,7 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Tabulated distribution and its exporting*)
 
 
@@ -1962,7 +1987,7 @@
 (*(*filenameToExport["HNL-mixing-e","B","LHC"]*)*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Test*)
 
 
@@ -1994,11 +2019,11 @@
 (*]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Production via mixing: PDF*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Subscript[\[Theta], mother],Subscript[E, mother]->Subscript[\[Theta], LLP],Subscript[E, LLP], following 2201.05170*)
 
 
@@ -2049,7 +2074,7 @@
 (*JacobianEmesonToEVCollider[EV_,mV_,mmeson_]=D[EcmMesonEcmLLP[EV,mV,mmeson],EV];*)*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Distribution of LLPs obtained using the transformation Subscript[E, meson],Subscript[\[Theta], meson] ->Subscript[E, LLP], Subscript[\[Theta], LLP]*)
 
 
@@ -2110,7 +2135,7 @@
 (*]*)*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Production via bremsstrahlung: PDF and normalization*)
 
 
@@ -2132,7 +2157,7 @@
 (*]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Production via Primakov process: PDF and normalization*)
 
 
@@ -2156,7 +2181,7 @@
 (*]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Production via photon fusion: PDF and normalization*)
 
 
@@ -2183,11 +2208,11 @@
 (*]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Choose LLP and run*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Some definitions*)
 
 
@@ -2224,7 +2249,7 @@
 (*Do[If[!DirectoryQ[dir],CreateDirectory[dir]],{dir,directories}]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Selecting LLP, facility, and production channels*)
 
 
@@ -2254,7 +2279,7 @@
 (*]*)*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Computing the distributions of LLPs*)
 
 
@@ -2271,30 +2296,31 @@
 (*\[Theta]minExtrFacility["FermilabBD",mode]=\[Theta]minExtrFacility["Serpukhov",mode]=10^-3.;*)
 (*\[Theta]minExtrFacility["LHC",mode]=If[StringContainsQ[mode,"Pi0"]||StringContainsQ[mode,"Primakov"]||StringContainsQ[mode,"Eta"]||StringContainsQ[mode,"Rho0"]||StringContainsQ[mode,"Omega"]||StringContainsQ[mode,"EtaPr"],10^-4,0.5*10^-3.];*)
 (*\[Theta]minExtrFacility["FCC-hh",mode]=If[StringContainsQ[mode,"Pi0"]||StringContainsQ[mode,"Primakov"]||StringContainsQ[mode,"Eta"]||StringContainsQ[mode,"Rho0"]||StringContainsQ[mode,"Omega"]||StringContainsQ[mode,"EtaPr"],0.7*10^-4,2*10^-4.];*)
+(*\[Theta]minExtrFacility["LHC_fixed_target",mode]=If[StringContainsQ[mode,"Pi0"]||StringContainsQ[mode,"Primakov"]||StringContainsQ[mode,"Eta"]||StringContainsQ[mode,"Rho0"]||StringContainsQ[mode,"Omega"],0.5*10^-3.,10^-3.];*)
 (*,{mode,modes}]*)
 (*(*Launch if you are interested in all production channels implemented in this notebook for the given LLP *)*)
 (*BlockProductionComputation[SelectedLLP,listproductionForComputation]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Actual computation of the distributions*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*HNL*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_W*)
 
 
 (* ::Input:: *)
-(*If[MemberQ[{"LHC","FCC-hh"},SelectedFacility]==True,*)
+(*If[MemberQ[{"LHC","FCC-hh", "LHC_fixed_target"},SelectedFacility]==True,*)
 (*proc="W";*)
 (*(*List of masses for which the distribution will be tabulated*)*)
 (*Do[*)
 (*MassList["HNL",proc,Facility]={0.02,0.05,1,2,5,7,10,15,20,25,30,35,40,50,60,65,70,75,mSM["W"]-mSM["e"]-0.1}//N;*)
-(*,{Facility,{"LHC","FCC-hh"}}];*)
+(*,{Facility,{"LHC","FCC-hh", "LHC_fixed_target"}}];*)
 (*Do[*)
 (*TabulatedPDF[mLLP_]:=BlockTabulatedPDFsFromDecaysMass[LLP,SelectedFacility,mLLP,proc,nsim,\[Theta]Nlist[SelectedFacility],ENlist[SelectedFacility],\[Theta]minExtrFacility[SelectedFacility,proc],"False"];*)
 (*filename=filenameToExport[LLP,proc,SelectedFacility];*)
@@ -2306,7 +2332,7 @@
 (*{proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_B*)
 
 
@@ -2316,7 +2342,7 @@
 (*proc="B";*)
 (*(*List of masses for which the distribution will be tabulated*)*)
 (*Do[*)
-(*MassList[LLPn,proc,Facility]=If[MemberQ[{"LHC","FCC-hh"},Facility]==True,{0.02,0.05,0.1,0.15,0.2,0.5,1,1.5,2.,2.5,2.8,3.,3.45,4.,4.5,5.16,5.27,5.8,6.25},{0.05,0.2,0.5,1,1.5,2.,2.5,2.8,3.,3.45,4.,4.5,5.16,5.27}]//N;*)
+(*MassList[LLPn,proc,Facility]=If[MemberQ[{"LHC","FCC-hh", "LHC_fixed_target"},Facility]==True,{0.02,0.05,0.1,0.15,0.2,0.5,1,1.5,2.,2.5,2.8,3.,3.45,4.,4.5,5.16,5.27,5.8,6.25},{0.05,0.2,0.5,1,1.5,2.,2.5,2.8,3.,3.45,4.,4.5,5.16,5.27}]//N;*)
 (*,{Facility,FacilitiesList}];*)
 (*Monitor[*)
 (*Do[*)
@@ -2330,7 +2356,7 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_D*)
 
 
@@ -2353,12 +2379,12 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_K*)
 
 
 (* ::Input:: *)
-(*If[MemberQ[{"SPS"},SelectedFacility],*)
+(*If[MemberQ[{"SPS", "LHC_fixed_target"},SelectedFacility],*)
 (*proc="K";*)
 (*Do[*)
 (*MassList["HNL",proc,Facility]={0.05`,0.1,0.2,0.4,0.99*MaxMass[ListHNLs[[2]],SelectedFacility,proc],0.99*MaxMass[ListHNLs[[1]],SelectedFacility,proc]};*)
@@ -2374,12 +2400,12 @@
 (*{proc,mlist}//Clear;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_mu*)
 
 
 (* ::Input:: *)
-(*If[MemberQ[{"ESS"},SelectedFacility],*)
+(*If[MemberQ[{"ESS", "LHC_fixed_target"},SelectedFacility],*)
 (*proc="mu";*)
 (*Do[*)
 (*MassList["HNL",proc,Facility]={0.005,0.01,0.015,0.02,0.025,0.03,0.035,0.04,0.045,0.05,0.055,0.06,0.065,0.07,0.075,0.08,0.085,0.09,0.095,0.1,0.99*MaxMass[ListHNLs[[1]],SelectedFacility,proc]}//Sort//DeleteDuplicates;*)
@@ -2398,16 +2424,16 @@
 (*{proc,mlist}//Clear;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_PiCharged*)
 
 
 (* ::Input:: *)
-(*If[MemberQ[{"ESS"},SelectedFacility],*)
+(*If[MemberQ[{"ESS", "LHC_fixed_target"},SelectedFacility],*)
 (*proc="PiCharged";*)
 (*Do[*)
 (*MassList["HNL",proc,Facility]={0.001,0.005,0.01,0.015,0.02,0.027,0.032,0.04,0.05,0.06,0.07,0.08,0.09,0.1,0.11,0.115,0.12,0.125,0.13,0.135};*)
-(*,{Facility,{"ESS"}}];*)
+(*,{Facility,{"ESS", "LHC_fixed_target"}}];*)
 (*Do[*)
 (*elist=Join[(mSM["PiCharged"]^2-mSM["e"]^2+MassList["HNL",proc,"ESS"]^2)/(2mSM["PiCharged"]),(mSM["PiCharged"]^2-mSM["mu"]^2+MassList["HNL",proc,"ESS"]^2)/(2mSM["PiCharged"])]//DeleteDuplicates//Sort;*)
 (*TabulatedPDF[mLLP_]:=BlockTabulatedPDFsFromDecaysMass[LLP,SelectedFacility,mLLP,proc,nsim,\[Theta]Nlist[SelectedFacility],elist,\[Theta]minExtrFacility[SelectedFacility,proc],"False"];*)
@@ -2667,7 +2693,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*DP*)
 
 
@@ -3298,7 +3324,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-fermion*)
 
 
