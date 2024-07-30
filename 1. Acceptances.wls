@@ -1,7 +1,7 @@
 #!/usr/bin/env wolframscript
 (* ::Package:: *)
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Just launch the code below to run the notebook (shift+enter)*)
 
 
@@ -12,11 +12,11 @@
 (*SelectionEvaluate[nb]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Definitions (launch this section first)*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Critical definitions required to launch this notebook*)
 
 
@@ -33,11 +33,11 @@
 (*<<FeynCalc`*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Parameters*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Properties of SM particles*)
 
 
@@ -61,11 +61,11 @@
 (*detectablepdgs={1.,-1.,2.,-2.,3.,-3.,4.,-4.,5.,-5.,21.,-21.,22.,11.,-11.,13.,-13.,211.,-211.,130.,321.,-321.,2112.,-2112.,2212.,-2212.}//Sort*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Kinematics*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Lorentz boosts*)
 
 
@@ -98,11 +98,11 @@
 (*testExpr2[ELLP_,mLLP_,\[Theta]LLP_,\[Phi]LLP_,pxd_,pyd_,pzd_,Ed_]=EproductLabSpher[ELLP,mLLP,\[Theta]LLP,\[Phi]LLP,pxd,pyd,pzd,Ed]^2-pproductLab1Spher[ELLP,mLLP,\[Theta]LLP,\[Phi]LLP,pxd,pyd,pzd,Ed]^2-pproductLab2Spher[ELLP,mLLP,\[Theta]LLP,\[Phi]LLP,pxd,pyd,pzd,Ed]^2-pproductLab3Spher[ELLP,mLLP,\[Theta]LLP,\[Phi]LLP,pxd,pyd,pzd,Ed]^2//Expand//Simplify*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Kinematics of 3-body decays*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Phase space in terms of energies Subscript[E, 1],Subscript[E, 3]*)
 
 
@@ -145,7 +145,7 @@
 (*E12E23domain[m_,m1_,m2_,m3_,Emin_,Emax_]:=NIntegrate[UnitStep[E3v-Emin]*UnitStep[Emax-E3v],{E1v,E1domain[m,m1,m2,m3][[1]],E1domain[m,m1,m2,m3][[2]]},{E3v,Max[E3domain[E1v,m,m1,m2,m3][[1]],Emin],Min[Emax,E3domain[E1v,m,m1,m2,m3][[2]]]},Method->"AdaptiveMonteCarlo"]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Scalar products in terms of energies 1,3*)
 
 
@@ -162,7 +162,7 @@
 (*ProductK2K3energy=(m^2+m1^2-2*m*E1-m2^2-m3^2)/2;*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Scalar products in terms of Mandelstam variables*)
 
 
@@ -182,7 +182,7 @@
 (*ProductKK-ProductK1K1-ProductK2K2-ProductK3K3-2*(ProductK1K2mandelstam+ProductK2K3mandelstam+ProductK1K3mandelstam)//Simplify*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*4-momenta of decay products at rest frame as a function of energies Subscript[E, 1],Subscript[E, 3]*)
 
 
@@ -212,11 +212,11 @@
 (*p3rotatedZ[E1_,E3_,m_,m1_,m2_,m3_,\[Theta]V_,\[Phi]V_,\[Kappa]_]=p3rotated[E1,E3,m,m1,m2,m3,\[Theta]V,\[Phi]V,\[Kappa]][[3]];*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Decays of various LLPs: processes, branching ratios, matrix elements*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Definitions*)
 
 
@@ -230,11 +230,11 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Scalar*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -291,11 +291,11 @@
 (*Matrix elements*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*DP*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -321,7 +321,7 @@
 (*Select[ProcessesList[LLPsel,"True"],JetsPresence[LLPsel,#]=="Yes"&]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Matrix elements*)
 
 
@@ -329,11 +329,11 @@
 (*Msquared3BodyLLP["DP","KK\[Pi]",E1_,E3_,mFIP_]=Msquared3BodyLLP["DP","\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)",E1_,E3_,mFIP_]=1;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -341,7 +341,7 @@
 (*HNLsList={"HNL-mixing-e","HNL-mixing-mu","HNL-mixing-tau"};*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Mixing e*)
 
 
@@ -368,7 +368,7 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatios[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,40},PlotRange->All]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Mixing \[Mu]*)
 
 
@@ -395,7 +395,7 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatios[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,20},PlotRange->All]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Mixing \[Tau]*)
 
 
@@ -422,11 +422,11 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatios[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,20},PlotRange->All]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Matrix elements*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*N->\[Pi]\[Pi]\[Nu]/\[Pi]\[Pi]l*)
 
 
@@ -443,7 +443,7 @@
 (*,{PROC,{"2\[Pi]l","2\[Pi]\[Nu]"}},{LLP,HNLsList}]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*N-> q+\!\(\*OverscriptBox[\(q\), \(_\)]\)'+l, q+\!\(\*OverscriptBox[\(q\), \(_\)]\)+\[Nu] *)
 
 
@@ -474,7 +474,7 @@
 (*,{LLP,HNLsList}]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*N->l+l'+\[Nu]*)
 
 
@@ -510,11 +510,11 @@
 (*,{LLP,HNLsList}]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALPs coupled to gluons*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -541,7 +541,7 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatiosTemp[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,4.5},PlotRange->All]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Squared matrix elements*)
 
 
@@ -552,11 +552,11 @@
 (*,{i,1,Length[MatrixElementsALPgluonList[ma][[3]]],1}];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALPs coupled to fermions*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -582,7 +582,7 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatiosTemp[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,4.5},PlotRange->All]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Old description from 1901.09966 - no hadronic decays*)
 
 
@@ -607,7 +607,7 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatiosTemp[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,4.5},PlotRange->All]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Squared matrix elements*)
 
 
@@ -618,11 +618,11 @@
 (*,{i,1,Length[MatrixElementsALPfermionList[ma][[3]]],1}];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-L mediator*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -650,11 +650,11 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatios[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,4.5},PlotRange->All]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Squared matrix elements*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*B->3\[Pi] (following https://arxiv.org/pdf/1404.4370.pdf and Ref. therein)*)
 
 
@@ -674,11 +674,11 @@
 (*Msquared3BodyLLP["B-L","\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)",E1_,E3_,mLLP_]=(MBLTo3\[Pi]SquaredTemp/.{ScalarProduct[p\[Pi]plus,p\[Pi]minus]->ProductK1K2energy,ScalarProduct[p,p\[Pi]plus]->ProductKK1energy,ScalarProduct[p,p\[Pi]minus]->ProductKK2energy}/.{m1->m\[Pi],m2->m\[Pi],m3->m\[Pi],mB->mLLP,m->mLLP}//Simplify)/.{m\[Pi]->ParamProductMass[211.],m\[Rho]->ParamProductMass[113.]};*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Subscript[L, \[Mu]] mediator*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -706,7 +706,7 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatios[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,4.5},PlotRange->All]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Matrix elements*)
 
 
@@ -715,11 +715,11 @@
 (*Msquared3BodyLLP[LLPsel,"\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)",E1_,E3_,mLLP_]=Msquared3BodyLLP["B-L","\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)",E1,E3,mLLP];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3 Subscript[L, e]-Subscript[L, \[Mu]]+Subscript[L, \[Tau]] mediator*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -747,7 +747,7 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatios[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,4.5},PlotRange->All]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Matrix elements*)
 
 
@@ -756,11 +756,11 @@
 (*Msquared3BodyLLP[LLPsel,"\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)",E1_,E3_,mLLP_]=Msquared3BodyLLP["B-L","\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)",E1,E3,mLLP];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-Subscript[L, e]-3Subscript[L, \[Mu]]+Subscript[L, \[Tau]] mediator*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -788,7 +788,7 @@
 (*LogLogPlot[{Evaluate[Sum[ListBrRatios[LLPsel,mN,pr],{pr,ProcessesList[LLPsel,"True"]}]]},{mN,0.05,4.5},PlotRange->All]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Matrix elements*)
 
 
@@ -797,11 +797,11 @@
 (*Msquared3BodyLLP[LLPsel,"\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)",E1_,E3_,mLLP_]=Msquared3BodyLLP["B-L","\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)",E1,E3,mLLP];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALPs coupled to photons*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and sets of decay products for them, branching ratios*)
 
 
@@ -821,7 +821,7 @@
 (*Matrix elements*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*LLPs - total*)
 
 
@@ -855,15 +855,15 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Unstable SM particles*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*List of decay processes and decay products*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*\[Tau] leptons*)
 
 
@@ -873,7 +873,7 @@
 (*{\[Omega]process["\!\(\*SuperscriptBox[\(\[Tau]\), \(+\)]\)","e\[Nu]\[Nu]"],\[Omega]process["\!\(\*SuperscriptBox[\(\[Tau]\), \(+\)]\)","\[Mu]\[Nu]\[Nu]"],\[Omega]process["\!\(\*SuperscriptBox[\(\[Tau]\), \(+\)]\)","\[Pi]\[Nu]"],\[Omega]process["\!\(\*SuperscriptBox[\(\[Tau]\), \(+\)]\)","2\[Pi]\[Nu]"]}={\[Omega]process["\!\(\*SuperscriptBox[\(\[Tau]\), \(-\)]\)","e\[Nu]\[Nu]"],\[Omega]process["\!\(\*SuperscriptBox[\(\[Tau]\), \(-\)]\)","\[Mu]\[Nu]\[Nu]"],\[Omega]process["\!\(\*SuperscriptBox[\(\[Tau]\), \(-\)]\)","\[Pi]\[Nu]"],\[Omega]process["\!\(\*SuperscriptBox[\(\[Tau]\), \(-\)]\)","2\[Pi]\[Nu]"]}={0.1739,0.1782,0.1082,0.2549};*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*\[Eta],\[Eta]',\[Pi]^0*)
 
 
@@ -886,7 +886,7 @@
 (*\[Omega]process["\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)","\[Gamma]-pair"]=1;*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*\[Rho], \[Omega], \[Phi], Subscript[a, 1]*)
 
 
@@ -901,7 +901,7 @@
 (*{\[Omega]process["\!\(\*SubscriptBox[\(a\), \(1\)]\)","\!\(\*SuperscriptBox[\(\[Rho]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)"],\[Omega]process["\!\(\*SubscriptBox[\(a\), \(1\)]\)","\!\(\*SuperscriptBox[\(\[Rho]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)"]}={0.5,0.5};*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*SuperStar[K],Subscript[K, S]*)
 
 
@@ -912,7 +912,7 @@
 (*{\[Omega]process["\!\(\*SubscriptBox[\(K\), \(S\)]\)","\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)"],\[Omega]process["\!\(\*SubscriptBox[\(K\), \(S\)]\)","2\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)"]}={0.6920,0.3069};*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Matrix elements*)
 
 
@@ -922,15 +922,15 @@
 (*(*Table[With[{part=ListSMdecays[[i]][[1]],proc=ListSMdecays[[i]][[2]]},Evaluate[{part,proc,ListDecayProducts[part,proc][[1]],ListDecayProducts[part,proc][[2]],ListDecayProducts[part,proc][[3]],ListDecayProducts[part,proc][[4]],\[Omega]process[part,proc]}]],{i,1,Length[ListSMdecays],1}]*)*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Phase space of decay products at the rest frame of the decaying LLP *)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Phase space of decay products - generated on-flight*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Phase space of LLP's decays at its rest frame - 2-body decays*)
 
 
@@ -970,7 +970,7 @@
 (*LengthDataProduct=indexstability1;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Phase space of LLP's decays at its rest frame - 3-body decays*)
 
 
@@ -1066,7 +1066,7 @@
 (*]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Boosts of decay products to lab frame of the decaying particle (for decay products of unstable decay products)*)
 
 
@@ -1102,11 +1102,11 @@
 (*]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Phase space of LLP's decays at its rest frame - 4-body decays*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Definitions*)
 
 
@@ -1169,7 +1169,7 @@
 (*]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Final block producing phase space*)
 
 
@@ -1194,7 +1194,7 @@
 (*]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Phase space of STABLE LLP's decay products - overall definition*)
 
 
@@ -1236,7 +1236,7 @@
 (**)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Final table*)
 
 
@@ -1308,7 +1308,7 @@
 (*PhaseSpaceDecaysRest["HNL-mixing-e",2.,"2\[Pi]l",10]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Phase space of decay products - pre-simulated in pythia (for decays into jets)*)
 
 
@@ -1339,11 +1339,11 @@
 (*,{fip,{"HNL-mixing-mu","HNL-mixing-tau"}},{i,1,Length[ParsHNLe],1}];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Tests*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*1. Checking if the angle between two massless decay products obtain from simulation matches theoretical formula*)
 
 
@@ -1377,11 +1377,11 @@
 (*Clear[ELLPtest,MassParticleTest,ParamProductMass1,ParamProductMass2,ff]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*2. Checking that kinematics for 3-body decays *)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Shape of the energy distributions matches analytic formula*)
 
 
@@ -1402,7 +1402,7 @@
 (*Style[Row[{pt1,pt2}],ImageSizeMultipliers->{1, 1}]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*4-momentum conservation*)
 
 
@@ -1415,7 +1415,7 @@
 (*Table[fourcheck[j],{j,1,Length[pd],1}]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Checking the 4-momentum conservation for the phase space simulated in pythia*)
 
 
@@ -1443,7 +1443,7 @@
 (*If[Max[checktab[[All,4]]]>10^-5.,infoDialog["The simulated phase space does not obey 4-momentum conservation! Examine in detail"]]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Geometry of different experiments and cross-sections*)
 
 
@@ -1451,11 +1451,11 @@
 (*NotebookEvaluate[FileNameJoin[{NotebookDirectory[],"codes/experiments.nb"}]]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Selecting the experiment*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Choosing the experiment*)
 
 
@@ -1471,7 +1471,7 @@
 (*infoDialog["One of the decay volumes of ANUBIS-shaft has been selected. The full sensitivity requires calculating the acceptances for all the three volumes. You need to generate them afterwards"]]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Setting all the parameters*)
 
 
@@ -1543,7 +1543,7 @@
 (*DecayAcceptanceGeometry[x1LLPproj_,x2LLPproj_,xLongProj_]=IfLLPtoDet[x1LLPproj,x2LLPproj,xLongProj];*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Specifying cuts on the decay products*)
 
 
@@ -1595,11 +1595,11 @@
 (*DetectablePDGsGivenExperiment*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Displaying cuts*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Creating functions with cuts*)
 
 
@@ -1657,7 +1657,7 @@
 (*If[id1!=22.&&id1!=2112.&&id1!=130.,IPcut,IPcutZero],CompilationTarget->"C",RuntimeAttributes->{Listable},RuntimeOptions->"Speed",Parallelization->True]/.ruleOwn[{IPcut,IPcutZero}]//ReleaseHold*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Visualization of the cuts*)
 
 
@@ -1679,7 +1679,7 @@
 (*{{"Any E cut","Tot \!\(\*SubscriptBox[\(E\), \(lower\)]\) cut","Tot \!\(\*SubscriptBox[\(E\), \(upper\)]\) cut","\!\(\*SubscriptBox[\(p\), \(T\)]\) cut","Angular cut","SS cut","IP cuts","Any \!\(\*SubscriptBox[\(m\), \(inv\\\  cut\)]\)","\!\(\*SubscriptBox[\(m\), \(inv, lower\)]\) cuts","\!\(\*SubscriptBox[\(m\), \(inv, upper\)]\) cuts"},{IfEcuts,IfEtotLowercuts,IfEtotUppercuts,IfpTcuts,IfAngSepCuts,IfSScuts,IfIPcuts,IfminvCuts,IfminvLowerCuts,IfminvUpperCuts}}//TableForm*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Refining possible decay channels*)
 
 
@@ -1696,11 +1696,11 @@
 (*]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Azimuthal acceptance calculation*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Geometry visualization*)
 
 
@@ -1729,39 +1729,55 @@
 
 
 (* ::Input:: *)
-(*(*BoxRatioz=5;*)
-(*PlotOrigin=(*If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",*)Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes\[Rule]True,AxesLabel\[Rule]{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin\[Rule]{0,0,0},ViewProjection\[Rule]"Orthographic",ViewCenter\[Rule]{0,0,0},ViewPoint\[Rule]{-0.7,0.25,-2},ViewVertical\[Rule]{0,1,0},BoxRatios\[Rule]{1,1,BoxRatioz},AxesStyle\[Rule]{Thickness[0.03]},LabelStyle\[Rule]{Directive[Black,20]}](*,Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes\[Rule]True,AxesLabel\[Rule]{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin\[Rule]{0,0,0},ViewProjection\[Rule]"Orthographic",ViewCenter\[Rule]{0,0,0},ViewPoint\[Rule]{-0.7,0.25,-2},ViewVertical\[Rule]{0,1,0},BoxRatios\[Rule]{1,1,BoxRatioz},AxesStyle\[Rule]{Thickness[0.03]},LabelStyle\[Rule]{Directive[Black,20]}]]*);*)
-(*PlotFinalPlane=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",Graphics3D[{Green,Opacity[0.2],FinalPlaneGivenExperiment}]];*)
-(*PlotDecayVolume=If[GeometryGivenExperiment\[Equal]"Annular cylinder",Show[Region[Style[finAnnular,White,Opacity[1](*,EdgeForm[Directive[Thickness[0.01],Blue,Opacity\[Rule] 1]]*)]],Region[Style[foutAnnular,Blue,Opacity[0.3](*,EdgeForm[Directive[Thickness[0.01],Blue,Opacity\[Rule] 0.1]]*)]]],Region[Style[DecayVolumeGeometryGivenExperiment,Blue,Opacity[0.2](*,EdgeForm[{Thick,Blue}]*)],BoxRatios\[Rule]{1,1,BoxRatioz},Boxed\[Rule]True,Axes\[Rule]True]];*)
-(*PlotDetector=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",If[GeometryGivenExperiment\[Equal]"Annular cylinder"&&GivenExperiment!="LHCb-downstream-SciFi",Show[Region[Style[finDetAnnular,White,Opacity[1](*,EdgeForm[Directive[Thickness[0.01],Red,Opacity\[Rule] 1]]*)]],Region[Style[foutDetAnnular,Red,Opacity[0.2](*,EdgeForm[Directive[Thickness[0.01],Red,Opacity\[Rule] 0.1]]*)]]],Region[Style[DetectorGeometryGivenExperiment,Red,Opacity[0.3](*,EdgeForm[{Thick,Red}]*)],BoxRatios\[Rule]{1,1,BoxRatioz},Boxed\[Rule]True,Axes\[Rule]True]]];*)
-(*PlotFullGeometry=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",Show[PlotOrigin(*,PlotFinalPlane*),PlotDecayVolume,PlotDetector],Show[PlotOrigin,PlotDecayVolume]]*)*)
+(*BoxRatioz=5;*)
+(*PlotOrigin=(*If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",*)Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes->True,AxesLabel->{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin->{0,0,0},ViewProjection->"Orthographic",ViewCenter->{0,0,0},ViewPoint->{-0.7,0.25,-2},ViewVertical->{0,1,0},BoxRatios->{1,1,BoxRatioz},AxesStyle->{Thickness[0.03]},LabelStyle->{Directive[Black,20]}](*,Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes\[Rule]True,AxesLabel\[Rule]{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin\[Rule]{0,0,0},ViewProjection\[Rule]"Orthographic",ViewCenter\[Rule]{0,0,0},ViewPoint\[Rule]{-0.7,0.25,-2},ViewVertical\[Rule]{0,1,0},BoxRatios\[Rule]{1,1,BoxRatioz},AxesStyle\[Rule]{Thickness[0.03]},LabelStyle\[Rule]{Directive[Black,20]}]]*);*)
+(*PlotFinalPlane=If[DecayVolumeAsDetectorGivenExperiment=="False",Graphics3D[{Green,Opacity[0.2],FinalPlaneGivenExperiment}]];*)
+(*PlotDecayVolume=If[GeometryGivenExperiment=="Annular cylinder",Show[Region[Style[finAnnular,White,Opacity[1](*,EdgeForm[Directive[Thickness[0.01],Blue,Opacity\[Rule] 1]]*)]],Region[Style[foutAnnular,Blue,Opacity[0.3](*,EdgeForm[Directive[Thickness[0.01],Blue,Opacity\[Rule] 0.1]]*)]]],Region[Style[DecayVolumeGeometryGivenExperiment,Blue,Opacity[0.2](*,EdgeForm[{Thick,Blue}]*)],BoxRatios->{1,1,BoxRatioz},Boxed->True,Axes->True]];*)
+(*PlotDetector=If[DecayVolumeAsDetectorGivenExperiment=="False",If[GeometryGivenExperiment=="Annular cylinder"&&GivenExperiment!="LHCb-downstream-SciFi",Show[Region[Style[finDetAnnular,White,Opacity[1](*,EdgeForm[Directive[Thickness[0.01],Red,Opacity\[Rule] 1]]*)]],Region[Style[foutDetAnnular,Red,Opacity[0.2](*,EdgeForm[Directive[Thickness[0.01],Red,Opacity\[Rule] 0.1]]*)]]],Region[Style[DetectorGeometryGivenExperiment,Red,Opacity[0.3](*,EdgeForm[{Thick,Red}]*)],BoxRatios->{1,1,BoxRatioz},Boxed->True,Axes->True]]];*)
+(*PlotFullGeometry=If[DecayVolumeAsDetectorGivenExperiment=="False",Show[PlotOrigin(*,PlotFinalPlane*),PlotDecayVolume,PlotDetector],Show[PlotOrigin,PlotDecayVolume]]*)
 
 
 (* ::Input:: *)
-(*(*BoxRatioz=3;*)
-(*PlotOrigin=(*If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",*)Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes\[Rule]True,AxesLabel\[Rule]{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin\[Rule]{0,0,0},ViewProjection\[Rule]"Orthographic",ViewCenter\[Rule]{0,0,0},ViewPoint\[Rule]{-0.7,0.25,-2},ViewVertical\[Rule]{0,1,0},BoxRatios\[Rule]{1,0.75,BoxRatioz},AxesStyle\[Rule]{Thickness[0.03]},LabelStyle\[Rule]{Directive[Black,20]}];*)
+(*BoxRatioz=3;*)
+(*PlotOrigin=(*If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",*)Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes->True,AxesLabel->{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin->{0,0,0},ViewProjection->"Orthographic",ViewCenter->{0,0,0},ViewPoint->{-0.7,0.25,-2},ViewVertical->{0,1,0},BoxRatios->{1,0.75,BoxRatioz},AxesStyle->{Thickness[0.03]},LabelStyle->{Directive[Black,20]}];*)
 (*UT=Polygon[{{-1,-1,2.5},{-1,1,2.5},{1,1,2.5},{1,-1,2.5}}];*)
-(*PlotUT=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",Graphics3D[{Green,Opacity[0.2],UT}]];*)
-(*PlotDecayVolume=If[GeometryGivenExperiment\[Equal]"Annular cylinder"&&MemberQ[explistlhcb,GivenExperiment]==False,Show[Region[Style[finAnnular,White,Opacity[1],EdgeForm[Directive[Thickness[0.01],Blue,Opacity\[Rule] 1]]]],Region[Style[foutAnnular,Blue,Opacity[0.3],EdgeForm[Directive[Thickness[0.01],Blue,Opacity\[Rule] 0.1]]]]],Region[Style[DecayVolumeGeometryGivenExperiment,Blue,Opacity[0.2]],BoxRatios\[Rule]{1,1,BoxRatioz},Boxed\[Rule]True,Axes\[Rule]True]];*)
-(*PlotDetector=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",If[GeometryGivenExperiment\[Equal]"Annular cylinder"&&MemberQ[explistlhcb,GivenExperiment]==False,Show[Region[Style[finDetAnnular,White,Opacity[1],EdgeForm[Directive[Thickness[0.01],Red,Opacity\[Rule] 1]]]],Region[Style[foutDetAnnular,Red,Opacity[0.2],EdgeForm[Directive[Thickness[0.01],Red,Opacity\[Rule] 0.1]]]]],Region[Style[DetectorGeometryGivenExperiment,Red,Opacity[0.3]],BoxRatios\[Rule]{1,1,BoxRatioz},Boxed\[Rule]True,Axes\[Rule]True]]];*)
-(*PlotFullGeometry=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",Show[PlotOrigin,PlotUT,PlotDecayVolume,PlotDetector],Show[PlotOrigin,PlotDecayVolume]]*)*)
+(*PlotUT=If[DecayVolumeAsDetectorGivenExperiment=="False",Graphics3D[{Green,Opacity[0.2],UT}]];*)
+(*PlotDecayVolume=If[GeometryGivenExperiment=="Annular cylinder"&&MemberQ[explistlhcb,GivenExperiment]==False,Show[Region[Style[finAnnular,White,Opacity[1],EdgeForm[Directive[Thickness[0.01],Blue,Opacity-> 1]]]],Region[Style[foutAnnular,Blue,Opacity[0.3],EdgeForm[Directive[Thickness[0.01],Blue,Opacity-> 0.1]]]]],Region[Style[DecayVolumeGeometryGivenExperiment,Blue,Opacity[0.2]],BoxRatios->{1,1,BoxRatioz},Boxed->True,Axes->True]];*)
+(*PlotDetector=If[DecayVolumeAsDetectorGivenExperiment=="False",If[GeometryGivenExperiment=="Annular cylinder"&&MemberQ[explistlhcb,GivenExperiment]==False,Show[Region[Style[finDetAnnular,White,Opacity[1],EdgeForm[Directive[Thickness[0.01],Red,Opacity-> 1]]]],Region[Style[foutDetAnnular,Red,Opacity[0.2],EdgeForm[Directive[Thickness[0.01],Red,Opacity-> 0.1]]]]],Region[Style[DetectorGeometryGivenExperiment,Red,Opacity[0.3]],BoxRatios->{1,1,BoxRatioz},Boxed->True,Axes->True]]];*)
+(*PlotFullGeometry=If[DecayVolumeAsDetectorGivenExperiment=="False",Show[PlotOrigin,PlotUT,PlotDecayVolume,PlotDetector],Show[PlotOrigin,PlotDecayVolume]]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Adjustable plot*)
 
 
 (* ::Input:: *)
-(*(*BoxRatioz=10;*)
-(*PlotOrigin=(*If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",*)Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes\[Rule]True,AxesLabel\[Rule]{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin\[Rule]{0,0,0},ViewProjection\[Rule]"Orthographic",ViewCenter\[Rule]{0,0,0},ViewPoint\[Rule]{-0.7,0.25,-2},ViewVertical\[Rule]{0,1,0},BoxRatios\[Rule]{1,1.8,BoxRatioz},AxesStyle\[Rule]{Thickness[0.03]},LabelStyle\[Rule]{Directive[Black,20]}](*,Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes\[Rule]True,AxesLabel\[Rule]{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin\[Rule]{0,0,0},ViewProjection\[Rule]"Orthographic",ViewCenter\[Rule]{0,0,0},ViewPoint\[Rule]{-0.7,0.25,-2},ViewVertical\[Rule]{0,1,0},BoxRatios\[Rule]{1,1,BoxRatioz},AxesStyle\[Rule]{Thickness[0.03]},LabelStyle\[Rule]{Directive[Black,20]}]]*);*)
-(*PlotFinalPlane=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",Graphics3D[{Green,Opacity[0.2],FinalPlaneGivenExperiment}]];*)
-(*PlotDecayVolume=If[GeometryGivenExperiment\[Equal]"Annular cylinder"&&MemberQ[explistlhcb,GivenExperiment]==False,Show[Region[Style[finAnnular,White,Opacity[1],EdgeForm[Directive[Thickness[0.01],Blue,Opacity\[Rule] 1]]]],Region[Style[foutAnnular,Blue,Opacity[0.3],EdgeForm[Directive[Thickness[0.01],Blue,Opacity\[Rule] 0.1]]]]],Region[Style[DecayVolumeGeometryGivenExperiment,Blue,Opacity[0.2],EdgeForm[{Thick,Blue}]],BoxRatios\[Rule]{1,1,BoxRatioz},Boxed\[Rule]True,Axes\[Rule]True]];*)
-(*PlotDetector=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",If[GeometryGivenExperiment\[Equal]"Annular cylinder"&&MemberQ[explistlhcb,GivenExperiment]==False,Show[Region[Style[finDetAnnular,White,Opacity[1],EdgeForm[Directive[Thickness[0.01],Red,Opacity\[Rule] 1]]]],Region[Style[foutDetAnnular,Red,Opacity[0.2],EdgeForm[Directive[Thickness[0.01],Red,Opacity\[Rule] 0.1]]]]],Region[Style[DetectorGeometryGivenExperiment,Red,Opacity[0.3],EdgeForm[{Thick,Red}]],BoxRatios\[Rule]{1,1,BoxRatioz},Boxed\[Rule]True,Axes\[Rule]True]]];*)
-(*PlotFullGeometry=If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",Show[PlotOrigin,PlotDecayVolume,PlotDetector],Show[PlotOrigin,PlotDecayVolume]];*)
-(*PlotFullGeometry*)*)
+(*BoxRatioz=10;*)
+(*PlotOrigin=(*If[DecayVolumeAsDetectorGivenExperiment\[Equal]"False",*)Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes->True,AxesLabel->{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin->{0,0,0},ViewProjection->"Orthographic",ViewCenter->{0,0,0},ViewPoint->{-0.7,0.25,-2},ViewVertical->{0,1,0},BoxRatios->{1,1.8,BoxRatioz},AxesStyle->{Thickness[0.03]},LabelStyle->{Directive[Black,20]}](*,Graphics3D[{PointSize[0.05],Black,Point[{0,0,0}]},Axes\[Rule]True,AxesLabel\[Rule]{Style["x",24,Bold,Black],Style["y",24,Bold,Black],Style["z",24,Bold,Black]},AxesOrigin\[Rule]{0,0,0},ViewProjection\[Rule]"Orthographic",ViewCenter\[Rule]{0,0,0},ViewPoint\[Rule]{-0.7,0.25,-2},ViewVertical\[Rule]{0,1,0},BoxRatios\[Rule]{1,1,BoxRatioz},AxesStyle\[Rule]{Thickness[0.03]},LabelStyle\[Rule]{Directive[Black,20]}]]*);*)
+(*PlotFinalPlane=If[DecayVolumeAsDetectorGivenExperiment=="False",Graphics3D[{Green,Opacity[0.2],FinalPlaneGivenExperiment}]];*)
+(*PlotDecayVolume=If[GeometryGivenExperiment=="Annular cylinder"&&MemberQ[explistlhcb,GivenExperiment]==False,Show[Region[Style[finAnnular,White,Opacity[1],EdgeForm[Directive[Thickness[0.01],Blue,Opacity-> 1]]]],Region[Style[foutAnnular,Blue,Opacity[0.3],EdgeForm[Directive[Thickness[0.01],Blue,Opacity-> 0.1]]]]],Region[Style[DecayVolumeGeometryGivenExperiment,Blue,Opacity[0.2],EdgeForm[{Thick,Blue}]],BoxRatios->{1,1,BoxRatioz},Boxed->True,Axes->True]];*)
+(*PlotDetector=If[DecayVolumeAsDetectorGivenExperiment=="False",If[GeometryGivenExperiment=="Annular cylinder"&&MemberQ[explistlhcb,GivenExperiment]==False,Show[Region[Style[finDetAnnular,White,Opacity[1],EdgeForm[Directive[Thickness[0.01],Red,Opacity-> 1]]]],Region[Style[foutDetAnnular,Red,Opacity[0.2],EdgeForm[Directive[Thickness[0.01],Red,Opacity-> 0.1]]]]],Region[Style[DetectorGeometryGivenExperiment,Red,Opacity[0.3],EdgeForm[{Thick,Red}]],BoxRatios->{1,1,BoxRatioz},Boxed->True,Axes->True]]];*)
+(*PlotFullGeometry=If[DecayVolumeAsDetectorGivenExperiment=="False",Show[PlotOrigin,PlotDecayVolume,PlotDetector],Show[PlotOrigin,PlotDecayVolume]];*)
+(*PlotFullGeometry*)
 
 
-(* ::Section::Closed:: *)
+(* ::Input:: *)
+(**)
+
+
+(* ::Input:: *)
+(*Null*)
+
+
+(* ::Input:: *)
+(**)
+
+
+(* ::Input:: *)
+(*Null*)
+
+
+(* ::Section:: *)
 (*Defining \[Theta],E,z grid for the tabulation*)
 
 
@@ -1773,6 +1789,10 @@
 (*ELLPvaluesFacility["SPS"]=Join[{0.005,0.01,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[EmaxFacility["SPS"]],(Log10[EmaxFacility["SPS"]]-Log10[5.5])/50}]]//N;*)
 (*ELLPvaluesFacility["LHC"]=Join[{0.005,0.01,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[1000],(Log10[1000]-Log10[5.5])/50}],Table[10^ELLP,{ELLP,Log10[1100.],Log10[EmaxFacility["LHC"]],(Log10[EmaxFacility["LHC"]]-Log10[1100.])/30}]]//N;*)
 (*ELLPvaluesFacility["FCC-hh"]=Join[{0.005,0.011,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[1000],(Log10[1000]-Log10[5.5])/30}],Table[10^ELLP,{ELLP,Log10[1100.],Log10[10000.],(Log10[10000.]-Log10[1100.])/30}],Table[10^ELLP,{ELLP,Log10[11000.],Log10[EmaxFacility["FCC-hh"]],(Log10[EmaxFacility["FCC-hh"]]-Log10[11000.])/30}]]//N;*)
+(**)
+(*ELLPvaluesFacility["LHC_fixed_target"]=Join[{0.005,0.01,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[1000],(Log10[1000]-Log10[5.5])/50}],Table[10^ELLP,{ELLP,Log10[1100.],Log10[EmaxFacility["LHC_fixed_target"]],(Log10[EmaxFacility["LHC_fixed_target"]]-Log10[1100.])/30}]]//N;*)
+(**)
+(**)
 (*(*Grid of Subscript[\[Theta], LLP],Subscript[z, LLP]*)*)
 (*\[Theta]LLPrange=\[Theta]grid[DecayVolumeAsDetectorGivenExperiment,ThetaDecVolGivenExperimentMin,ThetaDecVolGivenExperimentMax,ThetaDetGivenExperimentMin,ThetaDetGivenExperimentMax];*)
 (*\[CapitalDelta]zVal[\[CapitalDelta]z_]=Min[\[CapitalDelta]z/10,Max[0.5,\[CapitalDelta]z/45.]];*)
@@ -1783,7 +1803,7 @@
 (*ELLPvalues=ELLPvaluesFacility[FacilityGivenExperiment];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Azimuthal acceptance calculations*)
 
 
@@ -1812,18 +1832,19 @@
 (*azaccdata=Join[gridReducedLLPtoDet[[All,{1,3}]],If[DecayVolumeAsDetectorGivenExperiment=="False",gridReducedLLPtoDet[[All,{4}]]+gridReducedLLPnotToDet[[All,{4}]],gridReducedLLPtoDet[[All,{4}]]],2];*)
 (*Print["The volume of the decay volume (in \!\(\*SuperscriptBox[\(m\), \(3\)]\)) calculated by the azimuthal acceptance (compare with the true volume obtained using simple formulas):"]*)
 (*azacc[th_,z_]=Interpolation[DeleteDuplicatesBy[azaccdata,{#[[1]],#[[2]]}&],InterpolationOrder->1][th,z];*)
-(*{{"Meaning","Volume - computed as \[Integral]2\!\(\*SubscriptBox[\(\[Pi]\[Epsilon]\), \(az\)]\)(\[Theta],z)sin(\[Theta]) \!\(\*SuperscriptBox[\(r\), \(2\)]\)(z)d\[Theta]dr", "Volume - computed internally as Volume[Decay Volume]", "Volume - computed as \[Integral]IfLLPinsideDecVol dx dy dz"},{"Comment","","Must match the 2nd column with O(few %) precision","Must match the 2nd column with O(few %) precision"},{"Value",NIntegrate[2*Pi*azacc[th,z]*Sin[th] z^2/Cos[th]^3,{th,thgrid[[1]],thgrid[[-1]]},{z,zgrid[[1]],zgrid[[-1]]}],Volume[DecayVolumeGeometryGivenExperiment],VolumeFromIf[GivenExperiment]}}//TableForm*)
+(*{{"Meaning","Volume - computed as \[Integral]2\!\(\*SubscriptBox[\(\[Pi]\[Epsilon]\), \(az\)]\)(\[Theta],z)sin(\[Theta]) \!\(\*SuperscriptBox[\(r\), \(2\)]\)(z)d\[Theta]dr", "Volume - computed internally as Volume[Decay Volume]", "Volume - computed as \[Integral]IfLLPinsideDecVol dx dy dz"},{"Comment","","Must match the 2nd column with O(few %) precision","Must match the 2nd column with O(few %) precision"},{"Value",NIntegrate[2*Pi*azacc[th,z]*Sin[th] z^2/Cos[th]^3,{th,thgrid[[1]],thgrid[[-1]]},{z,zgrid[[1]],zgrid[[-1]]}, WorkingPrecision-> 5],Volume[DecayVolumeGeometryGivenExperiment],VolumeFromIf[GivenExperiment]}}//TableForm*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Visualization of the generated acceptance points*)
+(**)
 
 
 (* ::Input:: *)
 (*(*_______________________________________________________*)*)
 (*(*Visualization of the generated LLP decay points. Uncomment if needed*)*)
 (*(*_______________________________________________________*)*)
-(*AzimuthalAcceptanceVisualizationChoice="No";*)
+(*AzimuthalAcceptanceVisualizationChoice="Yes";*)
 (*(*AzimuthalAcceptanceVisualizationChoice=dropdownDialog[{"Yes","No"},"Do you want to visualize the generated grid of the LLP decay points inside the decay volume?"];*)*)
 (*If[AzimuthalAcceptanceVisualizationChoice=="Yes",Print["Green points - the decay points of the LLPs pointing to the end of the detector. Cyan points - for the LLPs that do not point to the detector (less dense grid)"]]*)
 (*If[AzimuthalAcceptanceVisualizationChoice=="Yes",*)
@@ -1839,15 +1860,15 @@
 (*(*Export[FileNameJoin[{NotebookDirectory[],"temp1/mathusla-points.pdf"}],fig]*)]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Computing the decay products acceptance*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Definitions*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Initializing all routines*)
 
 
@@ -1855,18 +1876,18 @@
 (*Quiet[NotebookEvaluate[FileNameJoin[{NotebookDirectory[],"codes/decay-acceptance.nb"}]]];*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Mass range for the acceptance computation*)
 
 
 (* ::Input:: *)
 (*(*Mass range for scalars. If the facility is not FCC-hh/LHC (where scalars heavier than B may be produced), then the mass range is bounded by Subscript[m, B] - Subscript[m, \[Pi]]. Otherwise, it is up to Subscript[m, h]/2*)*)
 (*mLLPlistTemp["Scalar"]=Join[{0.02,0.05,0.1,0.2,0.22,0.3,0.4,0.5,0.7,0.9,1.05,1.3,1.6,1.99},mjetsrange["Scalar"]];*)
-(*mLLPlist["Scalar"]=If[MemberQ[{"LHC","FCC-hh"},FacilityGivenExperiment]==False,Select[mLLPlistTemp["Scalar"],#<=5.1&],mLLPlistTemp["Scalar"]];*)
+(*mLLPlist["Scalar"]=If[MemberQ[{"LHC","FCC-hh", "LHC_fixed_target"},FacilityGivenExperiment]==False,Select[mLLPlistTemp["Scalar"],#<=5.1&],mLLPlistTemp["Scalar"]];*)
 (*(*For HNLs - similarly*)*)
 (*Do[*)
 (*mLLPlistTemp[LLP]=Join[Select[{0.02,0.05,0.1,0.17,0.35,0.5,0.75,1.,1.19,1.5},#<Min[mjetsrange[LLP]]&],mjetsrange[LLP],{1.75}]//Sort//DeleteDuplicates;*)
-(*mLLPlist[LLP]=If[MemberQ[{"LHC","FCC-hh"},FacilityGivenExperiment]==False,Select[mLLPlistTemp[LLP],#<=5.3&],mLLPlistTemp[LLP]];*)
+(*mLLPlist[LLP]=If[MemberQ[{"LHC","FCC-hh", "LHC_fixed_target"},FacilityGivenExperiment]==False,Select[mLLPlistTemp[LLP],#<=5.3&],mLLPlistTemp[LLP]];*)
 (*,{LLP,{"HNL-mixing-e","HNL-mixing-mu","HNL-mixing-tau"}}]*)
 (*(*ALPs coupled to gluons*)*)
 (*mLLPlistTemp["ALP-gluon"]=Join[Select[{0.02,0.05,0.1,0.25,0.3,0.5,0.75,1.,1.25,1.5,1.8,2.3},#<Min[mjetsrange["ALP-gluon"]]&],mjetsrange["ALP-gluon"]];*)
@@ -1884,7 +1905,7 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Final block*)
 
 
@@ -1992,7 +2013,7 @@
 (*]*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Actual computation of the decay acceptance*)
 
 
@@ -2012,15 +2033,15 @@
 (*If[(DirectoryQ["Acceptances"]//ToString)=="False",CreateDirectory["Acceptances"]];*)
 (*If[(DirectoryQ[FileNameJoin[{"Acceptances",GivenExperimentName}]]//ToString)=="False",CreateDirectory[FileNameJoin[{"Acceptances",GivenExperimentName}]]];*)
 (*(*ChoiceDialog["Choose the LLP for which acceptances will be computed:",Join[LLPlistReduced,{"All"}],Appearance\[Rule]"Vertical"\[Rule]{Automatic,3}]*)*)
-(*ivaltest=If[GivenExperiment=="SHiNESS",10^4,1000];*)
+(*ivaltest=If[GivenExperiment=="SHiNESS",10^4,If[GivenExperiment=="LHC_fixed_target",100,1000]];*)
 (*Do[BlockAcceptanceComputation[SelectedLLPlist[[i]]],{i,1,Length[SelectedLLPlist],1}]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Chapter to be automatically launched by the previous chapter. No need to launch it manually*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Scalar*)
 
 
@@ -2028,11 +2049,11 @@
 (*dataS=BlockExport["Scalar",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*HNL*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*e mixing*)
 
 
@@ -2056,7 +2077,7 @@
 (*dataS=BlockExport["HNL-mixing-tau",10^3];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Dark photon*)
 
 
@@ -2064,7 +2085,7 @@
 (*dataS=BlockExport["DP",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-fermion*)
 
 
@@ -2072,7 +2093,7 @@
 (*dataS=BlockExport["ALP-fermion",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-gluon*)
 
 
@@ -2080,7 +2101,7 @@
 (*dataS=BlockExport["ALP-gluon",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-photon*)
 
 
@@ -2088,7 +2109,7 @@
 (*dataS=BlockExport["ALP-photon",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-L mediator*)
 
 
@@ -2096,7 +2117,7 @@
 (*dataS=BlockExport["B-L",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-3Subscript[L, \[Mu]] mediator*)
 
 
@@ -2104,7 +2125,7 @@
 (*dataS=BlockExport["B-3Lmu",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-3Subscript[L, e]-Subscript[L, \[Mu]]+Subscript[L, \[Tau]] mediator*)
 
 
@@ -2112,7 +2133,7 @@
 (*dataS=BlockExport["B-3Le-Lmu+Ltau",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-Subscript[L, e]-3Subscript[L, \[Mu]]+Subscript[L, \[Tau]] mediator*)
 
 
@@ -2120,7 +2141,7 @@
 (*dataS=BlockExport["B-Le-3Lmu+Ltau",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Deleting generated cells/proceeding to an other experiment*)
 
 
