@@ -168,7 +168,7 @@
 (*{mnucleus["Mo"],anucleus["Mo"],znucleus["Mo"]}={89.38,96,42};*)
 (*{mnucleus["Fe"],anucleus["Fe"],znucleus["Fe"]}={54.43,56,28};*)
 (*{mnucleus["C"],anucleus["C"],znucleus["C"]}={11.188,12,6};*)
-(*{mnucleus["H"],anucleus["H"],znucleus["H"]}={1.0078,1,1};*)
+(*(*{mnucleus["H"],anucleus["H"],znucleus["H"]}={1.0078,1,1};*)*)
 (**)
 (*(*Br ratios of EM decays of light mesons*)*)
 (*Br\[Pi]To\[Gamma]\[Gamma]=0.98799;*)
@@ -1917,8 +1917,8 @@
 
 
 (* ::Input:: *)
-(*\[Theta]listBinning["SPS"]=\[Theta]listBinning["Serpukhov"]=\[Theta]listBinning["FermilabBD"]=\[Theta]listBinning["LHC_fixed_target"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*),10^-4.,5*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.015}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
-(*\[Theta]listBinning["LHC"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2.],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[1.],0.015}],Table[10^\[Theta]N,{\[Theta]N,Log10[1.02],Log10[Pi/2],0.01}],{Pi/2}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
+(*\[Theta]listBinning["SPS"]=\[Theta]listBinning["Serpukhov"]=\[Theta]listBinning["FermilabBD"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*),10^-4.,5*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.015}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
+(*\[Theta]listBinning["LHC"]=\[Theta]listBinning["LHC_fixed_target"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2.],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[1.],0.015}],Table[10^\[Theta]N,{\[Theta]N,Log10[1.02],Log10[Pi/2],0.01}],{Pi/2}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*\[Theta]listBinning["FCC-hh"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)7*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi/2],0.02}],{Pi/2}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*\[Theta]listBinning["ESS"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)10^-4.,10^-3.,10^-2.},Table[10^\[Theta]N,{\[Theta]N,Log10[3*10^-2.],Log10[0.5],0.25}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.1}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*(*The block that computes the smooth pdf Subscript[f, \[Theta],E] from the data BoostedData in the form Log[\[Theta]],Log[E]*)*)
@@ -2452,7 +2452,7 @@
 (*{proc,mlist}//Clear;*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Scalar*)
 
 

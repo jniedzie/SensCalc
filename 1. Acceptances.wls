@@ -1841,6 +1841,7 @@
 
 
 (* ::Input:: *)
+(**)
 (*(*_______________________________________________________*)*)
 (*(*Visualization of the generated LLP decay points. Uncomment if needed*)*)
 (*(*_______________________________________________________*)*)
@@ -1963,7 +1964,7 @@
 (*]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Silent run*)
 
 
@@ -2033,7 +2034,7 @@
 (*If[(DirectoryQ["Acceptances"]//ToString)=="False",CreateDirectory["Acceptances"]];*)
 (*If[(DirectoryQ[FileNameJoin[{"Acceptances",GivenExperimentName}]]//ToString)=="False",CreateDirectory[FileNameJoin[{"Acceptances",GivenExperimentName}]]];*)
 (*(*ChoiceDialog["Choose the LLP for which acceptances will be computed:",Join[LLPlistReduced,{"All"}],Appearance\[Rule]"Vertical"\[Rule]{Automatic,3}]*)*)
-(*ivaltest=If[GivenExperiment=="SHiNESS",10^4,If[GivenExperiment=="LHC_fixed_target",100,1000]];*)
+(*ivaltest=If[GivenExperiment=="SHiNESS",10^4,If[GivenExperiment=="SHIFT_muon_chamber",100,1000]];*)
 (*Do[BlockAcceptanceComputation[SelectedLLPlist[[i]]],{i,1,Length[SelectedLLPlist],1}]*)
 
 
@@ -2161,11 +2162,11 @@
 (*]*)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Some tests*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Some tests*)
 
 
@@ -2351,7 +2352,7 @@
 (*Show[ListPlot[{multlist[[1]][[1]],multlist[[1]][[2]],multlist[[2]][[1]],multlist[[2]][[2]],multlist[[3]][[1]],multlist[[3]][[2]]},Joined->True,PlotStyle->{{Thick,Blue},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green},{Thick,Darker@Darker@Green,Dashing[0.02]}},Frame\[Rule] True,FrameLabel\[Rule]{"Subscript[m, LLP] [GeV]" , "Subscript[n, per decay]"},FrameStyle\[Rule]Directive[Black, 23],ImageSize->Large,PlotRange\[Rule]{{0.05,4.5},{1,12}},PlotLabel\[Rule]Style[Row[{"Dashed: charged only. Solid: incl. \[Gamma],Subscript[K^0, L]"}],18,Black]],Plot[{0.9,0.9,0.9,0.9,0.9},{x,0,1},PlotStyle->{{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green}},PlotLegends\[Rule]Placed[Style[#,18]&/@fipsformult,{0.24,0.8}]]]*)*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*In the limit Subscript[E, LLP]/Subscript[m, LLP] >> 1 and in absence of energy cut and magnetic field etc ., Subscript[\[Epsilon], decay] must tend to 1 for the LLPs pointing to the detector and to 0 for those that do not point to the detector*)
 
 
