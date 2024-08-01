@@ -241,6 +241,7 @@
 (*Do[PppToPhiexp[exp]=PppToPhiFacility[FacilityExperiment[exp]],{exp,explistship}];*)
 (*(*Overall table with cross-sections used for exporting*)*)
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistship}]*)
+(**)
 
 
 (* ::Subsubsection:: *)
@@ -2564,7 +2565,7 @@
 
 
 (* ::Input:: *)
-(*listgeometrynonstandard=Join[22,explistlhcb];*)
+(*listgeometrynonstandard=Join[explistship,explistlhcb];*)
 (*NonStandardDecayVolumeGeometry[experiment_]:=If[StringContainsQ[experiment,{"SHiP","CHARM"}]==True,BlockDecayVolumePyramidalFrustum[experiment],If[StringContainsQ[experiment,"LHCb-downstream"]==True,LHCbfarDecayVolume[experiment],LHCbMuonVol]]*)
 
 
