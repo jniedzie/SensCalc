@@ -122,7 +122,7 @@
 (**)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*LHC_fixed_target*)
 
 
@@ -2312,11 +2312,11 @@
 (*Actual computation of the distributions*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*HNL*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*HNL_W*)
 
 
@@ -2338,7 +2338,7 @@
 (*{proc,mlist}//Clear*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*HNL_B*)
 
 
@@ -2362,7 +2362,7 @@
 (*]*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*HNL_D*)
 
 
@@ -2385,7 +2385,7 @@
 (*]*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*HNL_K*)
 
 
@@ -2406,7 +2406,7 @@
 (*{proc,mlist}//Clear;*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*HNL_mu*)
 
 
@@ -2430,7 +2430,7 @@
 (*{proc,mlist}//Clear;*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*HNL_PiCharged*)
 
 
@@ -2474,7 +2474,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Scalar_B-quartic*)
 
 
@@ -2699,7 +2699,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*DP*)
 
 
@@ -3330,7 +3330,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*ALP-fermion*)
 
 

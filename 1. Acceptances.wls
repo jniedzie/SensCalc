@@ -2062,7 +2062,7 @@
 (*dataS=BlockExport["HNL-mixing-e",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\[Mu] mixing*)
 
 
@@ -2070,7 +2070,7 @@
 (*dataS=BlockExport["HNL-mixing-mu",10^3];//AbsoluteTiming*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\[Tau] mixing*)
 
 
