@@ -1790,7 +1790,7 @@
 (*ELLPvaluesFacility["LHC"]=Join[{0.005,0.01,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[1000],(Log10[1000]-Log10[5.5])/50}],Table[10^ELLP,{ELLP,Log10[1100.],Log10[EmaxFacility["LHC"]],(Log10[EmaxFacility["LHC"]]-Log10[1100.])/30}]]//N;*)
 (*ELLPvaluesFacility["FCC-hh"]=Join[{0.005,0.011,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[1000],(Log10[1000]-Log10[5.5])/30}],Table[10^ELLP,{ELLP,Log10[1100.],Log10[10000.],(Log10[10000.]-Log10[1100.])/30}],Table[10^ELLP,{ELLP,Log10[11000.],Log10[EmaxFacility["FCC-hh"]],(Log10[EmaxFacility["FCC-hh"]]-Log10[11000.])/30}]]//N;*)
 (**)
-(*ELLPvaluesFacility["LHC_fixed_target"]=Join[{0.005,0.01,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[1000],(Log10[1000]-Log10[5.5])/50}],Table[10^ELLP,{ELLP,Log10[1100.],Log10[EmaxFacility["LHC_fixed_target"]],(Log10[EmaxFacility["LHC_fixed_target"]]-Log10[1100.])/30}]]//N;*)
+(*ELLPvaluesFacility["LHC-fixed-target"]=Join[{0.005,0.01,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[1000],(Log10[1000]-Log10[5.5])/50}],Table[10^ELLP,{ELLP,Log10[1100.],Log10[EmaxFacility["LHC-fixed-target"]],(Log10[EmaxFacility["LHC-fixed-target"]]-Log10[1100.])/30}]]//N;*)
 (**)
 (**)
 (*(*Grid of Subscript[\[Theta], LLP],Subscript[z, LLP]*)*)
@@ -1861,6 +1861,22 @@
 (*(*Export[FileNameJoin[{NotebookDirectory[],"temp1/mathusla-points.pdf"}],fig]*)]*)
 
 
+(* ::Input:: *)
+(**)
+
+
+(* ::Input:: *)
+(*Null*)
+
+
+(* ::Input:: *)
+(**)
+
+
+(* ::Input:: *)
+(*Null*)
+
+
 (* ::Title:: *)
 (*Computing the decay products acceptance*)
 
@@ -1884,11 +1900,11 @@
 (* ::Input:: *)
 (*(*Mass range for scalars. If the facility is not FCC-hh/LHC (where scalars heavier than B may be produced), then the mass range is bounded by Subscript[m, B] - Subscript[m, \[Pi]]. Otherwise, it is up to Subscript[m, h]/2*)*)
 (*mLLPlistTemp["Scalar"]=Join[{0.02,0.05,0.1,0.2,0.22,0.3,0.4,0.5,0.7,0.9,1.05,1.3,1.6,1.99},mjetsrange["Scalar"]];*)
-(*mLLPlist["Scalar"]=If[MemberQ[{"LHC","FCC-hh", "LHC_fixed_target"},FacilityGivenExperiment]==False,Select[mLLPlistTemp["Scalar"],#<=5.1&],mLLPlistTemp["Scalar"]];*)
+(*mLLPlist["Scalar"]=If[MemberQ[{"LHC","FCC-hh", "LHC-fixed-target"},FacilityGivenExperiment]==False,Select[mLLPlistTemp["Scalar"],#<=5.1&],mLLPlistTemp["Scalar"]];*)
 (*(*For HNLs - similarly*)*)
 (*Do[*)
 (*mLLPlistTemp[LLP]=Join[Select[{0.02,0.05,0.1,0.17,0.35,0.5,0.75,1.,1.19,1.5},#<Min[mjetsrange[LLP]]&],mjetsrange[LLP],{1.75}]//Sort//DeleteDuplicates;*)
-(*mLLPlist[LLP]=If[MemberQ[{"LHC","FCC-hh", "LHC_fixed_target"},FacilityGivenExperiment]==False,Select[mLLPlistTemp[LLP],#<=5.3&],mLLPlistTemp[LLP]];*)
+(*mLLPlist[LLP]=If[MemberQ[{"LHC","FCC-hh", "LHC-fixed-target"},FacilityGivenExperiment]==False,Select[mLLPlistTemp[LLP],#<=5.3&],mLLPlistTemp[LLP]];*)
 (*,{LLP,{"HNL-mixing-e","HNL-mixing-mu","HNL-mixing-tau"}}]*)
 (*(*ALPs coupled to gluons*)*)
 (*mLLPlistTemp["ALP-gluon"]=Join[Select[{0.02,0.05,0.1,0.25,0.3,0.5,0.75,1.,1.25,1.5,1.8,2.3},#<Min[mjetsrange["ALP-gluon"]]&],mjetsrange["ALP-gluon"]];*)
@@ -2034,7 +2050,7 @@
 (*If[(DirectoryQ["Acceptances"]//ToString)=="False",CreateDirectory["Acceptances"]];*)
 (*If[(DirectoryQ[FileNameJoin[{"Acceptances",GivenExperimentName}]]//ToString)=="False",CreateDirectory[FileNameJoin[{"Acceptances",GivenExperimentName}]]];*)
 (*(*ChoiceDialog["Choose the LLP for which acceptances will be computed:",Join[LLPlistReduced,{"All"}],Appearance\[Rule]"Vertical"\[Rule]{Automatic,3}]*)*)
-(*ivaltest=If[GivenExperiment=="SHiNESS",10^4,If[GivenExperiment=="SHIFT_muon_chamber",100,1000]];*)
+(*ivaltest=If[GivenExperiment=="SHiNESS",10^4,If[GivenExperiment=="SHIFT-muon-chamber",100,1000]];*)
 (*Do[BlockAcceptanceComputation[SelectedLLPlist[[i]]],{i,1,Length[SelectedLLPlist],1}]*)
 
 

@@ -28,9 +28,10 @@ Cell[BoxData[{
   "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{
-   "For", " ", "the", " ", "moment", " ", "I", " ", "choose", " ", 
-    "intermediate", " ", "values", " ", "between", " ", "SPS", " ", "and", 
-    " ", "LHC", " ", "for", " ", "LHC_fixed", "_target"}], 
+    RowBox[{
+    "For", " ", "the", " ", "moment", " ", "I", " ", "choose", " ", 
+     "intermediate", " ", "values", " ", "between", " ", "SPS", " ", "and", 
+     " ", "LHC", " ", "for", " ", "LHC"}], "-", "fixed", "-", "target"}], 
    "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{"\[Sigma]ppInpbFacility", ":=", 
   RowBox[{"Association", "[", 
@@ -54,7 +55,7 @@ Cell[BoxData[{
      RowBox[{"\"\<ESS\>\"", "->", 
       RowBox[{"45.", "*", 
        SuperscriptBox["10", "9"]}]}], ",", 
-     RowBox[{"\"\<LHC_fixed_target\>\"", "->", 
+     RowBox[{"\"\<LHC-fixed-target\>\"", "->", 
       RowBox[{"42.5", "*", 
        SuperscriptBox["10", "9"]}]}]}], "}"}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
@@ -109,7 +110,7 @@ Cell[BoxData[{
         SuperscriptBox["10", "9"]}]}], ",", 
       RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-      RowBox[{"\"\<LHC_fixed_target\>\"", "->", 
+      RowBox[{"\"\<LHC-fixed-target\>\"", "->", 
        RowBox[{"2.878", "*", 
         SuperscriptBox["10", "5"]}]}]}], "}"}], "]"}]}], 
   "\[IndentingNewLine]", 
@@ -158,7 +159,7 @@ Cell[BoxData[{
         SuperscriptBox["10", "10"]}]}], ",", 
       RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-      RowBox[{"\"\<LHC_fixed_target\>\"", "->", 
+      RowBox[{"\"\<LHC-fixed-target\>\"", "->", 
        RowBox[{"3.924", "*", 
         SuperscriptBox["10", "7"]}]}]}], "}"}], "]"}]}], 
   "\[IndentingNewLine]", 
@@ -193,7 +194,7 @@ Cell[BoxData[{
       RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", "552."}], ",", 
       RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-      RowBox[{"\"\<LHC_fixed_target\>\"", "->", "0"}]}], "}"}], "]"}]}], 
+      RowBox[{"\"\<LHC-fixed-target\>\"", "->", "0"}]}], "}"}], "]"}]}], 
   "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{
@@ -253,7 +254,7 @@ Cell[BoxData[{
      RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", "73.8"}], ",", 
      RowBox[{"\"\<Serpukhov\>\"", "->", "2.37"}], ",", 
      RowBox[{"\"\<ESS\>\"", "->", "0.59"}], ",", 
-     RowBox[{"\"\<LHC_fixed_target\>\"", "->", "12.148"}]}], "}"}], 
+     RowBox[{"\"\<LHC-fixed-target\>\"", "->", "12.148"}]}], "}"}], 
    "]"}]}], "\[IndentingNewLine]", 
  RowBox[{"PppTo\[Eta]Facility", ":=", 
   RowBox[{"Association", "[", 
@@ -265,7 +266,7 @@ Cell[BoxData[{
      RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", "8.3"}], ",", 
      RowBox[{"\"\<Serpukhov\>\"", "->", "0.211"}], ",", 
      RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-     RowBox[{"\"\<LHC_fixed_target\>\"", "->", "1.391"}]}], "}"}], 
+     RowBox[{"\"\<LHC-fixed-target\>\"", "->", "1.391"}]}], "}"}], 
    "]"}]}], "\[IndentingNewLine]", 
  RowBox[{"PppTo\[Eta]prFacility", ":=", 
   RowBox[{"Association", "[", 
@@ -277,7 +278,7 @@ Cell[BoxData[{
      RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", "1.1"}], ",", 
      RowBox[{"\"\<Serpukhov\>\"", "->", "0.027"}], ",", 
      RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-     RowBox[{"\"\<LHC_fixed_target\>\"", "->", "0.170"}]}], "}"}], 
+     RowBox[{"\"\<LHC-fixed-target\>\"", "->", "0.170"}]}], "}"}], 
    "]"}]}], "\[IndentingNewLine]", 
  RowBox[{"PppTo\[Rho]0Facility", ":=", 
   RowBox[{"Association", "[", 
@@ -289,7 +290,7 @@ Cell[BoxData[{
      RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", "8.26"}], ",", 
      RowBox[{"\"\<Serpukhov\>\"", "->", "0.294"}], ",", 
      RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-     RowBox[{"\"\<LHC_fixed_target\>\"", "->", "1.705"}]}], "}"}], 
+     RowBox[{"\"\<LHC-fixed-target\>\"", "->", "1.705"}]}], "}"}], 
    "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"PppTo\[Omega]Facility", ":=", 
@@ -302,7 +303,7 @@ Cell[BoxData[{
       RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", "7.75"}], ",", 
       RowBox[{"\"\<Serpukhov\>\"", "->", "0.2983"}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-      RowBox[{"\"\<LHC_fixed_target\>\"", "->", " ", "1.649"}]}], "}"}], 
+      RowBox[{"\"\<LHC-fixed-target\>\"", "->", " ", "1.649"}]}], "}"}], 
     "]"}]}], "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{
@@ -349,7 +350,7 @@ Cell[BoxData[{
      RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", "0."}], ",", 
      RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
      RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-     RowBox[{"\"\<LHC_fixed_target\>\"", "->", " ", "0.00026"}]}], "}"}], 
+     RowBox[{"\"\<LHC-fixed-target\>\"", "->", " ", "0.00026"}]}], "}"}], 
    "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"PppToUpsilonFacility", ":=", 
@@ -365,7 +366,7 @@ Cell[BoxData[{
       RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", "0."}], ",", 
       RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-      RowBox[{"\"\<LHC_fixed_target\>\"", "->", "0"}]}], " ", "}"}], "]"}]}], 
+      RowBox[{"\"\<LHC-fixed-target\>\"", "->", "0"}]}], " ", "}"}], "]"}]}], 
   "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{
@@ -387,7 +388,7 @@ Cell[BoxData[{
         SuperscriptBox["10", 
          RowBox[{"-", "3"}]]}]}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-      RowBox[{"\"\<LHC_fixed_target\>\"", "->", " ", "0.074"}]}], "}"}], 
+      RowBox[{"\"\<LHC-fixed-target\>\"", "->", " ", "0.074"}]}], "}"}], 
     "]"}]}], "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{"Data", " ", "for", " ", "W", " ", "production"}], "*)"}], 
@@ -423,7 +424,7 @@ Cell[BoxData[{
         SuperscriptBox["10", "6"]}]}], ",", 
       RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-      RowBox[{"\"\<LHC_fixed_target\>\"", "->", " ", "1.34"}]}], "}"}], 
+      RowBox[{"\"\<LHC-fixed-target\>\"", "->", " ", "1.34"}]}], "}"}], 
     "]"}]}], "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{
@@ -440,7 +441,7 @@ Cell[BoxData[{
      RowBox[{"\"\<FCC-hh\>\"", "\[Rule]", " ", "50000."}], ",", 
      RowBox[{"\"\<Serpukhov\>\"", "->", "70."}], ",", 
      RowBox[{"\"\<ESS\>\"", "->", "2.4"}], ",", 
-     RowBox[{"\"\<LHC_fixed_target\>\"", "->", " ", "7000."}]}], "}"}], 
+     RowBox[{"\"\<LHC-fixed-target\>\"", "->", " ", "7000."}]}], "}"}], 
    "]"}]}]}], "Input",
  CellChangeTimes->{{3.905016515864115*^9, 3.90501651635985*^9}, {
    3.910328840726426*^9, 3.910328866931158*^9}, {3.910328900933639*^9, 
@@ -460,9 +461,9 @@ Cell[BoxData[{
    3.930737997930049*^9}, {3.930738030493822*^9, 3.930738062924773*^9}, {
    3.930738103046025*^9, 3.930738107208971*^9}, {3.930801935642954*^9, 
    3.930801936811825*^9}, 3.930807890968927*^9, {3.930895192152257*^9, 
-   3.930895334270698*^9}, {3.93124316562597*^9, 
-   3.931243166035637*^9}},ExpressionUUID->"ee7bfe9c-2c6e-4b8d-b202-\
-a56eee06adcd"]
+   3.930895334270698*^9}, {3.93124316562597*^9, 3.931243166035637*^9}, {
+   3.9323692589632587`*^9, 3.932369316072658*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"ee7bfe9c-2c6e-4b8d-b202-a56eee06adcd"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -908,8 +909,8 @@ Cell[BoxData[{
    3.910198434257594*^9}, 3.910198474615286*^9, {3.9101986684344697`*^9, 
    3.9101987848561797`*^9}, {3.910245727997229*^9, 3.910245747208251*^9}, {
    3.910245782520879*^9, 3.910245830688618*^9}, {3.910245909598368*^9, 
-   3.9102459362284236`*^9}, {3.91024613434826*^9, 3.910246145372591*^9}, {
-   3.9147486391844206`*^9, 3.914748642513946*^9}, {3.915437006837193*^9, 
+   3.91024593622842*^9}, {3.91024613434826*^9, 3.910246145372591*^9}, {
+   3.914748639184418*^9, 3.914748642513946*^9}, {3.915437006837193*^9, 
    3.915437006841717*^9}, {3.9154372078369846`*^9, 3.9154372081106806`*^9}},
  CellLabel->
   "In[20]:=",ExpressionUUID->"0ef6192c-b9ad-46f4-b651-eac4a4953f6f"]
@@ -2360,7 +2361,9 @@ LM+WMX8D0j+793OC6FvSWwRBdPRyGykQXTXlpxeItliT5geim5fGbgPR15Ym
 gumfEXlqfcxvHUP9l+mCaNlb66+FsL913PRzO5jebeL+J4nzreOuFj6OZCCt
 u0VXCERPmBUKpusENbZUA+nkpf47QTQbf1i2Ai/Q3bctC0F0uN+rUyDa51Dj
 aRB9q7z7Fog2VXt+G0TbHdDzOuL11nFNXTuYBgAijJum
-  "],ExpressionUUID->"be056b80-f7c5-40d4-a682-7aed56187183"]
+  "],
+ CellLabel->
+  "In[73]:=",ExpressionUUID->"be056b80-f7c5-40d4-a682-7aed56187183"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4850,7 +4853,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.9050142321602736`*^9, 3.9050142339625454`*^9}, {
    3.905014454342767*^9, 3.905014458377771*^9}, 3.905017151866778*^9, {
    3.905059366567094*^9, 3.905059366759766*^9}, {3.910258574509381*^9, 
-   3.91025864092065*^9}, 3.91025881848166*^9, 3.9102599356736856`*^9, {
+   3.91025864092065*^9}, 3.91025881848166*^9, 3.910259935673684*^9, {
    3.9154370068887568`*^9, 3.915437091500815*^9}, {3.915437208326058*^9, 
    3.915437208402462*^9}},
  CellLabel->"In[198]:=",ExpressionUUID->"23b82922-d039-4875-83be-7bd67f514620"]
@@ -12471,7 +12474,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.8933427163770285`*^9, 3.8933427165017796`*^9}, {
    3.893486286189659*^9, 3.893486289088214*^9}, {3.893518137032685*^9, 
    3.893518137039663*^9}, 3.8935193128285995`*^9, {3.893520126015787*^9, 
-   3.8935201693233404`*^9}, 3.8935206582013407`*^9, 3.8944385905609975`*^9, {
+   3.8935201693233404`*^9}, 3.893520658201342*^9, 3.8944385905609975`*^9, {
    3.897145306848808*^9, 3.8971453193869333`*^9}, {3.897145473943385*^9, 
    3.89714548695183*^9}, {3.903718225605397*^9, 3.903718237169443*^9}, {
    3.904793505323389*^9, 3.904793507411429*^9}, {3.905060156349679*^9, 
@@ -13601,7 +13604,7 @@ Cell[BoxData[{
  CellChangeTimes->{{3.8933427163770285`*^9, 3.8933427165017796`*^9}, {
    3.893486286189659*^9, 3.893486289088214*^9}, {3.893518137032685*^9, 
    3.893518137039663*^9}, 3.8935193128285995`*^9, {3.893520126015787*^9, 
-   3.8935201693233404`*^9}, 3.8935206582013407`*^9, 3.8944385905609975`*^9, {
+   3.8935201693233404`*^9}, 3.893520658201342*^9, 3.8944385905609975`*^9, {
    3.897145306848808*^9, 3.8971453193869333`*^9}, {3.897145473943385*^9, 
    3.89714548695183*^9}, {3.903718225605397*^9, 3.903718237169443*^9}, {
    3.904793505323389*^9, 3.904793507411429*^9}, {3.905060156349679*^9, 
@@ -14069,7 +14072,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell["DUNE/PRISM", "Subsection",
- CellChangeTimes->{{3.893324377648935*^9, 3.8933243780464363`*^9}, {
+ CellChangeTimes->{{3.893324377648935*^9, 3.893324378046438*^9}, {
   3.893520265447592*^9, 
   3.89352026635241*^9}},ExpressionUUID->"4d856511-d201-41c8-a939-\
 ed9023d9bcd9"],
@@ -14749,7 +14752,7 @@ Cell[BoxData[{
    3.893520806503993*^9, 3.894438590589984*^9, {3.897145306871933*^9, 
    3.89714531939192*^9}, {3.897145473952276*^9, 3.897145486957677*^9}, 
    3.897147806002312*^9, {3.905060161008649*^9, 3.905060161156616*^9}, 
-   3.910240594880687*^9, {3.9102469737595606`*^9, 3.910246973768616*^9}, {
+   3.910240594880687*^9, {3.910246973759558*^9, 3.910246973768616*^9}, {
    3.910255379008382*^9, 3.910255411575272*^9}, {3.910259012359108*^9, 
    3.910259014892061*^9}, {3.9120573465201187`*^9, 3.912057353030102*^9}},
  CellLabel->"In[628]:=",ExpressionUUID->"9e4c2f6e-1fe6-49a0-863f-bd0c7c4958b1"]
@@ -21279,7 +21282,7 @@ Cell[BoxData[
   RowBox[{
    RowBox[{
     RowBox[{"explistshift", "=", 
-     RowBox[{"{", "\"\<SHIFT_muon_chamber\>\"", "}"}]}], ";"}], 
+     RowBox[{"{", "\"\<SHIFT-muon-chamber\>\"", "}"}]}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
@@ -21365,7 +21368,7 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
         RowBox[{"Table", "[", 
-         RowBox[{"\"\<LHC_fixed_target\>\"", ",", 
+         RowBox[{"\"\<LHC-fixed-target\>\"", ",", 
           RowBox[{"Length", "[", "explistshift", "]"}]}], "]"}]}], "}"}]}], 
      "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
@@ -21444,7 +21447,7 @@ Cell[BoxData[
         ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "149.2", "}"}]}], "}"}]}], "]"}], ";"}], 
+        RowBox[{"{", "149.0", "}"}]}], "}"}]}], "]"}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
@@ -21494,15 +21497,15 @@ Cell[BoxData[
      "geometry"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
-     RowBox[{"We", " ", "asume", " ", "15", " ", "m", " ", 
-      RowBox[{"(", 
-       RowBox[{"CMS", " ", "whole", " ", "diameter"}], ")"}], " ", "as", " ", 
-      "the", " ", "diameter", " ", "of", " ", "the", " ", "decay", " ", 
-      "volume"}], ",", " ", 
+     RowBox[{"We", " ", "asume", " ", "20", " ", "m", " ", 
+      RowBox[{"(", " ", 
+       RowBox[{
+       "more", " ", "than", " ", "CMS", " ", "whole", " ", "diameter"}], 
+       ")"}], " ", "as", " ", "the", " ", "diameter", " ", "of", " ", "the", 
+      " ", "decay", " ", "volume"}], ",", " ", 
      RowBox[{
-     "we", " ", "must", " ", "implement", " ", "also", " ", "40", " ", "m", 
-      " ", "diameter", " ", "to", " ", "see", " ", "the", " ", 
-      "difference"}]}], "*)"}], "\[IndentingNewLine]", 
+     "other", " ", "values", " ", "must", " ", "be", " ", "checked"}]}], 
+    "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21525,7 +21528,7 @@ Cell[BoxData[
           RowBox[{"#1", ",", "z_"}], "]"}], "=", "#2"}], ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "7.5", "}"}]}], "}"}]}], "]"}], ";"}], 
+        RowBox[{"{", "10", "}"}]}], "}"}]}], "]"}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"z", "-", 
@@ -21884,6 +21887,17 @@ Cell[BoxData[
      "it", " ", "is", " ", "approximated", " ", "by", " ", "be", " ", "end", 
       " ", "of", " ", "the", " ", "trackers", " ", "or", " ", "the", " ", 
       "muon", " ", "system"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "For", " ", "SHIFT", " ", "we", " ", "asume", " ", "that", " ", "for", 
+     " ", "detecting", " ", "a", " ", "particle", " ", "it", " ", "is", " ", 
+     "enough", " ", "if", " ", "that", " ", "particle", " ", "points", " ", 
+     "inside", " ", "the", " ", "detector", " ", "in", " ", "the", " ", 
+     "middle", " ", "plane", " ", "of", " ", "the", " ", "detector", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"21.6", "/", "2"}], " ", "m"}], ")"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21894,10 +21908,14 @@ Cell[BoxData[
         ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", 
+        RowBox[{"Table", "[", 
          RowBox[{
-         "xLongMaxDetectorExperiment", "[", "\"\<SHIFT_muon_chamber\>\"", 
-          "]"}], "}"}]}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"xLongMaxDetectorExperiment", "[", "exp", "]"}], "-", 
+           RowBox[{"21.6", "/", "2"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"exp", ",", "explistshift"}], "}"}]}], "]"}]}], "}"}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -21911,8 +21929,15 @@ Cell[BoxData[
       "calorimeter", " ", "system"}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
-    "Set", " ", "to", " ", "0", " ", "for", " ", "the", " ", "moment"}], 
-    "*)"}], "\[IndentingNewLine]", 
+    "For", " ", "SHIFT", " ", "we", " ", "asume", " ", "that", " ", "for", 
+     " ", "detecting", " ", "a", " ", "particle", " ", "it", " ", "is", " ", 
+     "enough", " ", "if", " ", "that", " ", "particle", " ", "points", " ", 
+     "inside", " ", "the", " ", "detector", " ", "in", " ", "the", " ", 
+     "middle", " ", "plane", " ", "of", " ", "the", " ", "detector", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"21.6", "/", "2"}], " ", "m"}], ")"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21923,7 +21948,14 @@ Cell[BoxData[
          ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "0", "}"}]}], "}"}]}], "]"}], ";"}], "\n", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"xLongMaxDetectorExperiment", "[", "exp", "]"}], "-", 
+           RowBox[{"21.6", "/", "2"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"exp", ",", "explistshift"}], "}"}]}], "]"}]}], "}"}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"List", " ", "of", " ", "detectable", " ", 
@@ -21999,9 +22031,15 @@ Cell[BoxData[
    3.930812515137807*^9, 3.930812538135783*^9}, {3.930812683195274*^9, 
    3.93081269120844*^9}, {3.930813004504274*^9, 3.930813048174765*^9}, {
    3.930813218045247*^9, 3.930813221189033*^9}, {3.9308193187387667`*^9, 
-   3.930819319864679*^9}, 
-   3.931234074860401*^9},ExpressionUUID->"f5a61d9a-08ec-4a3c-bf63-\
-5f9a01ca66ae"]
+   3.930819319864679*^9}, 3.931234074860401*^9, 3.9323693445407743`*^9, {
+   3.932375135563591*^9, 3.932375156002597*^9}, {3.932460283061806*^9, 
+   3.932460289511722*^9}, {3.9324605983143673`*^9, 3.932460807144862*^9}, {
+   3.932460993079536*^9, 3.932461069986594*^9}, {3.932461328996297*^9, 
+   3.932461329933392*^9}, {3.932461373344856*^9, 3.932461378590086*^9}, 
+   3.932461412104142*^9, {3.9324614495579023`*^9, 3.932461485034967*^9}, {
+   3.932461526751359*^9, 3.932461603636224*^9}, {3.93246171631334*^9, 
+   3.9324617977318172`*^9}, {3.932544184513623*^9, 3.932544192360395*^9}},
+ CellLabel->"In[948]:=",ExpressionUUID->"f5a61d9a-08ec-4a3c-bf63-5f9a01ca66ae"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -22015,9 +22053,8 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
    RowBox[{
-   "Assuming", " ", "1", "%", " ", "of", " ", "the", " ", "integrated", " ", 
-    "luminosity", " ", "of", " ", "LHC", " ", "Run4"}], "*)"}], 
-  "\[IndentingNewLine]", 
+   "Assuming", " ", "1", "%", " ", "of", " ", "the", " ", "high", " ", 
+    "luminosity", " ", "of", " ", "LHC"}], "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
     RowBox[{"MapThread", "[", 
@@ -22031,19 +22068,18 @@ Cell[BoxData[
        RowBox[{"explistshift", ",", 
         RowBox[{"Table", "[", 
          RowBox[{
-          RowBox[{"7.15", "*", 
-           SuperscriptBox["10", "3"], 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"30", "*", 
+             SuperscriptBox["10", "3"]}], ")"}], "*", 
            RowBox[{
-           "\[Sigma]ppInpbFacility", "[", "\"\<LHC_fixed_target\>\"", "]"}]}],
+           "\[Sigma]ppInpbFacility", "[", "\"\<LHC-fixed-target\>\"", "]"}]}],
            ",", 
           RowBox[{"Length", "[", "explistshift", "]"}]}], "]"}]}], "}"}]}], 
      "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{
-    "We", " ", "take", " ", "this", " ", "value", " ", "to", " ", "1", " ", 
-     "in", " ", "order", " ", "to", " ", "have", " ", "the", " ", 
-     "luminosity", " ", "mentioned", " ", "before", "??"}], "*)"}], 
-   "\[IndentingNewLine]", 
+    RowBox[{"We", " ", "use", " ", "a", " ", "Hydrogen", " ", "target"}], 
+    "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -22081,14 +22117,9 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
         RowBox[{"Table", "[", 
-         RowBox[{"1", ",", 
+         RowBox[{"1.", ",", 
           RowBox[{"Length", "[", "explistshift", "]"}]}], "]"}]}], "}"}]}], 
      "]"}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Fraction", " ", "of", " ", "produced", " ", "bb", " ", "per", " ", "PoT",
-      " ", "at", " ", "the", " ", "given", " ", "experiment"}], "*)"}], 
-   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "Fraction", " ", "of", " ", "produced", " ", "bb", " ", "per", " ", "PoT",
@@ -22109,7 +22140,7 @@ Cell[BoxData[
         RowBox[{"AtargetExperiment", "[", "exp", "]"}], "0.29"], "*", 
        RowBox[{"CascadeFactorbb", "[", "exp", "]"}]}]}], ",", 
      RowBox[{"{", 
-      RowBox[{"exp", ",", "explistlhcb"}], "}"}]}], "]"}], 
+      RowBox[{"exp", ",", "explistshift"}], "}"}]}], "]"}], 
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
@@ -22362,8 +22393,14 @@ Cell[BoxData[
    3.930736369936721*^9, 3.930736403126394*^9}, {3.930736692501704*^9, 
    3.930736702171011*^9}, {3.9307370715037746`*^9, 3.930737190978337*^9}, {
    3.930737367081538*^9, 3.930737368775652*^9}, {3.930738165121825*^9, 
-   3.930738254283511*^9}, {3.930803257155149*^9, 3.930803258320596*^9}},
- CellLabel->"In[983]:=",ExpressionUUID->"752ec78d-98ad-4828-915c-6527a221b7c1"]
+   3.930738254283511*^9}, {3.930803257155149*^9, 3.930803258320596*^9}, 
+   3.932369333711835*^9, {3.932443998367424*^9, 3.932443999408225*^9}, {
+   3.932444037580619*^9, 3.932444045059886*^9}, {3.932461841447414*^9, 
+   3.932461884727415*^9}, 3.932462042406744*^9, {3.932465236258138*^9, 
+   3.9324652577518377`*^9}, {3.9325480669701023`*^9, 3.93254806858785*^9}, {
+   3.93254810173178*^9, 
+   3.932548121150187*^9}},ExpressionUUID->"752ec78d-98ad-4828-915c-\
+6527a221b7c1"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -23520,8 +23557,9 @@ Cell[BoxData[{
   3.9101145917638755`*^9, 3.910114709692765*^9}, {3.910248764108335*^9, 
   3.910248766762859*^9}, {3.9307275696382113`*^9, 3.930727576148238*^9}, {
   3.930741174390819*^9, 3.930741174576404*^9}, {3.931513642569244*^9, 
-  3.9315136467885838`*^9}},ExpressionUUID->"39e55937-a3f7-4527-a69e-\
-a60d51c1aa4a"]
+  3.9315136467885838`*^9}},
+ CellLabel->
+  "In[1011]:=",ExpressionUUID->"39e55937-a3f7-4527-a69e-a60d51c1aa4a"]
 }, Open  ]]
 }, Open  ]],
 
@@ -24124,7 +24162,7 @@ Cell[BoxData[{
    3.891678114539139*^9}, 3.893318177712144*^9, {3.8933405823662276`*^9, 
    3.8933405823682585`*^9}, {3.91024697386145*^9, 3.910246973869524*^9}, {
    3.9102479792923594`*^9, 3.910247989030578*^9}, {3.910248113025752*^9, 
-   3.9102481292904897`*^9}},
+   3.910248129290488*^9}},
  CellLabel->
   "In[1019]:=",ExpressionUUID->"fc7dd65e-2e91-458e-b2ef-28bd92b312ef"]
 }, Open  ]]
@@ -24141,7 +24179,7 @@ b7bbe096eae6"],
 Cell[CellGroupData[{
 
 Cell["LHCb-downstream", "Subsubsection",
- CellChangeTimes->{{3.8529588657882595`*^9, 3.852958868566205*^9}, 
+ CellChangeTimes->{{3.852958865788254*^9, 3.852958868566205*^9}, 
    3.885010243357608*^9, 3.8933414644865437`*^9, 
    3.907406782012643*^9},ExpressionUUID->"df8071d5-b0f0-4824-83d6-\
 62ff3e211d3a"],
