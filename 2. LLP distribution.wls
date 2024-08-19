@@ -168,7 +168,7 @@
 (*{mnucleus["Mo"],anucleus["Mo"],znucleus["Mo"]}={89.38,96,42};*)
 (*{mnucleus["Fe"],anucleus["Fe"],znucleus["Fe"]}={54.43,56,28};*)
 (*{mnucleus["C"],anucleus["C"],znucleus["C"]}={11.188,12,6};*)
-(*(*{mnucleus["H"],anucleus["H"],znucleus["H"]}={1.0078,1,1};*)*)
+(*{mnucleus["H"],anucleus["H"],znucleus["H"]}={1.0078,1,1};*)
 (**)
 (*(*Br ratios of EM decays of light mesons*)*)
 (*Br\[Pi]To\[Gamma]\[Gamma]=0.98799;*)
