@@ -2050,7 +2050,7 @@
 (*If[(DirectoryQ["Acceptances"]//ToString)=="False",CreateDirectory["Acceptances"]];*)
 (*If[(DirectoryQ[FileNameJoin[{"Acceptances",GivenExperimentName}]]//ToString)=="False",CreateDirectory[FileNameJoin[{"Acceptances",GivenExperimentName}]]];*)
 (*(*ChoiceDialog["Choose the LLP for which acceptances will be computed:",Join[LLPlistReduced,{"All"}],Appearance\[Rule]"Vertical"\[Rule]{Automatic,3}]*)*)
-(*ivaltest=If[GivenExperiment=="SHiNESS",10^4,If[GivenExperiment=="SHIFT-muon-chamber",100,1000]];*)
+(*ivaltest=If[GivenExperiment=="SHiNESS",10^4, If[StringContainsQ[GivenExperiment,"SHIFT"],100, 100]];*)
 (*Do[BlockAcceptanceComputation[SelectedLLPlist[[i]]],{i,1,Length[SelectedLLPlist],1}]*)
 
 
@@ -2176,6 +2176,14 @@
 (*FrontEndTokenExecute["SelectAll"];*)
 (*FrontEndTokenExecute["SelectionCloseAllGroups"];];*)
 (*]*)
+
+
+(* ::Input:: *)
+(*x*)
+
+
+(* ::Input:: *)
+(*2*)
 
 
 (* ::Title:: *)
