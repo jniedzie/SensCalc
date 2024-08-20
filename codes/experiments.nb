@@ -21275,14 +21275,35 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
    RowBox[{
-   "We", " ", "are", " ", "only", " ", "considerating", " ", "the", " ", 
-    "tracks", " ", "passing", " ", "through", " ", "the", " ", "muon", " ", 
-    "chambers", " ", "for", " ", "the", " ", "moment"}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
+    RowBox[{"We", " ", "define", " ", "three", " ", "different", " ", 
+     RowBox[{"modes", ".", " ", "The"}], " ", "first", " ", "one", " ", "is", 
+     " ", "for", " ", "muons"}], ",", " ", 
+    RowBox[{
+    "which", " ", "can", " ", "decay", " ", "from", " ", "the", " ", "target",
+      " ", "to", " ", "the", " ", 
+     RowBox[{"detector", ".", " ", "The"}], " ", "second", " ", "one", " ", 
+     "is", " ", "for", " ", "particles", " ", "which", " ", "can", " ", "not",
+      " ", "pass", " ", "thorugh", " ", "all", " ", "the", " ", "material"}], 
+    ",", " ", 
+    RowBox[{
+    "so", " ", "can", " ", "only", " ", "be", " ", "detected", " ", "if", " ",
+      "they", " ", "are", " ", "produced", " ", "just", " ", "near", " ", 
+     "the", " ", 
+     RowBox[{"detector", ".", " ", "The"}], " ", "last", " ", "one", " ", 
+     "sets", " ", "is", " ", "our", " ", "first", " ", "approximation"}], ",",
+     " ", 
+    RowBox[{
+    "like", " ", "if", " ", "all", " ", "the", " ", "decay", " ", "volume", 
+     " ", "was", " ", "empty", " ", "and", " ", "all", " ", "the", " ", 
+     "particles", " ", "which", " ", "decay", " ", "inside", " ", "could", 
+     " ", "be", " ", "detected"}]}], "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
     RowBox[{"explistshift", "=", 
-     RowBox[{"{", "\"\<SHIFT-muon-chamber\>\"", "}"}]}], ";"}], 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<SHIFT-muon\>\"", ",", " ", "\"\<SHIFT-non-muon\>\"", ",", " ", 
+       "\"\<SHIFT-empty-decay-volume\>\""}], "}"}]}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
@@ -21300,8 +21321,19 @@ Cell[BoxData[
      "equates", " ", "the", " ", "elements", " ", "list1", " ", "with", " ", 
      "keys", " ", "from", " ", "listexp", " ", "to", " ", "the", " ", 
      "corresponding", " ", "elements", " ", "of", " ", "the", " ", "list", 
-     " ", "listvals"}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   
+     " ", "listvals"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "In", " ", "the", " ", "first", " ", "mode", " ", "the", " ", "decay", 
+      " ", "volume", " ", "starts", " ", "nest", " ", "to", " ", "the", " ", 
+      "target"}], ",", " ", 
+     RowBox[{
+     "it", " ", "is", " ", "no", " ", "0.", " ", "to", " ", "avoid", " ", 
+      RowBox[{"errors", ".", " ", "In"}], " ", "the", " ", "secon", " ", 
+      "mode", " ", "the", " ", "decay", " ", "volume", " ", "starts", " ", 
+      "1", " ", "m", " ", "before", " ", "CMS", " ", "in", " ", "first", " ", 
+      "approximation"}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21312,8 +21344,9 @@ Cell[BoxData[
         ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "0.01", "}"}]}], "}"}]}], "]"}], ";"}], " ", 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"0.001", ",", " ", "148", ",", " ", "0.001"}], "}"}]}], 
+       "}"}]}], "]"}], ";"}], " ", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "Detector", " ", "has", " ", "the", " ", "axis", " ", "along", " ", 
@@ -21387,7 +21420,10 @@ Cell[BoxData[
        "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "\"\<Annular cylinder\>\"", "}"}]}], "}"}]}], "]"}], 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Annular cylinder\>\"", ",", " ", "\"\<Annular cylinder\>\"", 
+          ",", " ", "\"\<Annular cylinder\>\""}], "}"}]}], "}"}]}], "]"}], 
     ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
@@ -21411,8 +21447,9 @@ Cell[BoxData[
           RowBox[{"z_", ",", "#1"}], "]"}], "=", "#2"}], ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "0.", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"0.", ",", " ", "0.", ",", " ", "0."}], "}"}]}], "}"}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21423,8 +21460,9 @@ Cell[BoxData[
           RowBox[{"z_", ",", "#1"}], "]"}], "=", "#2"}], ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "0.", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"0.", ",", " ", "0.", ",", " ", "0."}], "}"}]}], "}"}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "Decay", " ", "volume", " ", "length", " ", "along", " ", "the", " ", 
@@ -21432,11 +21470,13 @@ Cell[BoxData[
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
-     "We", " ", "asume", " ", "the", " ", "decay", " ", "volume", " ", "is", 
-      " ", "160", " ", "m", " ", "longs"}], ",", " ", 
+     "We", " ", "asume", " ", "for", " ", "the", " ", "first", " ", "mode", 
+      " ", "the", " ", "decay", " ", "volume", " ", "is", " ", "160", " ", 
+      "m", " ", "longs"}], ",", " ", 
      RowBox[{
      "the", " ", "distance", " ", "between", " ", "SHIFT", " ", "and", " ", 
-      "CMS"}]}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"CMS", ".", " ", "For"}], " ", "the", " ", "secon"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21447,8 +21487,9 @@ Cell[BoxData[
         ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "149.0", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"149.0", ",", " ", "1", ",", "  ", "149.0"}], "}"}]}], 
+       "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -21516,8 +21557,9 @@ Cell[BoxData[
           RowBox[{"#1", ",", "z_"}], "]"}], "=", "#2"}], ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "0.01", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"0.0001", ",", " ", "0.0001", ",", " ", "0.0001"}], "}"}]}], 
+       "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21528,8 +21570,9 @@ Cell[BoxData[
           RowBox[{"#1", ",", "z_"}], "]"}], "=", "#2"}], ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "10", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"10", ",", " ", "10", ",", " ", "10"}], "}"}]}], "}"}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"z", "-", 
      RowBox[{
@@ -21781,8 +21824,10 @@ Cell[BoxData[
          "#2"}], ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "\"\<True\>\"", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<True\>\"", ",", " ", "\"\<True\>\"", ",", " ", "\"\<True\>\""}],
+          "}"}]}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "Longitudinal", " ", "positions", " ", "of", " ", "the", " ", "dipole", 
@@ -21807,8 +21852,9 @@ Cell[BoxData[
         "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "149.2", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"149.2", ",", " ", "149.2", ",", " ", "149.2"}], "}"}]}], 
+       "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21819,8 +21865,9 @@ Cell[BoxData[
         "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "170.8", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"170.8", ",", " ", "170.8", ",", " ", "170.8"}], "}"}]}], 
+       "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "Mean", " ", "magnetic", " ", "field", " ", "of", " ", "the", " ", 
@@ -21841,8 +21888,9 @@ Cell[BoxData[
         ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "1", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", " ", "1", ",", " ", "1"}], "}"}]}], "}"}]}], "]"}],
+     ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"ECAL", " ", "option", " ", 
      RowBox[{"(", 
@@ -21858,7 +21906,10 @@ Cell[BoxData[
         "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "\"\<False\>\"", "}"}]}], "}"}]}], "]"}], ";"}], 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<False\>\"", ",", " ", "\"\<False\>\"", ",", " ", 
+          "\"\<False\>\""}], "}"}]}], "}"}]}], "]"}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
@@ -21874,8 +21925,9 @@ Cell[BoxData[
        "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"{", "0", "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", " ", "0", ",", " ", "0"}], "}"}]}], "}"}]}], "]"}],
+     ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -21967,6 +22019,17 @@ Cell[BoxData[
       SubscriptBox[
        SuperscriptBox["K", "0"], "L"], " ", "cannot", " ", "be", " ", 
       "detected"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"In", " ", "the", " ", "first", " ", "mode"}], ",", " ", 
+     RowBox[{"only", " ", "muons", " ", "can", " ", "be", " ", "detected"}], 
+     ",", " ", 
+     RowBox[{"while", " ", "in", " ", "the", " ", "second", " ", "mode"}], 
+     ",", " ", 
+     RowBox[{
+     "all", " ", "the", " ", "particles", " ", "except", " ", "neutral", " ", 
+      "ones", " ", "and", " ", "muons", " ", "can", " ", "be", " ", 
+      "detected"}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -21977,8 +22040,23 @@ Cell[BoxData[
         ")"}], "&"}], ",", 
       RowBox[{"{", 
        RowBox[{"explistshift", ",", 
-        RowBox[{"Table", "[", 
+        RowBox[{"{", 
          RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"13.", ",", 
+             RowBox[{"-", "13."}]}], "}"}], "//", "Sort"}], ",", " ", 
+          RowBox[{"Select", "[", 
+           RowBox[{"detectablepdgs", ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"MemberQ", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"22.", ",", "130.", ",", "2112.", ",", 
+                  RowBox[{"-", "2112."}], ",", " ", "13", ",", " ", 
+                  RowBox[{"-", "13"}]}], "}"}], ",", "#"}], "]"}], "==", 
+              "False"}], "&"}]}], "]"}], ",", " ", 
           RowBox[{"Select", "[", 
            RowBox[{"detectablepdgs", ",", 
             RowBox[{
@@ -21988,9 +22066,8 @@ Cell[BoxData[
                 RowBox[{"{", 
                  RowBox[{"22.", ",", "130.", ",", "2112.", ",", 
                   RowBox[{"-", "2112."}]}], "}"}], ",", "#"}], "]"}], "==", 
-              "False"}], "&"}]}], "]"}], ",", 
-          RowBox[{"Length", "[", "explistshift", "]"}]}], "]"}]}], "}"}]}], 
-     "]"}], ";"}], "\[IndentingNewLine]"}]}]], "Input",
+              "False"}], "&"}]}], "]"}]}], "}"}]}], "}"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{{3.930382728800993*^9, 3.930382799834051*^9}, {
    3.930382852495518*^9, 3.9303829080651913`*^9}, {3.930384548427011*^9, 
    3.930384587779964*^9}, {3.930384691579023*^9, 3.930384695651183*^9}, {
@@ -22038,7 +22115,14 @@ Cell[BoxData[
    3.932461329933392*^9}, {3.932461373344856*^9, 3.932461378590086*^9}, 
    3.932461412104142*^9, {3.9324614495579023`*^9, 3.932461485034967*^9}, {
    3.932461526751359*^9, 3.932461603636224*^9}, {3.93246171631334*^9, 
-   3.9324617977318172`*^9}, {3.932544184513623*^9, 3.932544192360395*^9}},
+   3.9324617977318172`*^9}, {3.932544184513623*^9, 3.932544192360395*^9}, 
+   3.932701693439773*^9, {3.933061179994212*^9, 3.933061180127324*^9}, {
+   3.933061799506341*^9, 3.9330618097366*^9}, {3.933062605747974*^9, 
+   3.9330626058678007`*^9}, {3.933063293518766*^9, 3.933063527054283*^9}, {
+   3.933063581642631*^9, 3.933063612489224*^9}, {3.933063684506013*^9, 
+   3.9330638078306103`*^9}, {3.933063905696986*^9, 3.9330639448326693`*^9}, {
+   3.933064012576284*^9, 3.933064239024953*^9}, {3.9330647530532503`*^9, 
+   3.9330647601428967`*^9}, {3.9330668131173697`*^9, 3.933067153630226*^9}},
  CellLabel->"In[948]:=",ExpressionUUID->"f5a61d9a-08ec-4a3c-bf63-5f9a01ca66ae"]
 }, Open  ]],
 
@@ -22102,10 +22186,6 @@ Cell[BoxData[
      RowBox[{"collisions", ".", " ", "Relevant"}], " ", "for", " ", "fixed", 
      " ", "target", " ", "experiments"}], "*)"}], " ", "\[IndentingNewLine]", 
    
-   RowBox[{"(*", 
-    RowBox[{"What", " ", "should", " ", "be", " ", "put", " ", "here", 
-     RowBox[{"??", 
-      RowBox[{"??", "?"}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -22397,10 +22477,10 @@ Cell[BoxData[
    3.932369333711835*^9, {3.932443998367424*^9, 3.932443999408225*^9}, {
    3.932444037580619*^9, 3.932444045059886*^9}, {3.932461841447414*^9, 
    3.932461884727415*^9}, 3.932462042406744*^9, {3.932465236258138*^9, 
-   3.9324652577518377`*^9}, {3.9325480669701023`*^9, 3.93254806858785*^9}, {
-   3.93254810173178*^9, 
-   3.932548121150187*^9}},ExpressionUUID->"752ec78d-98ad-4828-915c-\
-6527a221b7c1"]
+   3.9324652577518377`*^9}, {3.932548066970102*^9, 3.93254806858785*^9}, {
+   3.93254810173178*^9, 3.932548121150187*^9}, {3.933064277275279*^9, 
+   3.9330642778079367`*^9}},
+ CellLabel->"In[983]:=",ExpressionUUID->"752ec78d-98ad-4828-915c-6527a221b7c1"]
 }, Open  ]],
 
 Cell[CellGroupData[{

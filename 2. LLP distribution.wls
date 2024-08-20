@@ -215,8 +215,8 @@
 (*ENlist["ESS"]=Join[Table[e,{e,0.0051,0.1401,0.001}],Table[10^EN,{EN,Log10[0.145],Log10[2.],0.02}],{EmaxFacility["ESS"]}]//N;*)
 (*ENlist["LHC-fixed-target"]=Join[With[{start=0.02,end=EmaxFacility["LHC-fixed-target"]},*)
 (*NestWhileList[#+StepEtemp[#]&,start,#<=end&,1,\[Infinity],-1]],{EmaxFacility["LHC-fixed-target"]}]//N;*)
-(*\[Theta]Nlist["LHC-fixed-target"]=SortBy[Partition[Join[\[Theta]NlistTemp,Pi-\[Theta]NlistTemp],1],1]//Flatten;*)
-(*\[Theta]NlistLight["LHC-fixed-target"]= \[Theta]NlistB["LHC-fixed-target"]=SortBy[Partition[Join[\[Theta]NlistLightTemp,Pi-\[Theta]NlistLightTemp],1],1]//Flatten;*)
+(*\[Theta]Nlist["LHC-fixed-target"]=\[Theta]NlistLight["LHC-fixed-target"]=Join[{10^-5.,5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.8],0.05}],{0.85,0.95,1.05,1.2,1.4,1.6,1.9,2.2,2.4,2.7,3.,Pi}]//N;*)
+(*\[Theta]NlistB["LHC-fixed-target"]=Join[{10^-5.,5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.8],0.03}],{0.85,0.95,1.05,1.2,1.4,1.6,1.9,2.2,2.4,2.7,3.,Pi}]//N;*)
 (**)
 (*ELLPfromKlistSPS={0.02,0.05,0.1,0.25,0.5,1.,1.5,2.,2.5,3.,3.5,4.,5.,6.,7.,8.};*)
 (**)
@@ -470,8 +470,8 @@
 
 
 (* ::Input:: *)
-(*(*factest="Serpukhov";*)
-(*ptest="EtaPr";*)
+(*(*factest="LHC-fixed-target";*)
+(*ptest="Eta";*)
 (*If[Length[DataDistr[factest,ptest]]!=2,*)
 (*pts=PointsSampler[factest,ptest,10^6,"False"];*)
 (*MotherInterpolation[factest,ptest];*)
@@ -1921,8 +1921,8 @@
 
 
 (* ::Input:: *)
-(*\[Theta]listBinning["SPS"]=\[Theta]listBinning["Serpukhov"]=\[Theta]listBinning["FermilabBD"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*),10^-4.,5*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.015}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
-(*\[Theta]listBinning["LHC"]=\[Theta]listBinning["LHC-fixed-target"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2.],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[1.],0.015}],Table[10^\[Theta]N,{\[Theta]N,Log10[1.02],Log10[Pi/2],0.01}],{Pi/2}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
+(*\[Theta]listBinning["SPS"]=\[Theta]listBinning["Serpukhov"]=\[Theta]listBinning["FermilabBD"]=\[Theta]listBinning["LHC-fixed-target"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*),10^-4.,5*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.015}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
+(*\[Theta]listBinning["LHC"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)5*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2.],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[1.],0.015}],Table[10^\[Theta]N,{\[Theta]N,Log10[1.02],Log10[Pi/2],0.01}],{Pi/2}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*\[Theta]listBinning["FCC-hh"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)7*10^-5.,10^-4.,3*10^-4.,6*10^-4.,10^-3.,2*10^-3.,4*10^-3.,6*10^-3.,8*10^-3.},Table[10^\[Theta]N,{\[Theta]N,Log10[10^-2],Log10[0.5],0.025}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi/2],0.02}],{Pi/2}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*\[Theta]listBinning["ESS"]=Join[{10^-6.,10^-5.,(*3*10^-5.,6*10^-5.,*)10^-4.,10^-3.,10^-2.},Table[10^\[Theta]N,{\[Theta]N,Log10[3*10^-2.],Log10[0.5],0.25}],Table[10^\[Theta]N,{\[Theta]N,Log10[0.52],Log10[Pi],0.1}],{Pi}]//N//DeleteDuplicates//Developer`ToPackedArray;*)
 (*(*The block that computes the smooth pdf Subscript[f, \[Theta],E] from the data BoostedData in the form Log[\[Theta]],Log[E]*)*)
@@ -2320,11 +2320,11 @@
 (*Actual computation of the distributions*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*HNL*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_W*)
 
 
@@ -2346,7 +2346,7 @@
 (*{proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_B*)
 
 
@@ -2370,7 +2370,7 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_D*)
 
 
@@ -2393,7 +2393,7 @@
 (*]*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_K*)
 
 
@@ -2414,7 +2414,7 @@
 (*{proc,mlist}//Clear;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_mu*)
 
 
@@ -2438,7 +2438,7 @@
 (*{proc,mlist}//Clear;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*HNL_PiCharged*)
 
 
@@ -2460,11 +2460,11 @@
 (*{proc,mlist}//Clear;*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*Scalar*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Scalar_B-mixing*)
 
 
@@ -2482,7 +2482,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Scalar_B-quartic*)
 
 
@@ -2500,7 +2500,7 @@
 (*{LLPv,proc,mlist,filename}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Scalar_Bs-quartic*)
 
 
@@ -2518,7 +2518,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Scalar_h-quartic*)
 
 
@@ -2538,7 +2538,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Scalar_K-mixing*)
 
 
@@ -2556,7 +2556,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Scalar_Bremsstrahlung-mixing*)
 
 
@@ -2581,11 +2581,11 @@
 (*Null*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*MCP*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*MCP_Pi0*)
 
 
@@ -2603,7 +2603,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*MCP_Eta*)
 
 
@@ -2621,7 +2621,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*MCP_Phi*)
 
 
@@ -2639,7 +2639,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*MCP_JPsi*)
 
 
@@ -2657,7 +2657,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*MCP_Rho0*)
 
 
@@ -2675,7 +2675,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*MCP_Omega*)
 
 
@@ -2693,7 +2693,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*MCP_Upsilon*)
 
 
@@ -2808,11 +2808,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-L*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-L_Bremsstrahlung*)
 
 
@@ -2833,7 +2833,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-L_Pi0*)
 
 
@@ -2851,7 +2851,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-L_Eta*)
 
 
@@ -2869,7 +2869,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-L_EtaPr*)
 
 
@@ -2887,7 +2887,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-L_Omega*)
 
 
@@ -2905,11 +2905,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-3Lmu*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Lmu_Bremsstrahlung*)
 
 
@@ -2930,7 +2930,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Lmu_Pi0*)
 
 
@@ -2948,7 +2948,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Lmu_Eta*)
 
 
@@ -2966,7 +2966,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Lmu_EtaPr*)
 
 
@@ -2984,7 +2984,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Lmu_Omega*)
 
 
@@ -3002,11 +3002,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-Le-3Lmu+Ltau*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-Le-3Lmu+Ltau_Bremsstrahlung*)
 
 
@@ -3027,7 +3027,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-Le-3Lmu+Ltau_Pi0*)
 
 
@@ -3045,7 +3045,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-Le-3Lmu+Ltau_Eta*)
 
 
@@ -3063,7 +3063,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-Le-3Lmu+Ltau_EtaPr*)
 
 
@@ -3081,7 +3081,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-Le-3Lmu+Ltau_Omega*)
 
 
@@ -3099,11 +3099,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*B-3Le-Lmu+Ltau*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Le-Lmu+Ltau_Bremsstrahlung*)
 
 
@@ -3124,7 +3124,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Le-Lmu+Ltau_Pi0*)
 
 
@@ -3142,7 +3142,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Le-Lmu+Ltau_Eta*)
 
 
@@ -3160,7 +3160,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Le-Lmu+Ltau_EtaPr*)
 
 
@@ -3178,7 +3178,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*B-3Le-Lmu+Ltau_Omega*)
 
 
@@ -3196,11 +3196,11 @@
 (**)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-photon*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-photon_Pi0*)
 
 
@@ -3218,7 +3218,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-photon_Eta*)
 
 
@@ -3236,7 +3236,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-photon_Primakov*)
 
 
@@ -3250,7 +3250,7 @@
 (*{LLPv,proc,Zlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-photon_Photon-fusion*)
 
 
@@ -3265,11 +3265,11 @@
 (*{LLPv,proc}//Clear*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-gluon*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-gluon_B*)
 
 
@@ -3287,7 +3287,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-gluon_Pi0*)
 
 
@@ -3308,7 +3308,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-gluon_Eta*)
 
 
@@ -3325,7 +3325,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-gluon_EtaPr*)
 
 
@@ -3342,11 +3342,11 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Chapter::Closed:: *)
+(* ::Chapter:: *)
 (*ALP-fermion*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-fermion_B*)
 
 
@@ -3364,7 +3364,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-fermion_Pi0*)
 
 
@@ -3387,7 +3387,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-fermion_Eta*)
 
 
@@ -3404,7 +3404,7 @@
 (*{LLPv,proc,mlist}//Clear*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*ALP-fermion_EtaPr*)
 
 
