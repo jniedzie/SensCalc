@@ -1,0 +1,11 @@
+*/.DS_Store
+*/.idea
+*/.vscode
+
+*/.m
+
+Acceptances/
+Auxiliary\ data/
+Sensitivity\ domains/
+Tabulated\ Nevents/
+plots/
