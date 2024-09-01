@@ -111,7 +111,7 @@ Cell[BoxData[{
       RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<LHC-fixed-target\>\"", "->", 
-       RowBox[{"2", "*", "2.878", "*", 
+       RowBox[{"2.878", "*", 
         SuperscriptBox["10", "5"]}]}]}], "}"}], "]"}]}], 
   "\[IndentingNewLine]", 
   RowBox[{"(*", 
@@ -160,7 +160,7 @@ Cell[BoxData[{
       RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<LHC-fixed-target\>\"", "->", 
-       RowBox[{"2", "*", "3.924", "*", 
+       RowBox[{"3.924", "*", 
         SuperscriptBox["10", "7"]}]}]}], "}"}], "]"}]}], 
   "\[IndentingNewLine]", 
   RowBox[{"(*", 
@@ -424,9 +424,8 @@ Cell[BoxData[{
         SuperscriptBox["10", "6"]}]}], ",", 
       RowBox[{"\"\<Serpukhov\>\"", "->", "0."}], ",", 
       RowBox[{"\"\<ESS\>\"", "->", "0."}], ",", 
-      RowBox[{"\"\<LHC-fixed-target\>\"", "->", 
-       RowBox[{"2", "*", " ", "1.34"}]}]}], "}"}], "]"}]}], 
-  "\[IndentingNewLine]", 
+      RowBox[{"\"\<LHC-fixed-target\>\"", "->", " ", "1.34"}]}], "}"}], 
+    "]"}]}], "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{
    "Maximal", " ", "energy", " ", "of", " ", "LLP", " ", "available", " ", 
@@ -464,8 +463,10 @@ Cell[BoxData[{
    3.930801936811825*^9}, 3.930807890968927*^9, {3.930895192152257*^9, 
    3.930895334270698*^9}, {3.93124316562597*^9, 3.931243166035637*^9}, {
    3.9323692589632587`*^9, 3.932369316072658*^9}, {3.933652078387697*^9, 
-   3.9336521070667663`*^9}, {3.933654132444604*^9, 3.933654189558202*^9}},
- CellLabel->"In[1]:=",ExpressionUUID->"ee7bfe9c-2c6e-4b8d-b202-a56eee06adcd"]
+   3.9336521070667663`*^9}, {3.933654132444604*^9, 3.933654189558202*^9}, {
+   3.934194588991294*^9, 
+   3.934194619105262*^9}},ExpressionUUID->"ee7bfe9c-2c6e-4b8d-b202-\
+a56eee06adcd"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -21827,12 +21828,12 @@ Cell[BoxData[
             RowBox[{"xLongMaxDetectorExperiment", "[", "#1", "]"}], "=", 
             RowBox[{"dxLongDetectorExperiment", "[", "#1", "]"}]}], ";"}]}], 
          "]"}]}], ")"}], "&"}], ",", "explistshift"}], "]"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", 
     RowBox[{
     "Position", " ", "of", " ", "the", " ", "final", " ", "plane", " ", "for",
       " ", "the", " ", "decay", " ", "products", " ", "along", " ", "the", 
-     " ", "detector", " ", "axis"}], "*)"}], "\n", 
+     " ", "detector", " ", "axis"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{"Do", "[", 
     RowBox[{
      RowBox[{
@@ -22202,7 +22203,7 @@ Cell[BoxData[
    3.934018394337181*^9}, 3.934019294298441*^9, {3.934019434461075*^9, 
    3.9340194368725863`*^9}, 3.93401973308438*^9, {3.934192834459179*^9, 
    3.934193024810822*^9}, 
-   3.9341930649514437`*^9},ExpressionUUID->"f5a61d9a-08ec-4a3c-bf63-\
+   3.934193064951444*^9},ExpressionUUID->"f5a61d9a-08ec-4a3c-bf63-\
 5f9a01ca66ae"]
 }, Open  ]],
 
