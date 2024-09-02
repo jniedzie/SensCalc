@@ -28,7 +28,7 @@
 
 
 (* ::Title:: *)
-(*Definitions*)
+(*Preliminary definitions*)
 
 
 (* ::Chapter:: *)
@@ -36,7 +36,7 @@
 
 
 (* ::Input:: *)
-(*LLPdirName="DP";*)
+(*LLPdirName="ALP-fermion";*)
 (*(*Set the directory for the search where tabulated acceptances are located*)*)
 (*directory["Acceptances"]=FileNameJoin[{NotebookDirectory[],"Acceptances"}];*)
 (*(*Set the directory for the search where tabulated angle-energy distributions are located*)*)
@@ -51,26 +51,71 @@
 
 
 (* ::Chapter:: *)
-(*Parameters and critical definitions*)
+(*Parameters and various functions*)
 
 
 (* ::Input:: *)
 (*dropdownDialog[list_,phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],PopupMenu[Dynamic[choice],list],Button["OK",DialogReturn[choice]]}]]*)
 (*infoDialog[phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],Button["Proceed",DialogReturn[choice]]}]]*)
-(*selectionDialog[list_,phrase_]:=DialogInput[{choice={}},Column[{Row[{phrase}],Pane[TogglerBar[Dynamic[choice],list,Appearance->"Vertical"->{Automatic,5}],ImageSize->{Automatic,Automatic},Scrollbars->{False,True}],Button["OK",DialogReturn[choice]]}]]*)
-(*(*Conversion units*)*)
-(*GeVMinusOneTom=2*10^-16;*)
-(*chbarval=3*10^8*6.58*10^-25;*)
-(*(*EM coupling*)*)
+(*selectionDialog[list_,phrase_]:=DialogInput[{choice={}},Column[{Row[{"Select the experiments for which the number of events will be computed:"}],Pane[TogglerBar[Dynamic[choice],list,Appearance->"Vertical"->{Automatic,5}],ImageSize->{Automatic,Automatic},Scrollbars->{False,True}],Button["OK",DialogReturn[choice]]}]]*)
+(*(*chbar*)*)
+(*chbar= 6.6*10^-25*3*10^8;*)
+(*(*Decay width of mesons*)*)
+(*\[Tau]\[Pi]0=8.52*10^-17;*)
+(*\[CapitalGamma]\[Pi]0=chbar/\[Tau]\[Pi]0;*)
+(*\[Tau]B=1.64*10^-12;*)
+(*hbar=6.58*10^-25;*)
+(*\[CapitalGamma]BdecayGeV=hbar/\[Tau]B;*)
+(*(*Bare quark masses from pdg*)*)
+(*md=4.67*10^-3;*)
+(*mu=2.16*10^-3;*)
+(*ms=0.093;*)
+(*(*Scales*)*)
+(*\[CapitalLambda]wVal=80;*)
+(*\[CapitalLambda]QCDval=0.34;*)
+(*(*Coupling constants*)*)
 (*\[Alpha]EM=1/137;*)
-(*(*Mesons masses*)*)
-(*{mSM["Rho0"],mSM["Pi0"],mSM["Eta"],mSM["EtaPr"],mSM["p"]}={0.775,0.135,0.547,0.958,0.939};*)
-(*\[CapitalGamma]SM["\[Rho]780"]=0.149;*)
-(*\[Sigma]pNucleonInpb[Atarget_]=51*Atarget^-0.29*10^9;*)
+(*\[Alpha]W=1/29.;*)
+(*f\[Pi]=0.093;*)
+(*\[Theta]\[Eta]\[Eta]pr=ArcSin[-1/3.];*)
+(*(*Cross-sections*)*)
+(*\[Sigma]pNucleonInpb[Atarget_]=If[Atarget==1., 42.5*10^(9),51*Atarget^-0.29*10^9];  (*The first case is for SHIFT target*)*)
+(*\[Sigma]ppLHC=72*10^9;*)
+(*(*Masses of various SM particles*)*)
+(*{mSM["Bplus"],mSM["Kplus"],mSM["PiPlus"],mSM["h"],mSM["Bs"]}={5.279,0.495,0.139,62.5,5.366};*)
+(*(*\[Alpha]S[ma_] = Interpolation[Import[FileNameJoin[{NotebookDirectory[],"phenomenology/AlphaS.txt"}],"Table"],InterpolationOrder\[Rule]1][ma];*)*)
+(*(*____________________*)*)
+(*(*B/K fragmentation fractions*)*)
+(*(*____________________*)*)
+(*(*Fragmentation fractions at the LHC. For the moment, the same fractions are assumed to be at the FCC-hh*)*)
+(*fbtob0["LHC"]=fbtobplus["LHC"]=fbtob0["FCC-hh"]=fbtobplus["FCC-hh"]=0.324;*)
+(*fbtobs["LHC"]=fbtobs["FCC-hh"]=0.09;*)
+(*(*Fragmentation fractions at SPS. From SHiP physics paper*)*)
+(*fbtobs["SPS"]=0.11;*)
+(*fbtob0["SPS"]=fbtobplus["SPS"]=0.411;*)
+(*fstokplus["SPS"]=0.5;*)
+(*fstok0l["SPS"]=0.25;*)
+(*(*Fraction of K^+/- decaying in-flight at SPS, from https://arxiv.org/pdf/2004.07974.pdf*)*)
+(*fractionDecayInFlightKplusKminus=(0.29+0.07);*)
+(*(*Fragmentation fractions at FermilabBD. Assumed to be the same as at SPS*)*)
+(*fbtobs["FermilabBD"]=0.11;*)
+(*fbtob0["FermilabBD"]=fbtobplus["FermilabBD"]=0.411;*)
+(*(*Fragmentation fractions at Serpukhov. Assumed to be zero*)*)
+(*fbtobs["Serpukhov"]=0.;*)
+(*fbtob0["Serpukhov"]=fbtobplus["Serpukhov"]=0.;*)
+(**)
+(*(*Fragmentation fractions at LHC fixed target*)*)
+(*(*Calculated for c quarks and estimated for b quarks*)*)
+(*fbtobplus["LHC-fixed-target"]=0.4;*)
+(*fbtob0["LHC-fixed-target"]=0.4;*)
+(*fbtobs["LHC-fixed-target"]=0.1; *)
+(*(*copied for SPS*)*)
+(*fstokplus["LHC-fixed-target"]=0.5;*)
+(*fstok0l["LHC-fixed-target"]=0.25;*)
 
 
 (* ::Chapter:: *)
-(*LLP phenomenology: production probabilities, decay widths*)
+(*LLP phenomenology: prodution probabilities, decay widths (y = 2Subscript[v, h]/Subscript[f, a])*)
 
 
 (* ::Section:: *)
@@ -87,62 +132,36 @@
 (*{parts[[2]],parts[[3]],StringDrop[parts[[4]],-2]} ];*)
 (*(*combinations selected LLP, production channel, facility for which the tabulated distributions are present*)*)
 (*DistrCombinations=(ExtractedProductionParameters/@matchingFiles)//Sort*)
+(*Print["Phenomenology choice:"]*)
+(*phen=dropdownDialog[{"Revised","Old"},"Use the revised phenomenology (2310.03524), or the old one (1901.09966; no hadronic decays, production only via B->K/K*)? Must be consistent with the choice made in 1. Acceptances.nb"];*)
+(*If[phen==Null,phen="Revised"];*)
+(*phen*)
+(*If[phen=="Old",DistrCombinations=Select[DistrCombinations,#[[2]]=="B"&]]*)
 
 
 (* ::Section:: *)
 (*Production probabilities*)
 
 
-(* ::Subsection:: *)
-(*Via decays of mesons and mixing: br ratios and meson multiplicities *)
-
-
 (* ::Input:: *)
-(*(*Production from decays of mesons and mixing with \[Rho]^0*)*)
-(*Br\[Pi]To\[Gamma]\[Gamma]=0.98799;*)
-(*Br\[Eta]To\[Gamma]\[Gamma]=0.3931181;*)
-(*(*Br\[Omega]To\[Pi]\[Gamma]=0.0834941;*)*)
-(*Br\[Eta]prTo\[Gamma]\[Gamma]=0.0219297;*)
-(*Br\[Pi]0ToV[mLLP_]=If[mLLP<mSM["Pi0"],Evaluate[2*(1-mLLP^2/mSM["Pi0"]^2)^3*Br\[Pi]To\[Gamma]\[Gamma]],0];*)
-(*Br\[Eta]ToV[mLLP_]=If[mLLP<mSM["Eta"],Evaluate[2*(1-mLLP^2/mSM["Eta"]^2)^3*Br\[Eta]To\[Gamma]\[Gamma]],0];*)
-(*(*Br\[Omega]ToV[mLLP_]=If[mLLP<m\[Omega]-m\[Pi]0,Br\[Omega]To\[Pi]\[Gamma]*(m\[Omega]^2-mLLP^2-m\[Pi]0^2)^2*Sqrt[(m\[Omega]^2-mLLP^2+m\[Pi]0^2)^2-4*m\[Omega]^2*m\[Pi]0^2]/(m\[Omega]^2-mLLP^2)^3,0];*)*)
-(*Br\[Eta]prToV[mLLP_]=If[mLLP<mSM["EtaPr"],Evaluate[2*(1-mLLP^2/mSM["EtaPr"]^2)^3*Br\[Eta]prTo\[Gamma]\[Gamma]],0];*)
-(*{BrDecay[mLLP_,\[Epsilon]2_,"Pi0"],BrDecay[mLLP_,\[Epsilon]2_,"Eta"],BrDecay[mLLP_,\[Epsilon]2_,"EtaPr"]}=\[Epsilon]2*{Br\[Pi]0ToV[mLLP],Br\[Eta]ToV[mLLP],Br\[Eta]prToV[mLLP]};*)
-(*(*Mixing angle \[Rho]^0-DP. Following https://arxiv.org/pdf/1810.01879.pdf*)*)
-(*g\[Rho]0=5;*)
-(*\[Theta]DP\[Rho]02[mLLP_,\[Epsilon]2_]=\[Epsilon]2*(4Pi*\[Alpha]EM)/g\[Rho]0^2 mSM["Rho0"]^4/((mLLP^2-mSM["Rho0"]^2)^2+\[CapitalGamma]SM["\[Rho]780"]^2*mSM["Rho0"]^2);*)
-(*FacilitiesList={"SPS","FermilabBD","LHC","FCC-hh","Serpukhov", "LHC-fixed-target"};*)
+(*ProductionProbabilitiesCoefs=Import[FileNameJoin[{directory["Production weights"],"Coefs-production-Fermion universal-scale-1000.-GeV.m"}],"MX"];*)
+(*vh=246.;*)
+(*{\[Theta]am02["Pi0",ma_,y_],\[Theta]am02["Eta",ma_,y_],\[Theta]am02["EtaPr",ma_,y_],BrBtoALPtotal[ma_,y_],cGGeff[ma_,y_],BrBtoALPKplus[ma_,y_],BrBtoALPKstar[ma_,y_]}=ProductionProbabilitiesCoefs/.{f->(2vh)/y};*)
+(*LogLogPlot[Evaluate[{\[Theta]am02["Pi0",ma,1],\[Theta]am02["Eta",ma,1],\[Theta]am02["EtaPr",ma,1]}],{ma,0.1,10},Frame->True,ImageSize->Large]*)
+(*FacilitiesList={"SPS","FermilabBD","LHC","FCC-hh","Serpukhov","ESS", "LHC-fixed-target"};*)
 (*Do[*)
-(*PmotherToLLP[mLLP_,\[Epsilon]2_,part,Facility]=BrDecay[mLLP,\[Epsilon]2,part];*)
+(*PmotherToLLP[mLLP_,y_,part,Facility]=If[phen=="Revised",\[Theta]am02[part,mLLP,y],0.];*)
 (*,{part,{"Pi0","Eta","EtaPr"}},{Facility,FacilitiesList}]*)
 (*Do[*)
-(*PmotherToLLP[mLLP_,\[Epsilon]2_,"Rho0",Facility]=\[Theta]DP\[Rho]02[mLLP,\[Epsilon]2];*)
+(*PmotherToLLP[mLLP_,y_,"B",Facility]=(fbtob0[Facility]+fbtobplus[Facility])If[phen=="Revised",BrBtoALPtotal[mLLP,y],BrBtoALPKplus[mLLP,y]+BrBtoALPKstar[mLLP,y]];*)
 (*,{Facility,FacilitiesList}]*)
-(*(*________________*)*)
-(*(*Bremsstrahlung*)*)
-(*(*________________*)*)
-(*bremfacilities=Select[DistrCombinations,#[[2]]=="Bremsstrahlung"&][[All,3]];*)
-(*BremProd[Facility_]:=Module[{},*)
-(*If[MemberQ[bremfacilities,Facility],*)
-(*datbrem[mLLP_,\[Theta]LLP_]=Import[FileNameJoin[{directory["Production weights"],"Pbrem_"<>LLPdirName<>"_"<>Facility<>".m"}],"MX"];*)
-(*PmotherToLLP[mLLP_,\[Epsilon]2_,"Bremsstrahlung",Facility]=datbrem[mLLP,\[Theta]LLP][[1]]*\[Epsilon]2;*)
-(*ELLPmin["Bremsstrahlung",Facility]=Evaluate[datbrem[mLLP,\[Theta]LLP][[2]]];*)
-(*ELLPmax[mLLP_,\[Theta]LLP_,"Bremsstrahlung",Facility]=Evaluate[datbrem[mLLP,\[Theta]LLP][[3]]]*)
-(*]*)
-(*]*)
-(*Do[*)
-(*BremProd[Facility],{Facility,FacilitiesList}]*)
-(*(*_____________________________*)*)
+(**)
 (*(*Production from Drell-Yan process*)*)
-(*(*_____________________________*)*)
-(*(*Average enhancement LO vs LO+NLO obtained for SPS energies in 2011.05115*)*)
-(*(*Asuming the same values for LHC-fixed-target as for SPS*)*)
-(*kfactorNLO=1.7;*)
 (*\[Sigma]DrellYanData[Facility_]:=Block[{},*)
-(*dat=Import[FileNameJoin[{directory["Production weights"],"sigmaDrellYan_DP_"<>Facility<>".txt"}],"Table"];*)
-(*MinMaxMassesDrellYan[Facility]={Min[dat[[All,1]]],Max[dat[[All,1]]]};*)
+(*dat=Import[FileNameJoin[{directory["Production weights"],"sigmaDrellYan_ALP-fermion_"<>Facility<>".txt"}],"Table"];*)
+(*MinMaxMassesDrellYan[Facility]={Min[dat[[All,1]]],Min[4,Max[dat[[All,1]]]]};*)
 (*int[ma_]=If[MinMaxMassesDrellYan[Facility][[1]]<= ma<=MinMaxMassesDrellYan[Facility][[2]],Evaluate[10^(Interpolation[{Log10[#[[1]]],Log10[#[[2]]+10^-90]}&/@dat,InterpolationOrder->1][Log10[ma]])],0];*)
-(*PmotherToLLP[mLLP_,\[Epsilon]2_,"DrellYan",Facility]=If[Facility=="SPS",kfactorNLO,1]*\[Epsilon]2*int[mLLP]/\[Sigma]pNucleonInpb[Atarget]*)
+(*PmotherToLLP[mLLP_,y_,"DrellYan",Facility]=Abs[cGGeff[mLLP,y]]^2*int[mLLP]/\[Sigma]pNucleonInpb[Atarget]*)
 (*]*)
 (*Do[\[Sigma]DrellYanData[Facility],{Facility,{"SPS","FermilabBD","LHC", "LHC-fixed-target"}}]*)
 (*WeightsCombinations=Cases[Keys[DownValues@PmotherToLLP][[All,1,#]]&/@{3,4}//Transpose//Sort,_?(MemberQ[DistrCombinations[[All,{2,3}]],#]&)];*)
@@ -152,16 +171,24 @@
 
 
 (* ::Section:: *)
-(*Decays*)
+(*LLP lifetime and branching ratios*)
+
+
+(* ::Subsection:: *)
+(*Lifetimes and branching ratios*)
 
 
 (* ::Input:: *)
-(*(*Decay width in GeV*)*)
-(*\[CapitalGamma]LLP[mLLP_,\[Epsilon]2_]=\[Epsilon]2*10^(Interpolation[{Log10[#[[1]]],Log10[#[[2]]]}&/@Import[FileNameJoin[{directory["Decays"],"GammaDarkPhoton.txt"}],"Table"],InterpolationOrder->1][Log10[mLLP]]);*)
-(*LogLogPlot[\[CapitalGamma]LLP[mLLP,1],{mLLP,0.05,5},Frame->True,ImageSize->Large]*)
-(*(*Decay length*)*)
-(*c\[Tau]LLP[mLLP_,\[Epsilon]2_]=chbarval/\[CapitalGamma]LLP[mLLP,\[Epsilon]2];*)
-(*ldecayLLP[mLLP_,\[Epsilon]2_,ELLP_]=c\[Tau]LLP[mLLP,\[Epsilon]2]*Sqrt[ELLP^2-mLLP^2]/mLLP;*)
+(*(*List of widths of the ALP into various final states*)*)
+(*DecayWidthsDataTemp=Import[FileNameJoin[{directory["Decays"],"Widths-model-Fermion universal-scale-1000.-GeV.m"}],"MX"];*)
+(*DecayWidthsDataTemp2=DecayWidthsDataTemp[[4]];*)
+(*{Table[i,{i,1,Length[DecayWidthsDataTemp2[[1]]],1}],DecayWidthsDataTemp2[[1]]}//TableForm*)
+(*DecayWidthsData=Drop[DecayWidthsDataTemp2,3];*)
+(*(*Total decay width and lifetime*)*)
+(*totalwidthdata=If[phen=="Revised",DecayWidthsData[[All,{1,-1}]],Join[DecayWidthsData[[All,{1}]],DecayWidthsData[[All,{2}]]+DecayWidthsData[[All,{4}]]+DecayWidthsData[[All,{5}]],2]];*)
+(*\[CapitalGamma]LLP[mLLP_,y_]=(1/(2vh))^2 y^2 Interpolation[totalwidthdata,InterpolationOrder->1][mLLP];*)
+(*c\[Tau]LLP[mLLP_,y_]=chbar/\[CapitalGamma]LLP[mLLP,y];*)
+(*ldecayLLP[mLLP_,y_,ELLP_]=c\[Tau]LLP[mLLP,y] Sqrt[ELLP^2-mLLP^2]/mLLP;*)
 
 
 (* ::Chapter:: *)
@@ -177,11 +204,7 @@
 
 
 (* ::Title:: *)
-(*Specifying the experiment and run next sections*)
-
-
-(* ::Chapter:: *)
-(*Specifying the experiment*)
+(*Specifying the experiments*)
 
 
 (* ::Input:: *)
@@ -197,6 +220,7 @@
 (*Print["Selected experiments:"]*)
 (*SelectedExperimentList=If[Length[ExperimentsList]!=0,selectionDialog[ExperimentsList,"Select the experiments:"]]*)
 (*icounter=1;*)
+(**)
 
 
 (* ::Chapter:: *)
@@ -248,27 +272,28 @@
 (*(*Logarithmized data with full acceptance, and also decay acceptance and full acceptance interpolations*)*)
 (*{FullAcceptanceData,DecayAcceptanceInt[mLLP_,\[Theta]LLP_,ELLP_,zLLP_],FullAcceptanceInt[mLLP_,\[Theta]LLP_,ELLP_,zLLP_],InGridm\[Epsilon],InGrid\[Theta]\[Epsilon],InGridE\[Epsilon],InGridz\[Epsilon],\[Epsilon]vals,\[Epsilon]azvals,mmin\[Epsilon],mmax\[Epsilon]}=Block\[Epsilon]Decay[FullAcceptanceData0,zminExp,BrVis];*)
 (*CrossSectionData=dataAcceptances[[4]]//Transpose;*)
-(*listquantities=((#//ToString)&/@{Npot,PPi0,PEta,PEtapr,PRho0,Atarget});*)
-(*quantityselector[quantity_]:=Select[CrossSectionData,#[[1]]==quantity&][[1]][[2]]//N;*)
-(*{NpotGivenExperiment,ProbMother["Pi0"],ProbMother["Eta"],ProbMother["EtaPr"],ProbMother["Rho0"],AtargetVal}=Table[quantityselector[quantity],{quantity,listquantities}];*)
-(*ProbMother["DrellYan"]=ProbMother["Bremsstrahlung"]=1.;*)
+(*NpotGivenExperiment=Select[CrossSectionData,#[[1]]=="Npot"&][[1]][[2]]//N;*)
+(*ProbMother["B"]=Select[CrossSectionData,#[[1]]=="Pb"&][[1]][[2]];*)
+(*ProbMother["Pi0"]=Select[CrossSectionData,#[[1]]=="PPi0"&][[1]][[2]];*)
+(*ProbMother["Eta"]=Select[CrossSectionData,#[[1]]=="PEta"&][[1]][[2]];*)
+(*ProbMother["EtaPr"]=Select[CrossSectionData,#[[1]]=="PEtapr"&][[1]][[2]];*)
+(*ProbMother["DrellYan"]=1.;*)
+(*AtargetVal=Select[CrossSectionData,#[[1]]=="Atarget"&][[1]][[2]];*)
+(*{{"\!\(\*SubscriptBox[\(\[Chi]\), \(b\\\  or\\\  \*OverscriptBox[\(b\), \(_\)]\)]\)","\!\(\*SubscriptBox[\(\[Chi]\), SuperscriptBox[\(\[Pi]\), \(0\)]]\)","\!\(\*SubscriptBox[\(\[Chi]\), \(\[Eta]\)]\)","\!\(\*SubscriptBox[\(\[Chi]\), \(\[Eta]'\)]\)"},{ProbMother["B"],ProbMother["Pi0"],ProbMother["Eta"],ProbMother["EtaPr"]}}//TableForm*)
 (*(*infoDialog[Row[{"The number of proton collisions is ", NpotGivenExperiment,". You may change it at the stage of computing the sensitivities"}]]*)*)
-(*Row[{"Search for "<>LLPdirName<>" at ", SelectedExperiment, " located at ",FacilityGivenExperiment,". \!\(\*SubscriptBox[\(N\), \(collisions\)]\) = ",NpotGivenExperiment}]*)
+(*Row[{"Search for "<>LLPdirName <>" at ", SelectedExperiment, " located at ",FacilityGivenExperiment,". \!\(\*SubscriptBox[\(N\), \(collisions\)]\) = ",NpotGivenExperiment}]*)
 (*{{"Quantity","\!\(\*SubscriptBox[\(\[Theta]\), \(min\)]\), rad","\!\(\*SubscriptBox[\(\[Theta]\), \(max\)]\), rad","\!\(\*SubscriptBox[\(\[Theta]\), \(min\)]\)(\!\(\*SubscriptBox[\(\[Epsilon]\), \(dec\)]\)), rad","\!\(\*SubscriptBox[\(\[Theta]\), \(max\)]\)(\!\(\*SubscriptBox[\(\[Epsilon]\), \(dec\)]\)), rad","\!\(\*SubscriptBox[\(z\), \(min\)]\), m","\!\(\*SubscriptBox[\(z\), \(max\)]\), m"},{"Description","Min angle covered by experiment","Max angle covered by experiment","Min angle where \!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)\[NotEqual]0","Max angle where \!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)\[NotEqual]0","Min long. displacement of the decay volume","Max long. displacement of the decay volume"},{"Value",\[Theta]minExpAll,\[Theta]maxExpAll,\[Theta]minExp,\[Theta]maxExp,zminExp,zmaxExp}}//TableForm*)
+(**)
 
 
 (* ::Chapter:: *)
-(*Angle-energy distributions and differential yields  for the given experiment*)
+(*Angle-energy distributions for the given experiment*)
 
 
 (* ::Input:: *)
 (*ProductionPatternSelected=Select[DistrCombinations,#[[3]]==FacilityGivenExperiment&];*)
 (*Print["Production list:"]*)
-(*ELLPmax[mLLP_,\[Theta]LLP_,"Bremsstrahlung"]=ELLPmax[mLLP,\[Theta]LLP,"Bremsstrahlung",FacilityGivenExperiment];*)
-(*ELLPmin["Bremsstrahlung"]=ELLPmin["Bremsstrahlung",FacilityGivenExperiment];*)
-(*ProductionListTemp=ProductionPatternSelected[[All,2]]//DeleteDuplicates;*)
-(*ProductionList=If[ELLPmin["Bremsstrahlung"]<ELLPmax[0.02,\[Theta]minExp,"Bremsstrahlung"],ProductionListTemp,Select[ProductionListTemp,#!="Bremsstrahlung"&]]*)
-(*\[Theta]maxBrem=Abs[\[Theta]LLP/.Solve[ELLPmax[0.02,\[Theta]LLP,"Bremsstrahlung"][[2]]==ELLPmin["Bremsstrahlung"],\[Theta]LLP][[1]]];*)
+(*ProductionList=ProductionPatternSelected[[All,2]]//DeleteDuplicates*)
 (*Do[*)
 (*Module[{prod},*)
 (*prod=ProductionPatternSelected[[i]][[2]];*)
@@ -283,8 +308,6 @@
 (*{mLLPmin[prod],mLLPmax[prod]}=MinMax[mlistDistr[prod]];*)
 (*(*Interpolation of the tabulated distribution*)*)
 (*DoubleDistrLLPint[mLLP_,\[Theta]LLP_,ELLP_,prod]=10^(Interpolation[distrlogComp[DistrDataImport[prod]],InterpolationOrder->1][Log10[mLLP],Log10[\[Theta]LLP],Log10[ELLP]]);*)
-(*If[prod=="Bremsstrahlung",*)
-(*DoubleDistrLLPint[mLLP_,\[Theta]LLP_,ELLP_,prod]=If[ELLP<=ELLPmax[mLLP,\[Theta]LLP,"Bremsstrahlung"],Evaluate[DoubleDistrLLPint[mLLP,\[Theta]LLP,ELLP,prod]],0.]];*)
 (*(*Probability to produce LLP*)*)
 (*ProbLLP[mLLP_,finv_,prod]=ProbMother[prod]*PmotherToLLP[mLLP,finv,prod,FacilityGivenExperiment]/.{Atarget->AtargetVal};*)
 (*]*)
@@ -296,9 +319,14 @@
 (*(*____________________________*)*)
 (*(*Finding Subscript[E, max](Subscript[m, LLP],Subscript[\[Theta], LLP]) for the angular range at the given experiment*)*)
 (*(*____________________________*)*)
-(*Do[ELLPmax[mfip_,\[Theta]fip_,prod]=EmaxBlock[prod,8,DistrDataImport,FacilityGivenExperiment],{prod,Select[ProductionList,#!="Bremsstrahlung"&]}]//AbsoluteTiming*)
+(*Do[ELLPmax[mfip_,\[Theta]fip_,prod]=EmaxBlock[prod,9,DistrDataImport,FacilityGivenExperiment],{prod,Select[ProductionList,#!="Bremsstrahlung"&]}]//AbsoluteTiming*)
+(*(*Temporary fix for ALPs from mixing*)*)
+(*If[SelectedExperiment=="NuCal",*)
+(*Do[ELLPmax[mfip_,\[Theta]fip_,prod]=70.,{prod,Select[ProductionList,#!="Bremsstrahlung"&]}]];*)
+(*If[SelectedExperiment=="NA62-dump",*)
+(*Do[ELLPmax[mfip_,\[Theta]fip_,prod]=400.,{prod,Select[ProductionList,#!="Bremsstrahlung"&]}]];*)
 (*ptenergies=LogLogPlot[Evaluate[Table[ELLPmax[0.1,\[Theta]LLP,prod],{prod,ProductionList}]],{\[Theta]LLP,\[Theta]minExp,\[Theta]maxExp},Frame->True,ImageSize->Large,PlotLegends->Placed[Style[#,15]&/@ProductionList,Right]];*)
-(*ptprodprob=LogLogPlot[Evaluate[Table[ProbLLP[ma,1,prod],{prod,ProductionList}]],{ma,mmin\[Epsilon],mmax\[Epsilon]},Frame->True,ImageSize->Large,PlotLegends->Placed[Style[#,16]&/@ProductionList,{0.2,0.28}], FrameStyle->Directive[Black, 25],PlotRange->{{0.02,3},{10^-8,100}},PlotStyle->{{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green},{Thick,Darker@Cyan},{Thick,Magenta},{Thick,Brown}},AspectRatio->0.66,ImageSize->Large,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(LLP\)]\) [GeV]","\!\(\*SubscriptBox[\(P\), \(prod\)]\)/\!\(\*SuperscriptBox[\(\[Epsilon]\), \(2\)]\)"},PlotLabel->Style[Row[{"Production probabilities of ",LLPdirName," at ",GivenExperiment}],18,Black]];*)
+(*ptprodprob=LogLogPlot[Evaluate[Table[ProbLLP[ma,1,prod],{prod,ProductionList}]],{ma,mmin\[Epsilon],mmax\[Epsilon]},Frame->True,ImageSize->Large,PlotLegends->Placed[Style[#,15]&/@ProductionList,Right]];*)
 (*Style[Row[{ptprodprob,ptenergies}],ImageSizeMultipliers->{1, 1}]*)
 
 
@@ -315,17 +343,13 @@
 
 
 (* ::Input:: *)
-(**)
-
-
-(* ::Input:: *)
 (*Do[{OutGrid\[Theta]final[prod],\[CapitalDelta]\[Theta]vals[prod]}=OutGrid\[Theta]Temp[InGrid\[Theta]\[Epsilon],30,prod,\[Theta]maxBrem],{prod,ProductionList}]*)
 (*{OutGridzfinal,\[CapitalDelta]zvals}=OutGridszTemp[InGridz\[Epsilon],30,zminExp];*)
 (*(*Final energy grid. Mass- and production channel-dependent*)*)
 (*If[FacilityGivenExperiment!="ESS",*)
 (*StepEtemp[Efip_]=Piecewise[{{0.3,Efip<=2.5},{0.5,2.5<Efip<35},{2,35<=Efip<=50},{4,50<Efip<160},{5,160<=Efip<=400},{25,400<Efip<600},{50,600<=Efip<2000},{200,2000<=Efip<4000},{400,4000<=Efip<7000},{500,7000<=Efip<=50000}}];*)
 (*OutGridEnergy[m_,ProdChannel_]:=Block[{},*)
-(*emin=If[ProdChannel!="Bremsstrahlung",N[m],ELLPmin["Bremsstrahlung"]];*)
+(*emin=If[ProdChannel!="Bremsstrahlung",1.0m,ELLPmin["Bremsstrahlung"]];*)
 (*egridtemp=With[{start=emin,end=ELLPmax[m,\[Theta]minExp,ProdChannel]},*)
 (*Log10[NestWhileList[#+StepEtemp[#]&,start,#<=end&,1,\[Infinity],-1]]]//N;*)
 (*If[Length[egridtemp]==1,egridtemp=Join[egridtemp,{Log10[2*emin]}]];*)
@@ -339,22 +363,7 @@
 (*Log10[tabt]//N*)
 (*]*)
 (*]*)
-(*(*____________________________________________________*)*)
 (*(*Block that computes the grid Subscript[\[Theta], S],Subscript[E, S],Subscript[z, S], Subscript[\[Epsilon], Full]\[Times]Subscript[f, Subscript[\[Theta], S],Subscript[E, S]]*)*)
-(*(*____________________________________________________*)*)
-(*(*The block which sets all the values of Subscript[\[Epsilon], Full]\[Times]Subscript[f, \[Theta],E] for which E < Subscript[E, max] to zero, for Bremsstrahlung*)*)
-(*emaxbrem[mLLP_,\[Theta]LLP_]=ELLPmax[mLLP,\[Theta]LLP,"Bremsstrahlung"];*)
-(*BremCutComp=Hold@Compile[{{angleenergy,_Real,1},{mfip,_Real}},Module[{angles,energies,distrvals,d},*)
-(*angles=Compile`GetElement[angleenergy,1];*)
-(*energies=Compile`GetElement[angleenergy,2];*)
-(*distrvals=Compile`GetElement[angleenergy,3];*)
-(*d=If[energies<emaxbrem[mfip,angles],distrvals,10^-90.];*)
-(*d*)
-(*],CompilationTarget->"C",RuntimeOptions->"Speed",RuntimeAttributes->{Listable}]/.DownValues@emaxbrem//ReleaseHold;*)
-(*BremCut[OutGrid\[Theta]final_,OutGridEfinal_,distr_,mLLP_]:=Block[{},*)
-(*angleenergy=Join[10^Tuples[{OutGrid\[Theta]final,OutGridEfinal}],Partition[distr,1],2];*)
-(*BremCutComp[angleenergy,mLLP]*)
-(*]*)
 (*TableIntegrandDiscret[m_,ProdChannel_,\[Epsilon]DecOp_]:=TableIntegrandDiscretTemp[m,ProdChannel,\[Epsilon]DecOp,\[Epsilon]vals,\[Epsilon]azvals,OutGrid\[Theta]final[ProdChannel],OutGridzfinal,OutGridEnergy,InGridm\[Epsilon],InGrid\[Theta]\[Epsilon],InGridE\[Epsilon],InGridz\[Epsilon],\[CapitalDelta]\[Theta]vals[ProdChannel],\[CapitalDelta]zvals,zminExp,GridInFinal,DistrVals,FacilityGivenExperiment]*)
 
 
@@ -371,28 +380,27 @@
 (*\[Epsilon]GeomTabs[prod]=ParallelTable[{m,AcceptanceDiscret[m,prod,"False",0],AcceptanceDiscret[m,prod,"True",0],AcceptanceDiscret[m,prod,"False",1],AcceptanceDiscret[m,prod,"True",1]},{m,mlistAcceptance[prod]}];*)
 (*\[Epsilon]GeomTabs[prod]=Join[{Join[{Max[mLLPmin[prod],mmin\[Epsilon]]},Drop[\[Epsilon]GeomTabs[prod][[1]],1]]},\[Epsilon]GeomTabs[prod],{Join[{Min[mLLPmax[prod],mmax\[Epsilon]]},Drop[\[Epsilon]GeomTabs[prod][[-1]],1]]}];*)
 (*,{prod,ProductionList}];//AbsoluteTiming*)
-(*PlotAcc[ProdChannel_]:=ListLogPlot[Evaluate[{\[Epsilon]GeomTabs[ProdChannel][[All,{1,2}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,3}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,4}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,5}]]}],FrameStyle->Directive[Black, 22],PlotStyle->{{Thickness[0.003],Blue},{Thickness[0.003],Darker@Red},{Thickness[0.003],Darker@Darker@Green},{Thickness[0.003],Black}},GridLines->Automatic,PlotRange->{MinMax[\[Epsilon]GeomTabs[ProdChannel][[All,1]]],{Max[0.9Min[Min[\[Epsilon]GeomTabs[ProdChannel][[All,4]]],Min[\[Epsilon]GeomTabs[ProdChannel][[All,3]]]],10^-5],1.1Max[Max[\[Epsilon]GeomTabs[ProdChannel][[All,2]]],Max[\[Epsilon]GeomTabs[ProdChannel][[All,4]]]]}},Joined->True,Frame->True,ImageSize->Large,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(LLP\)]\) [GeV]","Acceptance"},PlotLabel-> Style[Row[{"From ",ProdChannel}], 20, Black],PlotLegends->Placed[{Style[#, 18]&/@{"<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)>","<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)>","c\[Tau]<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(P\), \(decay\)]\)>","c\[Tau]<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(P\), \(decay\)]\)\!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)>"}},{0.75,0.2}]]*)
+(*PlotAcc[ProdChannel_]:=ListLogPlot[Evaluate[{\[Epsilon]GeomTabs[ProdChannel][[All,{1,2}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,3}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,4}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,5}]]}],FrameStyle->Directive[Black, 22],PlotStyle->{{Thickness[0.003],Blue},{Thickness[0.003],Darker@Red},{Thickness[0.003],Darker@Darker@Green},{Thickness[0.003],Black}},GridLines->Automatic,PlotRange->{MinMax[\[Epsilon]GeomTabs[ProdChannel][[All,1]]],{Max[0.9Min[Min[\[Epsilon]GeomTabs[ProdChannel][[All,4]]],Min[\[Epsilon]GeomTabs[ProdChannel][[All,3]]]],10^-5],1.1Max[Max[\[Epsilon]GeomTabs[ProdChannel][[All,2]]],Max[\[Epsilon]GeomTabs[ProdChannel][[All,4]]]]}},Joined->True,Frame->True,ImageSize->Large,FrameLabel->{"m [GeV]","Acceptance"},PlotLabel-> Style[Row[{"From ",ProdChannel}], 20, Black],PlotLegends->Placed[{Style[#, 18]&/@{"<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)>","<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)>","c\[Tau]<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(P\), \(decay\)]\)>","c\[Tau]<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(P\), \(decay\)]\)\!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)>"}},{0.75,0.2}]]*)
 (*Style[Row[Evaluate[Table[PlotAcc[prod],{prod,ProductionList}]]],ImageSizeMultipliers->{1,1,1,1}]*)
 (*(*Do[FilenameAcceptance[prod]=ToString@StringForm["Acceptance_ALP-fermion_at_``_From_``.dat",Sequence@@{SelectedExperiment,ExportList[prod]}];*)
 (*Export[FileNameJoin[{NotebookDirectory[],"Auxiliary data/ALPs with fermion coupling",SelectedExperiment,FilenameAcceptance[prod]}],\[Epsilon]GeomTabs[prod][[All,{1,2,4,5}]],"Table"]*)
 (*,{prod,ProductionList}]*)*)
 (*AccAveraged[mLLP_,c\[Tau]_]=NpotGivenExperiment{Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]],0],{prod,ProductionList}],Sum[If[Max[mLLPmin[prod],mmin\[Epsilon]]<mLLP<Min[mLLPmax[prod],mmax\[Epsilon]],Evaluate[ProbLLP[mLLP,1,prod]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,2}]],InterpolationOrder->1][mLLP]],0],{prod,ProductionList}],Sum[If[Max[mLLPmin[prod],mmin\[Epsilon]]<mLLP<Min[mLLPmax[prod],mmax\[Epsilon]],Evaluate[ProbLLP[mLLP,1,prod]/c\[Tau]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,4}]],InterpolationOrder->1][mLLP]],0],{prod,ProductionList}],Sum[If[Max[mLLPmin[prod],mmin\[Epsilon]]<mLLP<Min[mLLPmax[prod],mmax\[Epsilon]],Evaluate[ProbLLP[mLLP,1,prod]/c\[Tau]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,5}]],InterpolationOrder->1][mLLP]],0],{prod,ProductionList}]};*)
 (*Export[FileNameJoin[{directory["Auxiliary-experiment"],"AcceptanceAveraged-"<>LLPdirName<>".m"}],AccAveraged[mLLP,c\[Tau]],"MX"];*)
-(**)
-
-
-(* ::Input:: *)
-(**)
 
 
 (* ::Subsection:: *)
 (*Rough estimates of the upper and lower bounds*)
 
 
+(* ::Subsubsection:: *)
+(*Definitions*)
+
+
 (* ::Input:: *)
-(*Do[LowerBoundEstimate[mLLP_,prod]=((NpotGivenExperiment*ProbLLP[mLLP,1,prod]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,5}]],InterpolationOrder->1][mLLP])/(2.3ldecayLLP[mLLP,1,ELLP] mLLP/Sqrt[ELLP^2-mLLP^2]))^(-(1/2));*)
-(*UpperBoundEstimate[mLLP_,prod]=(Abs[Re[Evaluate[-(ProductLog[-1,-2.3*b/a]/b)/.{a-> NpotGivenExperiment*ProbLLP[mLLP,1,prod]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,3}]],InterpolationOrder->1][mLLP],b->zminExp/ldecayLLP[mLLP,1,ELLPmax[0.5,\[Theta]minExp,prod]]}]]]),{prod,ProductionList}]*)
-(*ProdTest=ProductionList[[1]]*)
+(*Do[LowerBoundEstimate[mLLP_,prod]=((NpotGivenExperiment*ProbLLP[mLLP,1,prod]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,5}]],InterpolationOrder->1][mLLP])/(2.3ldecayLLP[mLLP,1,ELLP] mLLP/Sqrt[ELLP^2-mLLP^2]))^(-(1/4));*)
+(*UpperBoundEstimate[mLLP_,prod]=(Abs[Re[Evaluate[-(ProductLog[-1,-2.3*b/a]/b)/.{a-> NpotGivenExperiment*ProbLLP[mLLP,1,prod]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,3}]],InterpolationOrder->1][mLLP],b->zminExp/ldecayLLP[mLLP,1,ELLPmax[0.5,\[Theta]minExp,prod]]}]]])^(1/2),{prod,ProductionList}]*)
+(*ProdTest=ProductionList[[1]];*)
 (*LogLogPlot[Evaluate[{0.3LowerBoundEstimate[mLLP,ProdTest],1.8UpperBoundEstimate[mLLP,ProdTest]}],{mLLP,Max[mLLPmin[ProdTest],mmin\[Epsilon]],Min[mLLPmax[ProdTest],mmax\[Epsilon]]},Frame->True,ImageSize->Large]*)
 
 
@@ -424,6 +432,7 @@
 (*(*The integrand determining the differential rate for events*)*)
 (*Do[IntegrandLLP[mLLP_,coupling_,\[Theta]LLP_,ELLP_,zLLP_,prod]=DoubleDistrLLPint[mLLP,\[Theta]LLP,ELLP,prod]*PdecayDensity[mLLP,coupling,\[Theta]LLP,ELLP,zLLP]*AzimuthalAcceptanceInt[\[Theta]LLP,zLLP]*DecayAcceptanceInt[mLLP,\[Theta]LLP,ELLP,zLLP],{prod,ProductionList}]*)
 (*IntegralLLP[mLLP_,coupling_,ProdChannel_]:=NIntegrate[Abs[IntegrandLLP[mLLP,coupling,\[Theta]LLP,Exp[ELLP],zLLP,ProdChannel]Exp[ELLP]],{\[Theta]LLP,\[Theta]minExp,\[Theta]maxExp},{ELLP,Log[mLLP],Log[ELLPmax[mLLP,\[Theta]LLP,ProdChannel]]},{zLLP,zmin\[Theta][\[Theta]LLP],zmax\[Theta][\[Theta]LLP]},Method->"AdaptiveMonteCarlo"]*)
+(*(*IntegralLLP[mLLP_,finv_,ProdChannel_]:=NIntegrate[Abs[IntegrandLLP[mLLP,finv,Exp[\[Theta]LLP],Exp[ELLP],Exp[zLLP],ProdChannel]]Exp[\[Theta]LLP+ELLP+zLLP],{\[Theta]LLP,Log[\[Theta]minExp],Log[\[Theta]maxExp]},{ELLP,Log[mLLP],Log[ELLPmax[mLLP,Exp[\[Theta]LLP],ProdChannel]]},{zLLP,Log[zmin\[Theta][Exp[\[Theta]LLP]]],Log[zmax\[Theta][Exp[\[Theta]LLP]]]},Method\[Rule]"AdaptiveMonteCarlo"]*)*)
 (*NeventsInt[mLLP_,coupling_,ProdChannel_]:=If[mLLPmin[ProdChannel]<=mLLP<=mLLPmax[ProdChannel]&&BrVis[mLLP]!=0,If[0.1LowerBoundEstimate[mLLP,ProdChannel]<coupling<2UpperBoundEstimate[mLLP,ProdChannel],NpotGivenExperiment*ProbLLP[mLLP,coupling,ProdChannel]*IntegralLLP[mLLP,coupling,ProdChannel],0.],0.]*)
 (*IntegralLLPE[mLLP_,coupling_,ProdChannel_,ELLP_]:=NIntegrate[Abs[IntegrandLLP[mLLP,coupling,\[Theta]LLP,ELLP,zLLP,ProdChannel]],{\[Theta]LLP,\[Theta]minExp,\[Theta]maxExp},{zLLP,zmin\[Theta][\[Theta]LLP],zmax\[Theta][\[Theta]LLP]},Method->"AdaptiveMonteCarlo"]*)
 (*NeventsDiffInt[mLLP_,coupling_,ProdChannel_,ELLP_]:=If[mLLPmin[ProdChannel]<=mLLP<=mLLPmax[ProdChannel]&&BrVis[mLLP]!=0&&mLLP<ELLP<=ELLPmax[mLLP,\[Theta]minExp,ProdChannel],If[0.1LowerBoundEstimate[mLLP,ProdChannel]<coupling<2UpperBoundEstimate[mLLP,ProdChannel],NpotGivenExperiment*ProbLLP[mLLP,coupling,ProdChannel]*IntegralLLPE[mLLP,coupling,ProdChannel,ELLP],0.],0.]*)
@@ -433,7 +442,7 @@
 (*Tests*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsection:: *)
 (*Total number of events*)
 
 
@@ -443,11 +452,11 @@
 (*(*1) The grid for the fast method is not dense enough. Try to increase the grid density (OutGrid\[Theta]final, OutGridEfinal, OutGridzfinal) to see whether the agreement improves. Sometimes, even a slightly denser grid for e.g. z may lead to a significant improvement in the agrement*)*)
 (*(*2) The Monte-Carlo integrator for the slow method fails to evaluate properly; this may happen if the range of the integration over energies is too large compared to the domain where most of the events actually are (off-axis experiments such as MATHUSLA and ANUBIS). Another symptom is that for the given mass and coupling the integral "jumps", i.e., returns values with large error*)*)
 (*(*A separate discussion should be made for the couplings belong to the domain c\[Tau] \[Gamma] << Subscript[z, experiment]. The discrepancy may be significant, and the reason is insufficient grid density for the fast integration method. However, due to the exponential suppression of the number of events, this may be compensated by a tiny shift in the coupling, so the discrepancy should be considered as appropriate.*)*)
-(*ProdTest=ProductionList[[2]];*)
-(*mtest=Max[(mLLPmax[ProdTest]+mLLPmin[ProdTest])/2,1.2*mmin\[Epsilon]];*)
-(*\[Epsilon]2list=(*{10^-12,3*10^-12,5*10^-12,10^-11,5*10^-11,10^-10,5*10^-10,10^-9,5*10^-9,10^-8,2*10^-8,4*10^-8,10^-7,5*10^-7,6*10^-7,7*10^-7,8*10^-7,9*10^-7,10^-6,2*10^-6}//N*)Table[10^x,{x,-17.,-3.,0.3}];*)
-(*dat1=NeventsDiscret[mtest,ProdTest,\[Epsilon]2list];//AbsoluteTiming*)
-(*dat2=ParallelTable[{\[Epsilon]2list[[i]],c\[Tau]LLP[mtest,\[Epsilon]2list[[i]]],Quiet[NeventsInt[mtest,\[Epsilon]2list[[i]],ProdTest]]},{i,1,Length[\[Epsilon]2list],1}];//AbsoluteTiming*)
+(*ProdTest=ProductionList[[1]]*)
+(*mtest=RandomReal[{Max[mmin\[Epsilon],mLLPmin[ProdTest]],Min[mmax\[Epsilon],mLLPmax[ProdTest]]}]*)
+(*couplinglist=(*{10^-12,3*10^-12,5*10^-12,10^-11,5*10^-11,10^-10,5*10^-10,10^-9,5*10^-9,10^-8,2*10^-8,4*10^-8,10^-7,5*10^-7,6*10^-7,7*10^-7,8*10^-7,9*10^-7,10^-6,2*10^-6}//N*)Table[10^x,{x,-7.5,-0.3,0.1}];*)
+(*dat1=NeventsDiscret[mtest,ProdTest,couplinglist];//AbsoluteTiming*)
+(*dat2=ParallelTable[{couplinglist[[i]],c\[Tau]LLP[mtest,couplinglist[[i]]],NeventsInt[mtest,couplinglist[[i]],ProdTest]},{i,1,Length[couplinglist],1}];//AbsoluteTiming*)
 (*Join[{{"\!\(\*FractionBox[SubscriptBox[\(m\), \(LLP\)], \(GeV\)]\)","coupling","\!\(\*FractionBox[\(c\[Tau]\), SubscriptBox[\(z\), \(min\)]]\)","\!\(\*SubscriptBox[\(N\), \(events, fast\)]\)","\!\(\*SubscriptBox[\(N\), \(events, slow\)]\)"}},Join[dat1[[All,{1,2}]],{#[[2]]/zminExp}&/@dat2,dat1[[All,{3}]],dat2[[All,{3}]],2]]//TableForm*)
 
 
@@ -457,12 +466,12 @@
 
 (* ::Input:: *)
 (*(*Variable = "Subscript[E, X]","Subscript[z, X]","Subscript[\[Theta], X]". The number belongs to the column in the tabulated data*)*)
-(*iVal:=Association[{"\!\(\*SubscriptBox[\(E\), \(LLP\)]\)" ->2,"\!\(\*SubscriptBox[\(\[Theta]\), \(LLP\)]\)"->1,"\!\(\*SubscriptBox[\(z\), \(LLP\)]\)"->3}]*)
-(*\[CapitalDelta]xvals["\!\(\*SubscriptBox[\(E\), \(LLP\)]\)"]:=\[CapitalDelta]Evals;*)
-(*\[CapitalDelta]xvals["\!\(\*SubscriptBox[\(z\), \(LLP\)]\)"]=\[CapitalDelta]zvals;*)
+(*iVal:=Association[{"\!\(\*SubscriptBox[\(E\), \(X\)]\)" ->2,"\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\)"->1,"\!\(\*SubscriptBox[\(z\), \(X\)]\)"->3}]*)
+(*\[CapitalDelta]xvals["\!\(\*SubscriptBox[\(E\), \(X\)]\)"]:=\[CapitalDelta]Evals;*)
+(*\[CapitalDelta]xvals["\!\(\*SubscriptBox[\(z\), \(X\)]\)"]=\[CapitalDelta]zvals;*)
 (*Do[\[CapitalDelta]xvals["\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\)",prod]=\[CapitalDelta]\[Theta]vals[prod],{prod,ProductionList}];*)
-(*LegendX:=Association[{"\!\(\*SubscriptBox[\(E\), \(LLP\)]\)"->"\!\(\*SubscriptBox[\(E\), \(LLP\)]\) [GeV]","\!\(\*SubscriptBox[\(\[Theta]\), \(LLP\)]\)"->"\!\(\*SubscriptBox[\(\[Theta]\), \(LLP\)]\) [rad]","\!\(\*SubscriptBox[\(z\), \(LLP\)]\)"-> "\!\(\*SubscriptBox[\(z\), \(LLP\)]\) [m]"}]*)
-(*LegendY:=Association[{"\!\(\*SubscriptBox[\(E\), \(LLP\)]\)"->"\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(dE\), \(LLP\)]\) [\!\(\*SuperscriptBox[\(GeV\), \(-1\)]\)]","\!\(\*SubscriptBox[\(\[Theta]\), \(LLP\)]\)"->"\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(d\[Theta]\), \(LLP\)]\) [\!\(\*SuperscriptBox[\(rad\), \(-1\)]\)]","\!\(\*SubscriptBox[\(z\), \(LLP\)]\)"-> "\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(dz\), \(LLP\)]\) [\!\(\*SuperscriptBox[\(m\), \(-1\)]\)]"}]*)
+(*LegendX:=Association[{"\!\(\*SubscriptBox[\(E\), \(X\)]\)"->"\!\(\*SubscriptBox[\(E\), \(X\)]\) [GeV]","\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\)"->"\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\) [rad]","\!\(\*SubscriptBox[\(z\), \(X\)]\)"-> "\!\(\*SubscriptBox[\(z\), \(X\)]\) [m]"}]*)
+(*LegendY:=Association[{"\!\(\*SubscriptBox[\(E\), \(X\)]\)"->"\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(dE\), \(X\)]\) [\!\(\*SuperscriptBox[\(GeV\), \(-1\)]\)]","\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\)"->"\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(d\[Theta]\), \(X\)]\) [\!\(\*SuperscriptBox[\(rad\), \(-1\)]\)]","\!\(\*SubscriptBox[\(z\), \(X\)]\)"-> "\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(dz\), \(X\)]\) [\!\(\*SuperscriptBox[\(m\), \(-1\)]\)]"}]*)
 (*(*Differential number of events*)*)
 (*NeventsDifferentialDiscretProd[m_,ProdChannel_,coupling_,Variable_]:=Module[{NpotTimes\[Chi]val},*)
 (*ival=iVal[Variable];*)
@@ -494,14 +503,14 @@
 (*{Table[NdiffInt[X,prod],{prod,LegendList}],LegendList,QuantityMinMax,ValueMinMax}*)
 (*]*)
 (*mvaltest=If[FacilityGivenExperiment=="ESS",0.04,0.2];*)
-(*couplingvaltest=1.4LowerBoundEstimate[mvaltest,"Eta"];*)
-(*quantity="\!\(\*SubscriptBox[\(E\), \(LLP\)]\)";*)
+(*couplingvaltest=1.4LowerBoundEstimate[mvaltest,ProductionList[[1]]];*)
+(*quantity="\!\(\*SubscriptBox[\(E\), \(X\)]\)";*)
 (*{NdiffTab[X_],LegendList,QuantityMinMax,ValueMinMax}=NeventsDifferentialDiscret[mvaltest,couplingvaltest,quantity];*)
 (*Do[*)
 (*prch=LegendList[[i]];*)
 (*NdiffInt[X_,prch]=NdiffTab[X][[i]];*)
 (*,{i,1,Length[LegendList]}];*)
-(*plotdiff=LogLogPlot[Evaluate[Table[NdiffInt[X,prod],{prod,LegendList}]],{X,QuantityMinMax[[1]],QuantityMinMax[[2]]},Frame->True,ImageSize->Large,PlotRange->{All,{10^-5,2ValueMinMax}},PlotStyle->{{Thick,Black},{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green},{Thick,Darker@Cyan},{Thick,Magenta},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green,Dashing[0.02]}},PlotLegends->Placed[Style[#,20]&/@LegendList,Right],FrameLabel->{LegendX[quantity] ,LegendY[quantity]},FrameStyle->Directive[Black, 18],PlotLabel->Style[Row[{SelectedExperiment,". \!\(\*SubscriptBox[\(m\), \(LLP\)]\) = ",mvaltest," GeV, \!\(\*SuperscriptBox[\(\[Epsilon]\), \(2\)]\) = ",couplingvaltest//N}],18,Black]]*)
+(*plotdiff=LogLogPlot[Evaluate[Table[NdiffInt[X,prod],{prod,LegendList}]],{X,QuantityMinMax[[1]],QuantityMinMax[[2]]},Frame->True,ImageSize->Large,PlotRange->{All,{10^-5,2ValueMinMax}},PlotStyle->{{Thick,Black},{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green},{Thick,Darker@Cyan},{Thick,Magenta},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green,Dashing[0.02]}},PlotLegends->Placed[Style[#,20]&/@LegendList,Right],FrameLabel->{LegendX[quantity] ,LegendY[quantity]},FrameStyle->Directive[Black, 18],PlotLabel->Style[Row[{SelectedExperiment,". \!\(\*SubscriptBox[\(m\), \(a\)]\) = ",mvaltest," GeV, \!\(\*SubscriptBox[\(g\), \(Y\)]\) = ",couplingvaltest//N}],14,Black]]*)
 
 
 (* ::Title:: *)
@@ -518,11 +527,11 @@
 (*directory["Nevents-LLP-experiment"]=FileNameJoin[{NotebookDirectory[],"Tabulated Nevents",LLPdirName,SelectedExperiment}];*)
 (*If[!DirectoryQ[directory[#]],CreateDirectory[directory[#]]]&/@{"Nevents","Nevents-LLP","Nevents-LLP-experiment"};*)
 (*Print["Filenames with tabulated \!\(\*SubscriptBox[\(N\), \(events\)]\):"]*)
-(*Do[FilenameNeventsInt[prod]=ToString@StringForm["Nevents_``_``_at_``_Npot=``.dat",Sequence@@{LLPdirName,prod,SelectedExperiment,NpotGivenExperiment//CForm//ToString}],{prod,ProductionList}]*)
-(*FilenameNeventsInt[#]&/@ProductionList*)
-(*Do[mRangeExport[prod]=Join[{0.021,0.026,0.031,0.036,0.041,0.046,0.051,0.056,0.061,0.066,0.07,0.08,0.09,0.1,0.11,0.12,0.125,0.13,0.14,0.15,0.17,0.2,0.215,0.25,0.3,0.35,0.4,0.45,0.5,0.54,0.55,0.6,0.65,0.7,0.72,0.73,0.74,0.75,0.76,0.77,0.775,0.78,0.785,0.79,0.795,0.8,0.81,0.82,0.84,0.9,0.95,0.97,1,1.005,1.01,1.012,1.015,1.017,1.02,1.025,1.03,1.05,1.07,1.09,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.,3.05,3.1,3.2},Table[mLLP,{mLLP,3.21,Max[Table[mLLPmax[prod],{prod,ProductionList}]],(Max[Table[mLLPmax[prod],{prod,ProductionList}]]-3)/10}]]//N*)
-(*,{prod,ProductionList}];*)
-(*couplingsRangeExport=Table[10^x,{x,-18.8,-4,0.03}]//N;*)
+(*Do[FilenameNevents[prod]=ToString@StringForm["Nevents_``_``_at_``_Npot=``.dat",Sequence@@{LLPdirName,prod,SelectedExperiment,NpotGivenExperiment//CForm//ToString}],{prod,ProductionList}]*)
+(*FilenameNevents[#]&/@ProductionList*)
+(*Do[mRangeExport[prod]={0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.1,0.11,0.12,0.13,0.14,0.151,0.2,0.21,0.215,0.218,0.22,0.225,0.23,0.24,0.25,0.27,0.301,0.35,0.4,0.425,0.45,0.47,0.5,0.51,0.52,0.53,0.535,0.54,0.543,0.544,0.545,0.546,0.55,0.56,0.57,0.58,0.59,0.6,0.61,0.62,0.63,0.64,0.65,0.67,0.7,0.725,0.75,0.77,0.8,0.825,0.85,0.87,0.88,0.89,0.9,0.91,0.92,0.93,0.94,0.95,0.953,0.954,0.955,0.956,0.96,0.961,0.962,0.963,0.966,0.97,0.973,0.975,0.98,1.,1.01,1.02,1.03,1.05,1.07,1.1,1.12,1.15,1.2,1.25,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.9,3.2,3.3,3.4,3.5,3.6,3.7,3.8,3.9,4.,4.1,4.2,4.3,4.4,4.5,4.6,4.7,4.76}//N;*)
+(*,{prod,ProductionList}]*)
+(*couplingsRangeExport=Table[10^x,{x,-7,-1,0.017}]//N;*)
 
 
 (* ::Chapter:: *)
@@ -537,7 +546,7 @@
 (*BlockExport[ProdChannel_]:=Module[{mlist},*)
 (*mlist=mRangeExport[ProdChannel];*)
 (*TabFrom=ParallelTable[Quiet[NeventsDiscret[mlist[[k]],ProdChannel,couplingsRangeExport]],{k,1,Length[mlist],1}];*)
-(*Export[FileNameJoin[{directory["Nevents-LLP-experiment"],FilenameNeventsInt[ProdChannel]}],Flatten[TabFrom,1],"Table"]*)
+(*Export[FileNameJoin[{directory["Nevents-LLP-experiment"],FilenameNevents[ProdChannel]}],Flatten[TabFrom,1],"Table"]*)
 (*]*)
 (*Monitor[*)
 (*Do[*)
@@ -556,7 +565,7 @@
 
 
 (* ::Input:: *)
-(*LLPdirName="DP";*)
+(*LLPdirName="ALP-fermion";*)
 (*directory["Sensitivity"]=FileNameJoin[{NotebookDirectory[],"Sensitivity domains"}];*)
 (*directory["Sensitivity-LLP"]=FileNameJoin[{directory["Sensitivity"],LLPdirName}];*)
 (*If[!DirectoryQ[directory[#]],CreateDirectory[directory[#]]]&/@{"Sensitivity","Sensitivity-LLP"};*)
@@ -582,8 +591,12 @@
 (*]*)
 
 
+(* ::Input:: *)
+(**)
+
+
 (* ::Chapter:: *)
-(*Specifying the experiment and interpolating tabulated number of events*)
+(*Specifying the experiment and interpolating the tabulated number of events*)
 
 
 (* ::Section:: *)
@@ -596,8 +609,8 @@
 (*CondANUBIS=MemberQ[{"ANUBIS-shaft-volume-1","ANUBIS-shaft-volume-2","ANUBIS-shaft-volume-3"},GivenExperimentForSensitivityComputation];*)
 (*If[CondANUBIS==True,infoDialog[Row[{"One of the modules of ANUBIS-shaft is chosen. The full sensitivity includes three modules. The importing will be over all modules, so for all ot the the sensitivity has to be computed"}]]]*)
 (*If[CondANUBIS==False,GivenExperimentForSensitivityComputationList={GivenExperimentForSensitivityComputation},GivenExperimentForSensitivityComputationList={"ANUBIS-shaft-volume-1","ANUBIS-shaft-volume-2","ANUBIS-shaft-volume-3"}];*)
-(*PathsNeventsSelected={};*)
-(*Do[PathsNeventsSelected=Join[PathsNeventsSelected,FileNames["*.dat",FileNameJoin[{directory["Nevents-LLP"],exp}]]],{exp,GivenExperimentForSensitivityComputationList}];*)
+(*directoriesNeventsSelected={};*)
+(*Do[directoriesNeventsSelected=Join[directoriesNeventsSelected,FileNames["*.dat",FileNameJoin[{directory["Nevents-LLP"],exp}]]],{exp,GivenExperimentForSensitivityComputationList}];*)
 (*(*Creating the directory for exporting sensitivity curves*)*)
 (*ExperimentFolder=If[CondANUBIS==True,"ANUBIS",GivenExperimentForSensitivityComputation];*)
 (*directory["Sensitivity-LLP-exp"]=FileNameJoin[{directory["Sensitivity-LLP"],ExperimentFolder}];*)
@@ -605,17 +618,17 @@
 
 
 (* ::Section:: *)
-(*Importing data and interpolations*)
+(*Importing and interpolations*)
 
 
 (* ::Input:: *)
+(*Print["List of production channels:"]*)
+(*FilenamesNevents=Table[Last@FileNameSplit@directoriesNeventsSelected[[i]],{i,1,Length[directoriesNeventsSelected],1}];*)
+(*FilenameParameters[i_]:=StringCases[FilenamesNevents[[i]],"Nevents_"<>LLPdirName<>"_"~~mother__~~"_at_"~~experiment__~~"_Npot="~~Npot__~~".dat":>{mother,experiment,Npot}][[1]]*)
 (*(*______________________________________________________*)*)
 (*(*Importing and interpolation*)*)
 (*(*______________________________________________________*)*)
-(*Print["List of production channels:"]*)
-(*FilenamesNeventsSelected=Table[Last@FileNameSplit@PathsNeventsSelected[[i]],{i,1,Length[PathsNeventsSelected],1}];*)
-(*FilenameParameters[i_]:=StringCases[FilenamesNeventsSelected[[i]],"Nevents_"<>LLPdirName<>"_"~~mother__~~"_at_"~~experiment__~~"_Npot="~~Npot__~~".dat":>{mother,experiment,Npot}][[1]]*)
-(*ProductionInfoList=Table[FilenameParameters[i],{i,1,Length[FilenamesNeventsSelected],1}];*)
+(*ProductionInfoList=Table[FilenameParameters[i],{i,1,Length[FilenamesNevents],1}];*)
 (*Join[{{"Mother","Experiment","\!\(\*SubscriptBox[\(N\), \(PoT\)]\)"}},ProductionInfoList]//TableForm*)
 (*ProductionChannelsList=ProductionInfoList[[All,1]];*)
 (*NpotDefault=Interpreter["Number"][ProductionInfoList[[1]][[3]]];*)
@@ -623,51 +636,45 @@
 (*\[Epsilon]reco[mLLP_]=1;*)
 (*If[StringContainsQ[GivenExperimentForSensitivityComputation,"LHCb-downstream"],*)
 (*\[Epsilon]reco[mLLP_]=0.4];*)
-(*If[StringContainsQ[GivenExperimentForSensitivityComputation,"NuCal"],*)
-(*\[Epsilon]reco[mLLP_]=0.7];*)
-(*If[StringContainsQ[GivenExperimentForSensitivityComputation,"CHARM"],*)
-(*\[Epsilon]reco[mLLP_]=0.6];*)
+(*If[StringContainsQ[GivenExperimentForSensitivityComputation,"CHARM-lepton"],\[Epsilon]reco[mLLP_]=If[mLLP<0.105*2,0.51,0.85]];*)
+(*If[StringContainsQ[GivenExperimentForSensitivityComputation,"NuCal"],\[Epsilon]reco[mLLP_]=If[mLLP<0.105*2,0.7,0.8]];*)
 (*Do[*)
 (*Module[{prod},*)
 (*prod=ProductionChannelsList[[i]];*)
 (*(*The condition if one sums the number of events for the same production mode over several experiments*)*)
 (*IfprodExists=MemberQ[Keys[DownValues@NeventsTabulated][[All,1,1]],prod];*)
-(*NeventsTabulated[prod]=If[!IfprodExists,Import[PathsNeventsSelected[[i]],"Table"],Join[NeventsTabulated[prod][[All,{1,2}]],NeventsTabulated[prod][[All,{3}]]+Import[PathsNeventsSelected[[i]],"Table"][[All,{3}]]]];*)
+(*NeventsTabulated[prod]=If[!IfprodExists,Import[directoriesNeventsSelected[[i]],"Table"],Join[NeventsTabulated[prod][[All,{1,2}]],NeventsTabulated[prod][[All,{3}]]+Import[directoriesNeventsSelected[[i]],"Table"][[All,{3}]]]];*)
 (*{mminmax[prod],couplingminmax[prod]}=(NeventsTabulated[prod][[All,#]]//MinMax)&/@{1,2};*)
 (*NevMax[prod]=NeventsTabulated[prod][[All,3]]//Max;*)
-(*NevInt[mLLP_,\[Epsilon]2_,prod]=\[Epsilon]reco[mLLP]*If[mminmax[prod][[1]]<= mLLP<=mminmax[prod][[2]]&&couplingminmax[prod][[1]]<=\[Epsilon]2<=couplingminmax[prod][[2]],Evaluate[10^(Interpolation[{Log10[#[[1]]],Log10[#[[2]]],Log10[#[[3]]+10^-90]}&/@NeventsTabulated[prod],InterpolationOrder->1][Log10[mLLP],Log10[\[Epsilon]2]])],0];*)
+(*NevInt[mLLP_,y_,prod]=\[Epsilon]reco[mLLP]*If[mminmax[prod][[1]]<= mLLP<=mminmax[prod][[2]]&&couplingminmax[prod][[1]]<=y<=couplingminmax[prod][[2]],Evaluate[10^(Interpolation[{Log10[#[[1]]],Log10[#[[2]]],Log10[#[[3]]+10^-90]}&/@NeventsTabulated[prod],InterpolationOrder->1][Log10[mLLP],Log10[y]])],0];*)
 (*]*)
 (*,{i,1,Length[ProductionInfoList],1}]*)
 (*{mminmaxOverall,couplingminmaxOverall}=MinMax[Table[#[prod],{prod,ProductionChannelsList}]//Flatten]&/@{mminmax,couplingminmax};*)
 (*NevMaxOverall=Max[Table[NevMax[prod],{prod,ProductionChannelsList}]];*)
-(*NevIntOverall[mLLP_,\[Epsilon]2_]=Sum[NevInt[mLLP,\[Epsilon]2,prod],{prod,ProductionChannelsList}];*)
-(*pt[mLLP_]:=LogLogPlot[Evaluate[Table[NevInt[mLLP,y,prod],{prod,ProductionChannelsList}]],{y,couplingminmaxOverall[[1]],couplingminmaxOverall[[2]]},PlotLegends->Placed[Style[#,15]&/@ProductionChannelsList,Right],PlotRange->{couplingminmaxOverall,{10^-2,NevMaxOverall}},Frame->True,ImageSize->Large,FrameLabel->{"\!\(\*SuperscriptBox[\(\[Epsilon]\), \(2\)]\)" , "\!\(\*SubscriptBox[\(N\), \(events\)]\)[\!\(\*SubscriptBox[\(m\), \(V\)]\),\!\(\*SuperscriptBox[\(\[Epsilon]\), \(2\)]\)]"},FrameStyle->Directive[Black, 23],PlotStyle->{{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green},{Thick,Black},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green,Dashing[0.02]},{Thick,Black,Dashing[0.02]}},PlotLabel->Style[Row[{ExperimentFolder,". \!\(\*SubscriptBox[\(m\), \(V\)]\) = ",mLLP, " GeV"}],20,Black]]*)
-(*pt[0.7]*)
-
-
-(* ::Input:: *)
-(**)
-(**)
+(*NevIntOverall[mLLP_,y_]=Sum[NevInt[mLLP,y,prod],{prod,ProductionChannelsList}];*)
+(*pt[mLLP_]:=LogLogPlot[Evaluate[Table[NevInt[mLLP,y,prod],{prod,ProductionChannelsList}]],{y,couplingminmaxOverall[[1]],couplingminmaxOverall[[2]]},PlotLegends->Placed[Style[#,15]&/@ProductionChannelsList,Right],PlotRange->{couplingminmaxOverall,{10^-2,NevMaxOverall}},Frame->True,ImageSize->Large,FrameLabel->{"y" , "\!\(\*SubscriptBox[\(N\), \(events\)]\)[\!\(\*SubscriptBox[\(m\), \(a\)]\),y]"},FrameStyle->Directive[Black, 23],PlotStyle->{{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green},{Thick,Black},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green,Dashing[0.02]},{Thick,Black,Dashing[0.02]}},PlotLabel->Style[Row[{GivenExperimentForSensitivityComputation,". \!\(\*SubscriptBox[\(m\), \(a\)]\) = ",mLLP, " GeV"}],20,Black]]*)
+(*pt[0.6]*)
 
 
 (* ::Chapter:: *)
-(*Sensitivity*)
+(*Sensitivity computation*)
 
 
 (* ::Section:: *)
-(*Events density plot*)
+(*Subscript[N, events] density plot*)
 
 
 (* ::Input:: *)
-(*plot=DensityPlot[Evaluate[Log10[NevIntOverall[mLLP,\[Epsilon]2]]],{mLLP,mminmaxOverall[[1]],mminmaxOverall[[2]]},{\[Epsilon]2,couplingminmaxOverall[[1]],couplingminmaxOverall[[2]]},ScalingFunctions->{"Log","Log"},AspectRatio->0.78,PlotRange->{All,All,{Log10[2.3],Log10[NevMaxOverall]}},ImageSize->Large,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(V\)]\) [GeV]","\!\(\*SuperscriptBox[\(\[Epsilon]\), \(2\)]\)"}, Frame-> True, FrameStyle->Directive[Black, 25],PlotPoints->100,PlotLegends->Placed[BarLegend[{Automatic,{Log10[2.3],Log10[NevMaxOverall]}},LegendMarkerSize->340,LegendLabel->Placed["\!\(\*SubscriptBox[\(Log\), \(10\)]\)[\!\(\*SubscriptBox[\(N\), \(ev\)]\)]",Bottom],LabelStyle->{FontSize->22},Method->{FrameStyle->Black,AxesStyle->None,TicksStyle->Black}],Right],PlotLabel->Style[Row[{ExperimentFolder}],20,Black](*,FrameTicks->{{Automatic,Automatic},{TicksPlotx,None}}*)]*)
-(*Export[FileNameJoin[{NotebookDirectory[],"plots/SensCalc/NeventsDensityPlotExample.pdf"}],plot,"AllowRasterization"->False]*)
+(*plot=DensityPlot[Evaluate[Log10[NevIntOverall[mLLP,y]]],{mLLP,mminmaxOverall[[1]],mminmaxOverall[[2]]},{y,couplingminmaxOverall[[1]],couplingminmaxOverall[[2]]},ScalingFunctions->{"Log","Log"},AspectRatio->0.78,PlotRange->{All,All,{Log10[2.3],Log10[NevMaxOverall]}},ImageSize->Large,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(a\)]\) [GeV]","y"}, Frame-> True, FrameStyle->Directive[Black, 25],PlotPoints->100,PlotLegends->Placed[BarLegend[{Automatic,{Log10[2.3],Log10[NevMaxOverall]}},LegendMarkerSize->340,LegendLabel->Placed["\!\(\*SubscriptBox[\(Log\), \(10\)]\)[\!\(\*SubscriptBox[\(N\), \(ev\)]\)]",Bottom],LabelStyle->{FontSize->22},Method->{FrameStyle->Black,AxesStyle->None,TicksStyle->Black}],Right],PlotLabel->Style[Row[{ExperimentFolder}],20,Black](*,FrameTicks->{{Automatic,Automatic},{TicksPlotx,None}}*)]*)
+(*(*Export[FileNameJoin[{NotebookDirectory[],"plots/SensCalc/NeventsDensityPlotExample.pdf"}],plot,"AllowRasterization"->False]*)*)
 
 
 (* ::Section:: *)
-(*Importing constraints*)
+(*Constraints importing*)
 
 
 (* ::Input:: *)
+(**)
 (*importformat["txt"]=importformat["dat"]="Table";*)
 (*importformat["m"]=importformat["mx"]="MX";*)
 (*importformat["xls"]="XLS";*)
@@ -682,39 +689,30 @@
 
 
 (* ::Section:: *)
-(*Sensitivity evaluation*)
+(*Sensitivity*)
 
 
 (* ::Input:: *)
-(**)
-(*(*If one wants to use bakcground, change Nev in this function to a funcionc dependent on mLLP*)*)
 (*SensitivityBlock[Nev_,Npot_,SelectedProduction_]:=Block[{},*)
-(*NevTot[mLLP_,\[Epsilon]2_]=Sum[NevInt[mLLP,\[Epsilon]2,prod],{prod,SelectedProduction}];*)
-(*RegSens=RegionPlot[Npot/NpotDefault NevTot[10^mLLP,10^\[Epsilon]2]>= Nev,{mLLP,Log10[mminmaxOverall[[1]]],Log10[mminmaxOverall[[2]]]},{\[Epsilon]2,Log10[couplingminmaxOverall[[1]]],Log10[couplingminmaxOverall[[2]]]},PlotPoints->200];*)
-(*SensTemp=Cases[Normal@RegSens,Line[x_]:>x,Infinity];*)
-(*Sens=Table[{10^#[[1]],10^#[[2]]}&/@SensTemp[[i]],{i,1,Length[SensTemp],1}];*)
+(*NevTot[mLLP_,y_]=Sum[NevInt[mLLP,y,prod],{prod,SelectedProduction}];*)
+(*RegSens1=RegionPlot[Npot/NpotDefault NevTot[10^mLLP,10^ga]*Boole[!(0.125<10^mLLP<0.14||0.538<10^mLLP<0.555||0.94<10^mLLP<0.974)]>=Nev,{mLLP,Log10[mminmaxOverall[[1]]],Log10[0.125]},{ga,Log10[couplingminmaxOverall[[1]]],Log10[couplingminmaxOverall[[2]]]},PlotPoints->200];*)
+(*RegSens2=RegionPlot[Npot/NpotDefault NevTot[10^mLLP,10^ga]*Boole[!(0.125<10^mLLP<0.14||0.538<10^mLLP<0.555||0.94<10^mLLP<0.974)]>=Nev,{mLLP,Log10[0.14],Log10[0.538]},{ga,Log10[couplingminmaxOverall[[1]]],Log10[couplingminmaxOverall[[2]]]},PlotPoints->200];*)
+(*RegSens3=RegionPlot[Npot/NpotDefault NevTot[10^mLLP,10^ga]*Boole[!(0.125<10^mLLP<0.14||0.538<10^mLLP<0.555||0.94<10^mLLP<0.974)]>=Nev,{mLLP,Log10[0.538],Log10[0.94]},{ga,Log10[couplingminmaxOverall[[1]]],Log10[couplingminmaxOverall[[2]]]},PlotPoints->200];*)
+(*RegSens4=RegionPlot[Npot/NpotDefault NevTot[10^mLLP,10^ga]*Boole[!(0.125<10^mLLP<0.14||0.538<10^mLLP<0.555||0.94<10^mLLP<0.974)]>=Nev,{mLLP,Log10[0.974],Log10[mminmaxOverall[[2]]]},{ga,Log10[couplingminmaxOverall[[1]]],Log10[couplingminmaxOverall[[2]]]},PlotPoints->200];*)
+(*(*Sens={10^#[[1]],10^#[[2]]}&/@Partition[Flatten[Cases[Normal@RegSens,Line[x_]\[RuleDelayed]x,Infinity]],2];*)*)
+(*SensTemp=Cases[Normal@#,Line[x_]:>x,Infinity]&/@{RegSens1,RegSens2,RegSens3,RegSens4};*)
+(*SensTemp1=Join[SensTemp[[1]],SensTemp[[2]],SensTemp[[3]],SensTemp[[4]]];*)
+(*Sens=Table[{10^#[[1]],10^#[[2]]}&/@SensTemp1[[i]],{i,1,Length[SensTemp1],1}];*)
 (*Export[FileNameJoin[{directory["Sensitivity-LLP-exp"],ToString@StringForm["Sensitivity_``_at_``_Nev=``_Npot=``.xls",Sequence@@{LLPdirName,ExperimentFolder,Nev//ToString,Npot//CForm//ToString}]}],Sens];*)
 (*Sens*)
 (*]*)
 (*productionlist=Join[{"All"},ProductionChannelsList];*)
-(**)
 (*DynamicModule[{input1=NpotDefault,input2=2.3,choice={"All"},list,phrase},*)
-(*DialogInput[Column[{Style[ExperimentFolder,Bold],TextCell["Enter the number of proton collisions:"],InputField[Dynamic[input1],Expression],TextCell["Enter the value of N_ev,min for which the sensitivity will be computed:"],InputField[Dynamic[input2],Expression],Row[{"Select the production channels to be used for the sensitivity calculation:"}],Pane[TogglerBar[Dynamic[choice],productionlist,Appearance->"Vertical"->{Automatic,1}],ImageSize->{Automatic,Automatic},Scrollbars->{False,True}],Button["Submit",DialogReturn[{NpotVal,NevMinVal,SelectedProduction}={input1,input2,choice}//N],ImageSize->Automatic]}]]];*)
+(*DialogInput[Column[{Style[GivenExperimentForSensitivityComputation,Bold],TextCell["Enter the number of proton collisions:"],InputField[Dynamic[input1],Expression],TextCell["Enter the value of N_ev,min for which the sensitivity will be computed:"],InputField[Dynamic[input2],Expression],Row[{"Select the production channels to be used for the sensitivity calculation:"}],Pane[TogglerBar[Dynamic[choice],productionlist,Appearance->"Vertical"->{Automatic,1}],ImageSize->{Automatic,Automatic},Scrollbars->{False,True}],Button["Submit",DialogReturn[{NpotVal,NevMinVal,SelectedProduction}={input1,input2,choice}//N],ImageSize->Automatic]}]]];*)
 (*If[MemberQ[SelectedProduction,"All"],SelectedProduction=ProductionChannelsList;]*)
 (*{{"\!\(\*SubscriptBox[\(N\), \(PoT\)]\) for computation","\!\(\*SubscriptBox[\(N\), \(ev, min\)]\)","Selected production modes"},{NpotVal,NevMinVal,SelectedProduction}}//TableForm*)
 (*sens=SensitivityBlock[NevMinVal,NpotVal,SelectedProduction];*)
-(*Show[ListLogLogPlot[Cases[ExcludedRegions[LLPdirName],_?MatrixQ,All],Joined->{True,True,True,True},Frame-> True,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(V\)]\) [GeV]" , "\!\(\*SuperscriptBox[\(\[Epsilon]\), \(2\)]\)"},FrameStyle->Directive[Black, 23],PlotStyle->{{Thick,Gray}},Filling->{1->{True,Directive[Gray,Opacity[0.3]]},2->{True,Directive[Gray,Opacity[0.3]]},3->{True,Directive[Gray,Opacity[0.3]]},4->{True,Directive[Gray,Opacity[0.3]]}},ImageSize->Large,PlotRange->{{1.01mminmaxOverall[[1]],1.1mminmaxOverall[[2]]},{0.3Min[Flatten[Sens]],0.99couplingminmaxOverall[[2]]}},PlotLabel->Style[Row[{"\!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] ",NevMinVal}],18,Black]],*)
-(*ListLogLogPlot[Cases[sens,_?MatrixQ,All],Joined->{True,True,True,True},PlotStyle->Flatten[{ConstantArray[{Thick,Blue},If[MatrixQ[sens],1,Length@sens]]},1],ImageSize->Large,PlotRange->{{1.01mminmaxOverall[[1]],1.1mminmaxOverall[[2]]},{couplingminmaxOverall[[1]],Max[0.2,0.99couplingminmaxOverall[[2]]]}},PlotLabel->Style[Row[{"\!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] ",NevMinVal}],18,Black],PlotLegends->Placed[Style[#,15]&/@{GivenExperimentForSensitivityComputation},{0.2,0.15}]],Graphics[{Text[Style["Excluded",24,Black],Scaled[{0.7,0.95}]]}]]*)
-
-
-(* ::Input:: *)
-(**)
-(**)
-
-
-(* ::Input:: *)
-(**)
-(**)
+(*Show[ListLogLogPlot[Cases[{sens,ExcludedRegions[LLPdirName]},_?MatrixQ,All],Joined->{True,True,True,True},Frame-> True,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(a\)]\) [GeV]" , "\!\(\*SubscriptBox[\(g\), \(y\)]\) = 2\!\(\*SubscriptBox[\(v\), \(h\)]\)/\!\(\*SubscriptBox[\(f\), \(a\)]\)"},FrameStyle->Directive[Black, 23],PlotStyle->Flatten[{ConstantArray[{Thick,Blue},If[MatrixQ[sens],1,Length@sens]],ConstantArray[{Thick,Gray},If[MatrixQ[ExcludedRegions[LLPdirName]],1,Length@ExcludedRegions[LLPdirName]]]},1],Filling->{Length[sens]+1->{True,Directive[Gray,Opacity[0.3]]},Length[sens]+2->{True,Directive[Gray,Opacity[0.3]]},Length[sens]+3->{True,Directive[Gray,Opacity[0.3]]},Length[sens]+4->{True,Directive[Gray,Opacity[0.3]]}},ImageSize->Large,PlotRange->{{1.01mminmaxOverall[[1]],1.1mminmaxOverall[[2]]},{0.3Min[Flatten[Sens]],0.99couplingminmaxOverall[[2]]}},PlotLabel->Style[Row[{"\!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] ",NevMinVal}],18,Black],PlotLegends->Placed[Style[#,15]&/@{ExperimentFolder},{0.2,0.15}]](*,LogLogPlot[{x,x^2,x^3,x^4,x^5,x^6},{x,0.05,62.49},PlotStyle\[Rule]{{Thickness[0.006],Blue},{Thickness[0.006],Darker@Red},{Thickness[0.006],Darker@Red,Dashing[0.02]},{Thickness[0.006],Black},{Thickness[0.01],Darker@Cyan,Dashing[0.007]},{Thick,Darker@Darker@Green,Dashing[0.02]},{Thick,Darker@Red}},PlotLegends\[Rule]Placed[Style[#,15]&/@{"SHiP","Subscript[SHADOWS, specified in LoI]","Subscript[SHADOWS, specified by Gaia]", "Subscript[SHADOWS, collab estimate]"},{0.26,0.15}]]*),Graphics[{Text[Style["Excluded",24,Black],Scaled[{0.7,0.95}]]}]]*)
 
 
 (* ::Title::Closed:: *)

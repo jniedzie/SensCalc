@@ -1339,11 +1339,11 @@
 (*,{fip,{"HNL-mixing-mu","HNL-mixing-tau"}},{i,1,Length[ParsHNLe],1}];*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Tests*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*1. Checking if the angle between two massless decay products obtain from simulation matches theoretical formula*)
 
 
@@ -1377,11 +1377,11 @@
 (*Clear[ELLPtest,MassParticleTest,ParamProductMass1,ParamProductMass2,ff]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*2. Checking that kinematics for 3-body decays *)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Shape of the energy distributions matches analytic formula*)
 
 
@@ -1402,7 +1402,7 @@
 (*Style[Row[{pt1,pt2}],ImageSizeMultipliers->{1, 1}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*4-momentum conservation*)
 
 
@@ -1415,7 +1415,7 @@
 (*Table[fourcheck[j],{j,1,Length[pd],1}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Checking the 4-momentum conservation for the phase space simulated in pythia*)
 
 
@@ -1795,9 +1795,30 @@
 (**)
 (*(*Grid of Subscript[\[Theta], LLP],Subscript[z, LLP]*)*)
 (*\[Theta]LLPrange=\[Theta]grid[DecayVolumeAsDetectorGivenExperiment,ThetaDecVolGivenExperimentMin,ThetaDecVolGivenExperimentMax,ThetaDetGivenExperimentMin,ThetaDetGivenExperimentMax];*)
-(*\[CapitalDelta]zVal[\[CapitalDelta]z_]=Min[\[CapitalDelta]z/10,Max[0.5,\[CapitalDelta]z/45.]];*)
-(*zLLPrangeTemp=Table[zLLP,{zLLP,zToDecayVolumeGivenExperiment,zMaxDecayVolumeGivenExperiment,\[CapitalDelta]zVal[zMaxDecayVolumeGivenExperiment-zToDecayVolumeGivenExperiment]}]//N;*)
-(*zLLPrange=If[zLLPrangeTemp[[-1]]!=zMaxDecayVolumeGivenExperiment,Join[zLLPrangeTemp,{zMaxDecayVolumeGivenExperiment}],zLLPrangeTemp];*)
+(**)
+(*(*Define the step size function based on experiment name and z value*)*)
+(**)
+(*\[CapitalDelta]zVal[\[CapitalDelta]z_,z_,experimentName_]:=If[StringContainsQ[experimentName,"SHIFT"],Piecewise[{{0.15,z<5},{Min[\[CapitalDelta]z/10,Max[0.5,\[CapitalDelta]z/100.]],True}}],Min[\[CapitalDelta]z/10,Max[0.5,\[CapitalDelta]z/45.]]];*)
+(*(*Way to define a denser grid*)*)
+(*(*\[CapitalDelta]zVal[\[CapitalDelta]z_,z_,experimentName_]:=Module[{verydenserDelta,denserDelta, linearDelta},*)
+(*verydenserDelta= z/5;*)
+(*denserDelta=z;*)
+(*linearDelta=Min[\[CapitalDelta]z/10,Max[0.5,\[CapitalDelta]z/45.]];*)
+(*(*Conditional based on the experiment name*)If[StringContainsQ[experimentName,"SHIFT"],Piecewise[{{verydenserDelta,z<0.1},{denserDelta,z<5&&z>=0.1},{linearDelta,z>=5}}],linearDelta]]*)*)
+(*zLLP=zToDecayVolumeGivenExperiment;*)
+(*zLLPrangeTemp={};*)
+(**)
+(*While[zLLP<=zMaxDecayVolumeGivenExperiment,AppendTo[zLLPrangeTemp,zLLP];*)
+(*zLLP+=\[CapitalDelta]zVal[zMaxDecayVolumeGivenExperiment-zToDecayVolumeGivenExperiment,zLLP, GivenExperiment];];*)
+(**)
+(*zLLPrangeTemp=N[zLLPrangeTemp];*)
+(**)
+(*zLLPrange=zLLPrangeTemp;*)
+(*(*Add zToDecayVolumeGivenExperiment as first value if it is not included*)*)
+(*If[zLLPrangeTemp[[1]]!=zToDecayVolumeGivenExperiment,zLLPrange=Prepend[zLLPrangeTemp,zToDecayVolumeGivenExperiment];];*)
+(*(*Add zMaxDecayVolumeGivenExperiment as first value if it is not included*)*)
+(*If[zLLPrangeTemp[[-1]]!=zMaxDecayVolumeGivenExperiment,zLLPrange=Append[zLLPrange,zMaxDecayVolumeGivenExperiment];];*)
+(**)
 (*TableLLPgrid\[Theta]z=Flatten[Table[{\[Theta]LLP,zLLP},{\[Theta]LLP,\[Theta]LLPrange},{zLLP,zLLPrange}],{1,2}];*)
 (*(*List of Subscript[E, LLP]*)*)
 (*ELLPvalues=ELLPvaluesFacility[FacilityGivenExperiment];*)
@@ -1980,7 +2001,7 @@
 (*]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Silent run*)
 
 
@@ -2058,7 +2079,7 @@
 (*Chapter to be automatically launched by the previous chapter. No need to launch it manually*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Scalar*)
 
 
@@ -2066,11 +2087,11 @@
 (*dataS=BlockExport["Scalar",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*HNL*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*e mixing*)
 
 
@@ -2078,7 +2099,7 @@
 (*dataS=BlockExport["HNL-mixing-e",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\[Mu] mixing*)
 
 
@@ -2086,7 +2107,7 @@
 (*dataS=BlockExport["HNL-mixing-mu",10^3];//AbsoluteTiming*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\[Tau] mixing*)
 
 
@@ -2110,7 +2131,7 @@
 (*dataS=BlockExport["ALP-fermion",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*ALP-gluon*)
 
 
@@ -2118,7 +2139,7 @@
 (*dataS=BlockExport["ALP-gluon",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*ALP-photon*)
 
 
@@ -2126,7 +2147,7 @@
 (*dataS=BlockExport["ALP-photon",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*B-L mediator*)
 
 
@@ -2134,7 +2155,7 @@
 (*dataS=BlockExport["B-L",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*B-3Subscript[L, \[Mu]] mediator*)
 
 
@@ -2142,7 +2163,7 @@
 (*dataS=BlockExport["B-3Lmu",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*B-3Subscript[L, e]-Subscript[L, \[Mu]]+Subscript[L, \[Tau]] mediator*)
 
 
@@ -2150,7 +2171,7 @@
 (*dataS=BlockExport["B-3Le-Lmu+Ltau",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*B-Subscript[L, e]-3Subscript[L, \[Mu]]+Subscript[L, \[Tau]] mediator*)
 
 
@@ -2186,11 +2207,11 @@
 (*2*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Some tests*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Some tests*)
 
 
@@ -2376,7 +2397,7 @@
 (*Show[ListPlot[{multlist[[1]][[1]],multlist[[1]][[2]],multlist[[2]][[1]],multlist[[2]][[2]],multlist[[3]][[1]],multlist[[3]][[2]]},Joined->True,PlotStyle->{{Thick,Blue},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green},{Thick,Darker@Darker@Green,Dashing[0.02]}},Frame\[Rule] True,FrameLabel\[Rule]{"Subscript[m, LLP] [GeV]" , "Subscript[n, per decay]"},FrameStyle\[Rule]Directive[Black, 23],ImageSize->Large,PlotRange\[Rule]{{0.05,4.5},{1,12}},PlotLabel\[Rule]Style[Row[{"Dashed: charged only. Solid: incl. \[Gamma],Subscript[K^0, L]"}],18,Black]],Plot[{0.9,0.9,0.9,0.9,0.9},{x,0,1},PlotStyle->{{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green}},PlotLegends\[Rule]Placed[Style[#,18]&/@fipsformult,{0.24,0.8}]]]*)*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*In the limit Subscript[E, LLP]/Subscript[m, LLP] >> 1 and in absence of energy cut and magnetic field etc ., Subscript[\[Epsilon], decay] must tend to 1 for the LLPs pointing to the detector and to 0 for those that do not point to the detector*)
 
 
