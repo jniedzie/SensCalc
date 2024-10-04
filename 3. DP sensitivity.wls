@@ -291,7 +291,7 @@
 (*,{i,1,Length[ProductionPatternSelected],1}]*)
 (*directory["Auxiliary-experiment"]=FileNameJoin[{directory["Auxiliary"],SelectedExperiment}];*)
 (*If[!DirectoryQ[directory["Auxiliary-experiment"]],CreateDirectory[directory["Auxiliary-experiment"]]];*)
-(*Export[FileNameJoin[{directory["Auxiliary-experiment"],"Double-Distr-Averaged-"<>LLPdirName<>".m"}],{Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]],0],{prod,ProductionList}],1/Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]],0],{prod,ProductionList}] Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]*DoubleDistrLLPint[mLLP,\[Theta]LLP,ELLP,prod]],0],{prod,ProductionList}]},"MX"];*)
+(*Export[FileNameJoin[{directory["Auxiliary-experiment"],"Double-Distr-Averaged-"<>LLPdirName<>".m"}],{Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]],0],{prod,ProductionList}],(1/Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]],0],{prod,ProductionList}])Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]*DoubleDistrLLPint[mLLP,\[Theta]LLP,ELLP,prod]],0],{prod,ProductionList}]},"MX"];*)
 (*Do[{GridInFinal[prod],DistrVals[prod]}=BlockGridsValsDistr[prod,DistrDataImport],{prod,ProductionList}];//AbsoluteTiming*)
 (*(*____________________________*)*)
 (*(*Finding Subscript[E, max](Subscript[m, LLP],Subscript[\[Theta], LLP]) for the angular range at the given experiment*)*)
@@ -688,12 +688,23 @@
 (* ::Input:: *)
 (**)
 (*(*If one wants to use bakcground, change Nev in this function to a funcionc dependent on mLLP*)*)
-(*SensitivityBlock[Nev_,Npot_,SelectedProduction_]:=Block[{},*)
+(*SensitivityBlock[Nev_,Npot_,SelectedProduction_, Experiment_]:=Block[{},*)
 (*NevTot[mLLP_,\[Epsilon]2_]=Sum[NevInt[mLLP,\[Epsilon]2,prod],{prod,SelectedProduction}];*)
-(*RegSens=RegionPlot[Npot/NpotDefault NevTot[10^mLLP,10^\[Epsilon]2]>= Nev,{mLLP,Log10[mminmaxOverall[[1]]],Log10[mminmaxOverall[[2]]]},{\[Epsilon]2,Log10[couplingminmaxOverall[[1]]],Log10[couplingminmaxOverall[[2]]]},PlotPoints->200];*)
+(*Nrequired = Nev;*)
+(*FileNameSuffix = Nev;*)
+(*experimentName=ToString[First[Experiment[[1]]]];*)
+(**)
+(*If[StringContainsQ[experimentName,"SHIFT"],*)
+(*Nbackground = 3000/750*Power[10, 6.1*Exp[-0.06*10^mLLP]+2.8*Power[10^mLLP,-0.2]];*)
+(*Nrequired = Nev*Sqrt[Nbackground];*)
+(*FileNameSuffix = "withBkg";*)
+(*];*)
+(*Print["N required: ", Nrequired];*)
+(**)
+(*RegSens=RegionPlot[Npot/NpotDefault NevTot[10^mLLP,10^\[Epsilon]2]>= Nrequired,{mLLP,Log10[mminmaxOverall[[1]]],Log10[mminmaxOverall[[2]]]},{\[Epsilon]2,Log10[couplingminmaxOverall[[1]]],Log10[couplingminmaxOverall[[2]]]},PlotPoints->200];*)
 (*SensTemp=Cases[Normal@RegSens,Line[x_]:>x,Infinity];*)
 (*Sens=Table[{10^#[[1]],10^#[[2]]}&/@SensTemp[[i]],{i,1,Length[SensTemp],1}];*)
-(*Export[FileNameJoin[{directory["Sensitivity-LLP-exp"],ToString@StringForm["Sensitivity_``_at_``_Nev=``_Npot=``.xls",Sequence@@{LLPdirName,ExperimentFolder,Nev//ToString,Npot//CForm//ToString}]}],Sens];*)
+(*Export[FileNameJoin[{directory["Sensitivity-LLP-exp"],ToString@StringForm["Sensitivity_``_at_``_Nev=``_Npot=``.xls",Sequence@@{LLPdirName,ExperimentFolder,FileNameSuffix//ToString,Npot//CForm//ToString}]}],Sens];*)
 (*Sens*)
 (*]*)
 (*productionlist=Join[{"All"},ProductionChannelsList];*)
@@ -702,13 +713,16 @@
 (*DialogInput[Column[{Style[ExperimentFolder,Bold],TextCell["Enter the number of proton collisions:"],InputField[Dynamic[input1],Expression],TextCell["Enter the value of N_ev,min for which the sensitivity will be computed:"],InputField[Dynamic[input2],Expression],Row[{"Select the production channels to be used for the sensitivity calculation:"}],Pane[TogglerBar[Dynamic[choice],productionlist,Appearance->"Vertical"->{Automatic,1}],ImageSize->{Automatic,Automatic},Scrollbars->{False,True}],Button["Submit",DialogReturn[{NpotVal,NevMinVal,SelectedProduction}={input1,input2,choice}//N],ImageSize->Automatic]}]]];*)
 (*If[MemberQ[SelectedProduction,"All"],SelectedProduction=ProductionChannelsList;]*)
 (*{{"\!\(\*SubscriptBox[\(N\), \(PoT\)]\) for computation","\!\(\*SubscriptBox[\(N\), \(ev, min\)]\)","Selected production modes"},{NpotVal,NevMinVal,SelectedProduction}}//TableForm*)
-(*sens=SensitivityBlock[NevMinVal,NpotVal,SelectedProduction];*)
+(*sens=SensitivityBlock[NevMinVal,NpotVal,SelectedProduction, GivenExperimentForSensitivityComputation];*)
 (*Show[ListLogLogPlot[Cases[ExcludedRegions[LLPdirName],_?MatrixQ,All],Joined->{True,True,True,True},Frame-> True,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(V\)]\) [GeV]" , "\!\(\*SuperscriptBox[\(\[Epsilon]\), \(2\)]\)"},FrameStyle->Directive[Black, 23],PlotStyle->{{Thick,Gray}},Filling->{1->{True,Directive[Gray,Opacity[0.3]]},2->{True,Directive[Gray,Opacity[0.3]]},3->{True,Directive[Gray,Opacity[0.3]]},4->{True,Directive[Gray,Opacity[0.3]]}},ImageSize->Large,PlotRange->{{1.01mminmaxOverall[[1]],1.1mminmaxOverall[[2]]},{0.3Min[Flatten[Sens]],0.99couplingminmaxOverall[[2]]}},PlotLabel->Style[Row[{"\!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] ",NevMinVal}],18,Black]],*)
 (*ListLogLogPlot[Cases[sens,_?MatrixQ,All],Joined->{True,True,True,True},PlotStyle->Flatten[{ConstantArray[{Thick,Blue},If[MatrixQ[sens],1,Length@sens]]},1],ImageSize->Large,PlotRange->{{1.01mminmaxOverall[[1]],1.1mminmaxOverall[[2]]},{couplingminmaxOverall[[1]],Max[0.2,0.99couplingminmaxOverall[[2]]]}},PlotLabel->Style[Row[{"\!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] ",NevMinVal}],18,Black],PlotLegends->Placed[Style[#,15]&/@{GivenExperimentForSensitivityComputation},{0.2,0.15}]],Graphics[{Text[Style["Excluded",24,Black],Scaled[{0.7,0.95}]]}]]*)
 
 
 (* ::Input:: *)
-(**)
+(* *)
+
+
+(* ::Input:: *)
 (**)
 
 
@@ -717,7 +731,7 @@
 (**)
 
 
-(* ::Title::Closed:: *)
+(* ::Title:: *)
 (*Deleting generated cells*)
 
 

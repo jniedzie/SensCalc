@@ -5,7 +5,7 @@
 (*Definitions*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*SM particles production cross-sections  at various facilities*)
 
 
@@ -46,7 +46,7 @@
 (*EmaxFacility:=Association[{"SPS"->400.,"FermilabBD"->120.,"LHC"->7000.,"FCC-hh"-> 50000.,"Serpukhov"->70.,"ESS"->2.4,"LHC-fixed-target"-> 7000.}]*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Generic definitions used to calculate acceptances*)
 
 
@@ -106,11 +106,11 @@
 (*Implementation of the experiments: geometry and cross-sections*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*SHiP configurations*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Preliminary definitions*)
 
 
@@ -137,7 +137,7 @@
 (*{dyDecayVolumeDownstream["SHiP-ECN3-LoI"],dyDecayVolumeDownstream["SHiP-ECN3"],dyDecayVolumeDownstream["SHiP-ECN3-alt"],dyDecayVolumeDownstream["SHiP-ECN4"]}={6.2*8/6,6.2,6.2,11};*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -204,7 +204,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistship,Table[detectablepdgs,Length[explistship]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -244,7 +244,7 @@
 (**)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -258,11 +258,11 @@
 (*,{exp,explistship}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*SHADOWS configurations*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -334,7 +334,7 @@
 (**)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -373,7 +373,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistshad}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -387,11 +387,11 @@
 (*,{exp,explistshad}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*MATHUSLA/MATHUSLA-FCC*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -460,7 +460,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistmat,Table[Select[detectablepdgs,MemberQ[{22.,130.,2112.,-2112.},#]==False&],Length[explistmat]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -498,7 +498,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistmat}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -512,11 +512,11 @@
 (*,{exp,explistmat}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*FACET/FACET-FCC*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -585,7 +585,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistfac,Table[detectablepdgs,Length[explistfac]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -623,7 +623,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistfac}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -637,11 +637,11 @@
 (*,{exp,explistfac}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*FASER/FASER2/FASER2-FPF*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -710,7 +710,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistfas,Table[detectablepdgs,Length[explistfas]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -748,7 +748,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistfas}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -762,11 +762,11 @@
 (*,{exp,explistfas}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*ANUBIS-shaft*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Definitions*)
 
 
@@ -781,7 +781,7 @@
 (*Plot[\[CapitalDelta]xCrossANUBIS[z],{z,5,23}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -850,7 +850,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistanub,Table[Select[detectablepdgs,MemberQ[{22.,130.,2112.,-2112.},#]==False&],Length[explistanub]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -888,7 +888,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistanub}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -902,11 +902,11 @@
 (*,{exp,explistanub}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*HIKE/NA62 *)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry (mostly taken from ALPINIST)*)
 
 
@@ -976,7 +976,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explisthike,Table[detectablepdgs,Length[explisthike]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -1014,7 +1014,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explisthike}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -1028,11 +1028,11 @@
 (*,{exp,explisthike}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*CODEX-b*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -1101,7 +1101,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistcodexb,Table[detectablepdgs,Length[explistcodexb]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -1140,7 +1140,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistcodexb}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -1154,11 +1154,11 @@
 (*,{exp,explistcodexb}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*FOREHUNT@FCC-hh (2306.11803 but with added detector and a hole accounting for beamline)*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -1227,7 +1227,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistforehunt,Table[detectablepdgs,Length[explistforehunt]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -1265,7 +1265,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistforehunt}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -1279,11 +1279,11 @@
 (*,{exp,explistforehunt}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*CHARM/BEBC*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -1351,7 +1351,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistcharm,Table[detectablepdgs,Length[explistcharm]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -1390,7 +1390,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistcharm}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -1404,11 +1404,11 @@
 (*,{exp,explistcharm}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*NuCal*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -1475,7 +1475,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistnucal,Table[detectablepdgs,Length[explistnucal]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -1514,7 +1514,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistnucal}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -1528,11 +1528,11 @@
 (*,{exp,explistnucal}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*DUNE/PRISM*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -1602,7 +1602,7 @@
 (**)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -1640,7 +1640,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistdune}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -1654,11 +1654,11 @@
 (*,{exp,explistdune}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*DarkQuest*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -1727,7 +1727,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistdarkquest,Table[detectablepdgs,Length[explistdarkquest]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -1765,7 +1765,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistdarkquest}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -1779,11 +1779,11 @@
 (*,{exp,explistdarkquest}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*SND@LHC/FASER\[Nu]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -1852,7 +1852,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistsnd,Table[detectablepdgs,Length[explistsnd]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -1891,7 +1891,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistsnd}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -1905,11 +1905,11 @@
 (*,{exp,explistsnd}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*SND@SHiP/LAr@SHiP*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -1978,7 +1978,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistsndship,Table[detectablepdgs,Length[explistsndship]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -2017,7 +2017,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistsndship}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -2032,11 +2032,11 @@
 (**)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*advSND/FASER\[Nu]2*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -2105,7 +2105,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistadvsnd,Table[detectablepdgs,Length[explistadvsnd]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -2144,7 +2144,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistadvsnd}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -2158,11 +2158,11 @@
 (*,{exp,explistadvsnd}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*LHCb-downstream*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Geometry*)
 
 
@@ -2231,7 +2231,7 @@
 (*MapThread[(DetectablePDGsExperiment[#1]=#2)&,{explistlhcb,Join[{detectablepdgs},Table[Select[detectablepdgs,MemberQ[{22.,130.,2112.,-2112.},#]==False&],Length[explistlhcb]-1]]}];*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -2270,7 +2270,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistlhcb}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -2324,7 +2324,7 @@
 (*explistshift={"SHIFT-muon", "SHIFT-non-muon", "SHIFT-empty-decay-volume"};*)
 (*(*Distance to the fiducial volume along the beamline axis. MapThread[(list1[#]=#2)&,{listexp,listvals}] equates the elements list1 with keys from listexp to the corresponding elements of the list listvals*)*)
 (*(*In the first mode the decay volume starts next to the target, it is no 0. to avoid errors. In the second mode the decay volume starts 5 m before CMS in first approximation*)*)
-(*MapThread[(zToDecayVolumeExperiment[#1]=#2)&,{explistshift,{0.0001, 144.2, 0.0001}}]; *)
+(*MapThread[(zToDecayVolumeExperiment[#1]=#2)&,{explistshift,{1*^-15, 144.2, 1*^-15}}]; *)
 (*(*Detector has the axis along which its components are placed. The option below defines the orientation of the final plane transverse to this axis relative to the beamline*)*)
 (*(*Transverse if the plane is tranverse (SHiP, FACET etc), and Parallel if it is parallel (MATHUSLA, ANUBIS*)*)
 (*MapThread[(DetectorPlaneOrientationExperiment[#1]=#2)&,{explistshift,Table["Transverse",Length[explistshift]]}];*)
@@ -2400,7 +2400,7 @@
 (**)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cross-sections*)
 
 
@@ -2439,7 +2439,7 @@
 (*Do[TableNumbersParticlesExperiment[exp]={{"Facility","Npot","Atarget","PPi0","PEta","PEtapr","PRho0","POmega","Pc","Pb","PW","Ph","PJpsi","PUpsilon","PPhi"},{FacilityExperiment[exp],NPOTexperiment[exp],AtargetExperiment[exp],PppTo\[Pi]0exp[exp],PppTo\[Eta]exp[exp],PppTo\[Eta]prexp[exp],PppTo\[Rho]0exp[exp],PppTo\[Omega]exp[exp],2PppToccExperiment[exp],2PppTobbExperiment[exp],PppToWExperiment[exp],PppTohExperiment[exp],PppToJpsiexp[exp],PppToUpsilonexp[exp],PppToPhiexp[exp]}}//N,{exp,explistshift}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Conditions for the LLP to decay inside the decay volume and for the products to point to the end of the detector*)
 
 
@@ -2453,15 +2453,15 @@
 (*,{exp,explistshift}]*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Full geometry of the decay volume (needed for visualization+determining angular coverage)*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Standard decay volumes: box, cylinder, annular cylinder*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Box*)
 
 
@@ -2469,7 +2469,7 @@
 (*StandardShapeDecayVolume[experiment_,"Box"]:=Parallelepiped[{xToDecayVolumeCenterExperiment[z,experiment]-dxDecayVolumeExperiment[z,experiment]/2,yToDecayVolumeCenterExperiment[z,experiment]-dyDecayVolumeExperiment[z,experiment]/2,zToDecayVolumeExperiment[experiment]},{{dxDecayVolumeExperiment[z,experiment],0,0},{0,dyDecayVolumeExperiment[z,experiment],0},{0,0,dzDecayVolumeExperiment[experiment]}}]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cylinder*)
 
 
@@ -2477,7 +2477,7 @@
 (*StandardShapeDecayVolume[experiment_,"Cylinder"]:=If[DetectorPlaneOrientationExperiment[experiment]=="Transverse",Cylinder[{{xToDecayVolumeCenterExperiment[z,experiment],yToDecayVolumeCenterExperiment[z,experiment],zToDecayVolumeExperiment[experiment]},{xToDecayVolumeCenterExperiment[z,experiment],yToDecayVolumeCenterExperiment[z,experiment],zMaxDecayVolumeExperiment[experiment]}},RouterDecayVolumeExperiment[experiment,z]],Cylinder[{{xToDecayVolumeCenterExperiment[z,experiment],yToDecayVolumeCenterExperiment[z,experiment]-dyDecayVolumeExperiment[z,experiment]/2,zToDecayVolumeExperiment[experiment]+dzDecayVolumeExperiment[experiment]/2},{xToDecayVolumeCenterExperiment[z,experiment],yToDecayVolumeCenterExperiment[z,experiment]+dyDecayVolumeExperiment[z,experiment]/2,zToDecayVolumeExperiment[experiment]+dzDecayVolumeExperiment[experiment]/2}},RouterDecayVolumeExperiment[experiment,z]]]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Annular cylinder*)
 
 
@@ -2490,11 +2490,11 @@
 (*]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Decay volume of experiments with complicated geometry (currently - SHiP, LHCb)*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Pyramidal frustum (SHiP, CHARM)*)
 
 
@@ -2532,7 +2532,7 @@
 (*Region[BlockDecayVolumePyramidalFrustum["SHiP-ECN3"]]*)*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*LHCb-downstream*)
 
 
@@ -2546,7 +2546,7 @@
 (*(*Region[Style[LHCbfarDecayVolume,Opacity[0.1]],BoxRatios\[Rule]{1,1,1},Boxed\[Rule]True,Axes\[Rule]True]*)*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*LHCb-muon chamber*)
 
 
@@ -2563,7 +2563,7 @@
 (*(*Region[Style[LHCbfarDecayVolume,Opacity[0.1]],BoxRatios\[Rule]{1,1,1},Boxed\[Rule]True,Axes\[Rule]True]*)*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Total*)
 
 
@@ -2572,7 +2572,7 @@
 (*NonStandardDecayVolumeGeometry[experiment_]:=If[StringContainsQ[experiment,{"SHiP","CHARM"}]==True,BlockDecayVolumePyramidalFrustum[experiment],If[StringContainsQ[experiment,"LHCb-downstream"]==True,LHCbfarDecayVolume[experiment],LHCbMuonVol]]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Combined - for standard and non-standard geometries*)
 
 
@@ -2581,7 +2581,7 @@
 (*(*Region[Style[DecayVolumeGeometry["LHCb-downstream"],Blue,Opacity[0.1]],BoxRatios\[Rule]{1,1,1},Boxed\[Rule]True,Axes\[Rule]True]*)*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Slice of the decay volume*)
 
 
@@ -2593,15 +2593,15 @@
 (*ExperimentDecayVolumeSlice[experiment_,z_,"Annular cylinder"]:=If[GeometryExperiment[experiment]=="Annular cylinder",RegionDifference[Disk[{xToDecayVolumeCenterExperiment[z,experiment],yToDecayVolumeCenterExperiment[z,experiment]},RouterDecayVolumeExperiment[experiment,z]],Disk[{xToDecayVolumeCenterExperiment[z,experiment],yToDecayVolumeCenterExperiment[z,experiment]},RinnerDecayVolumeExperiment[experiment,z]]],0];*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Full geometry of the detector (needed for visualization+determining angular coverage)*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Standard geometry*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Box*)
 
 
@@ -2621,7 +2621,7 @@
 (*]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Cylinder*)
 
 
@@ -2641,7 +2641,7 @@
 (*]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Annular cylinder*)
 
 
@@ -2662,11 +2662,11 @@
 (*(*Region[Style[StandardDetectorGeometry["FACET",GeometryExperiment["FACET"],0],Opacity[0.1]],BoxRatios\[Rule]{1,1,1},Boxed\[Rule]True,Axes\[Rule]True]*)*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Non-standard geometry*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*LHCb-downstream*)
 
 
@@ -2698,7 +2698,7 @@
 (*]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Common*)
 
 
@@ -2706,7 +2706,7 @@
 (*NonStandardDetectorGeometry[experiment_,\[Xi]_]:=Association[{{"LHCb-downstream-full",\[Xi]}->LHCbfarDetectorVolumeTemp["LHCb-downstream",\[Xi]],{"LHCb-downstream-T-tracks-only",\[Xi]}->LHCbfarSciFiDetectorVolumeTemp["LHCb-downstream-T-tracks-only",\[Xi]],{"LHCb-downstream",\[Xi]}->LHCbfarSciFiDetectorVolumeTemp["LHCb-downstream",\[Xi]]}][{experiment,\[Xi]}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Common definition*)
 
 
@@ -2727,7 +2727,7 @@
 (*\[Theta]minmaxBlock["SHADOWS-Gaia",10^5]*)*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Plane of the end of the detector*)
 
 
@@ -2755,7 +2755,7 @@
 (*DetectorEndCrossSectionExperiment[experiment_]:=RegionIntersection[PlaneEndOfDetectorExperiment[experiment],DetectorGeometry[experiment]]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Subscript[\[Theta], min/max] - minimal and maximal angles covered by the end of the detector. If the decay volume is fully off-axis, than the minimal angle is defined by the minimal angle covered by end of the decay volume*)
 
 
@@ -2828,7 +2828,7 @@
 (*tabb//TableForm*)*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Polar angle grid*)
 
 

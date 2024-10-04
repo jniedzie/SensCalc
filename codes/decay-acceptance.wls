@@ -1,7 +1,7 @@
 #!/usr/bin/env wolframscript
 (* ::Package:: *)
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Decay acceptance definitions*)
 
 

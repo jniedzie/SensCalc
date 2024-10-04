@@ -1,7 +1,7 @@
 #!/usr/bin/env wolframscript
 (* ::Package:: *)
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Just launch the code below to run the notebook (shift+enter)*)
 
 
@@ -12,11 +12,11 @@
 (*SelectionEvaluate[nb]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Definitions (launch this section first)*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Critical definitions required to launch this notebook*)
 
 
@@ -33,7 +33,7 @@
 (*<<FeynCalc`*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Parameters*)
 
 
@@ -61,7 +61,7 @@
 (*detectablepdgs={1.,-1.,2.,-2.,3.,-3.,4.,-4.,5.,-5.,21.,-21.,22.,11.,-11.,13.,-13.,211.,-211.,130.,321.,-321.,2112.,-2112.,2212.,-2212.}//Sort*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Kinematics*)
 
 
@@ -212,7 +212,7 @@
 (*p3rotatedZ[E1_,E3_,m_,m1_,m2_,m3_,\[Theta]V_,\[Phi]V_,\[Kappa]_]=p3rotated[E1,E3,m,m1,m2,m3,\[Theta]V,\[Phi]V,\[Kappa]][[3]];*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Decays of various LLPs: processes, branching ratios, matrix elements*)
 
 
@@ -922,7 +922,7 @@
 (*(*Table[With[{part=ListSMdecays[[i]][[1]],proc=ListSMdecays[[i]][[2]]},Evaluate[{part,proc,ListDecayProducts[part,proc][[1]],ListDecayProducts[part,proc][[2]],ListDecayProducts[part,proc][[3]],ListDecayProducts[part,proc][[4]],\[Omega]process[part,proc]}]],{i,1,Length[ListSMdecays],1}]*)*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Phase space of decay products at the rest frame of the decaying LLP *)
 
 
@@ -1443,7 +1443,7 @@
 (*If[Max[checktab[[All,4]]]>10^-5.,infoDialog["The simulated phase space does not obey 4-momentum conservation! Examine in detail"]]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Geometry of different experiments and cross-sections*)
 
 
@@ -1451,11 +1451,11 @@
 (*NotebookEvaluate[FileNameJoin[{NotebookDirectory[],"codes/experiments.nb"}]]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Selecting the experiment*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Choosing the experiment*)
 
 
@@ -1543,7 +1543,7 @@
 (*DecayAcceptanceGeometry[x1LLPproj_,x2LLPproj_,xLongProj_]=IfLLPtoDet[x1LLPproj,x2LLPproj,xLongProj];*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Specifying cuts on the decay products*)
 
 
@@ -1696,7 +1696,7 @@
 (*]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Azimuthal acceptance calculation*)
 
 
@@ -1792,13 +1792,19 @@
 (**)
 (*ELLPvaluesFacility["LHC-fixed-target"]=Join[{0.005,0.01,0.021,0.05,0.1,0.25,0.5,0.75,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.},Table[10^ELLP,{ELLP,Log10[5.5],Log10[1000],(Log10[1000]-Log10[5.5])/50}],Table[10^ELLP,{ELLP,Log10[1100.],Log10[EmaxFacility["LHC-fixed-target"]],(Log10[EmaxFacility["LHC-fixed-target"]]-Log10[1100.])/30}]]//N;*)
 (**)
+(*(*hacking this value temporarily for SHIFT*)*)
+(*ThetaDecVolGivenExperimentMin = 0.005882420789*)
 (**)
 (*(*Grid of Subscript[\[Theta], LLP],Subscript[z, LLP]*)*)
 (*\[Theta]LLPrange=\[Theta]grid[DecayVolumeAsDetectorGivenExperiment,ThetaDecVolGivenExperimentMin,ThetaDecVolGivenExperimentMax,ThetaDetGivenExperimentMin,ThetaDetGivenExperimentMax];*)
 (**)
 (*(*Define the step size function based on experiment name and z value*)*)
-(**)
-(*\[CapitalDelta]zVal[\[CapitalDelta]z_,z_,experimentName_]:=If[StringContainsQ[experimentName,"SHIFT"],Piecewise[{{0.15,z<5},{Min[\[CapitalDelta]z/10,Max[0.5,\[CapitalDelta]z/100.]],True}}],Min[\[CapitalDelta]z/10,Max[0.5,\[CapitalDelta]z/45.]]];*)
+(*\[CapitalDelta]zVal[\[CapitalDelta]z_,z_,experimentName_]:=If[StringContainsQ[experimentName,"SHIFT"],*)
+(*(*for SHIFT*)*)
+(*Piecewise[Table[{10^-n,z<10^-(n-1)},{n,15,0,-1}]~Join~{{10^1,True}}],*)
+(*(*for other experiments*)*)
+(*Min[\[CapitalDelta]z/10,Max[0.5,\[CapitalDelta]z/45.]]*)
+(*];*)
 (*(*Way to define a denser grid*)*)
 (*(*\[CapitalDelta]zVal[\[CapitalDelta]z_,z_,experimentName_]:=Module[{verydenserDelta,denserDelta, linearDelta},*)
 (*verydenserDelta= z/5;*)
@@ -1853,7 +1859,7 @@
 (*azaccdata=Join[gridReducedLLPtoDet[[All,{1,3}]],If[DecayVolumeAsDetectorGivenExperiment=="False",gridReducedLLPtoDet[[All,{4}]]+gridReducedLLPnotToDet[[All,{4}]],gridReducedLLPtoDet[[All,{4}]]],2];*)
 (*Print["The volume of the decay volume (in \!\(\*SuperscriptBox[\(m\), \(3\)]\)) calculated by the azimuthal acceptance (compare with the true volume obtained using simple formulas):"]*)
 (*azacc[th_,z_]=Interpolation[DeleteDuplicatesBy[azaccdata,{#[[1]],#[[2]]}&],InterpolationOrder->1][th,z];*)
-(*{{"Meaning","Volume - computed as \[Integral]2\!\(\*SubscriptBox[\(\[Pi]\[Epsilon]\), \(az\)]\)(\[Theta],z)sin(\[Theta]) \!\(\*SuperscriptBox[\(r\), \(2\)]\)(z)d\[Theta]dr", "Volume - computed internally as Volume[Decay Volume]", "Volume - computed as \[Integral]IfLLPinsideDecVol dx dy dz"},{"Comment","","Must match the 2nd column with O(few %) precision","Must match the 2nd column with O(few %) precision"},{"Value",NIntegrate[2*Pi*azacc[th,z]*Sin[th] z^2/Cos[th]^3,{th,thgrid[[1]],thgrid[[-1]]},{z,zgrid[[1]],zgrid[[-1]]}, WorkingPrecision-> 5],Volume[DecayVolumeGeometryGivenExperiment],VolumeFromIf[GivenExperiment]}}//TableForm*)
+(*{{"Meaning","Volume - computed as \[Integral]2\!\(\*SubscriptBox[\(\[Pi]\[Epsilon]\), \(az\)]\)(\[Theta],z)sin(\[Theta]) \!\(\*SuperscriptBox[\(r\), \(2\)]\)(z)d\[Theta]dr", "Volume - computed internally as Volume[Decay Volume]", "Volume - computed as \[Integral]IfLLPinsideDecVol dx dy dz"},{"Comment","","Must match the 2nd column with O(few %) precision","Must match the 2nd column with O(few %) precision"},{"Value",NIntegrate[2*Pi*azacc[th,z]*Sin[th] z^2/Cos[th]^3,{th,thgrid[[1]],thgrid[[-1]]},{z,zgrid[[1]],zgrid[[-1]]}, WorkingPrecision-> 16],Volume[DecayVolumeGeometryGivenExperiment],VolumeFromIf[GivenExperiment]}}//TableForm*)
 
 
 (* ::Subsubsection:: *)
@@ -1898,11 +1904,11 @@
 (*Null*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Computing the decay products acceptance*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Definitions*)
 
 
@@ -2051,7 +2057,7 @@
 (*]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Actual computation of the decay acceptance*)
 
 
@@ -2075,7 +2081,7 @@
 (*Do[BlockAcceptanceComputation[SelectedLLPlist[[i]]],{i,1,Length[SelectedLLPlist],1}]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Chapter to be automatically launched by the previous chapter. No need to launch it manually*)
 
 
@@ -2115,7 +2121,7 @@
 (*dataS=BlockExport["HNL-mixing-tau",10^3];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Dark photon*)
 
 
@@ -2123,7 +2129,7 @@
 (*dataS=BlockExport["DP",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*ALP-fermion*)
 
 
@@ -2179,7 +2185,7 @@
 (*dataS=BlockExport["B-Le-3Lmu+Ltau",ivaltest];//AbsoluteTiming*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Deleting generated cells/proceeding to an other experiment*)
 
 

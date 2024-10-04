@@ -17,11 +17,11 @@
 (*SelectionEvaluate[nb]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Preliminary code: various definitions*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Creating relevant directories and critical definitions*)
 
 
@@ -33,7 +33,7 @@
 (*<<FeynCalc`*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Parameters*)
 
 
@@ -222,11 +222,11 @@
 (**)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Preliminary code: mother particles sampling*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Importing tabulated mother particles distributions*)
 
 
@@ -248,7 +248,7 @@
 (*sortedDataPairs=SortBy[Join[sortedDataPairs,Table[{Facility,"p"},{Facility,FacilitiesList}],{{"ESS","PiCharged"},{"ESS","mu"}}],{#[[1]],#[[2]]}&];*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Code that samples 4-momenta of mother particles given the tabulated distribution*)
 
 
@@ -421,7 +421,7 @@
 (*{px,py,pz,e,m}],CompilationTarget->"C",RuntimeOptions->"Speed",RuntimeAttributes->{Listable},Parallelization->True]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Interpolation and phase space sampling*)
 
 
@@ -489,11 +489,11 @@
 (*Quiet[LogLogPlot[{1/norm1angdistrInt[x]/x,1/norm2pdfint[x]/x},{x,10^-5.,Pi/2}]]*)*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Preliminary code: LLP production phenomenology*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Preliminary definitions*)
 
 
@@ -663,7 +663,7 @@
 (**)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*HNL*)
 
 
@@ -870,7 +870,7 @@
 (*,{HNL,Drop[ListHNLs,-1]}]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*ALP-gluon*)
 
 
@@ -891,7 +891,7 @@
 (**)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*ALP-photon*)
 
 
@@ -928,7 +928,7 @@
 
 
 (* ::Input:: *)
-(*FFvac[p_,\[Mu]_,\[Nu]_,\[Alpha]_,\[Beta]_]:=(-FV[p,\[Mu]]*FV[p,\[Alpha]]*MT[\[Nu],\[Beta]]-FV[p,\[Nu]]*FV[p,\[Beta]]*MT[\[Mu],\[Alpha]]+FV[p,\[Mu]]*FV[p,\[Beta]]*MT[\[Nu],\[Alpha]]+FV[p,\[Nu]]*FV[p,\[Alpha]]*MT[\[Mu],\[Beta]])/ScalarProduct[p,p]//ExpandScalarProduct*)
+(*FFvac[p_,\[Mu]_,\[Nu]_,\[Alpha]_,\[Beta]_]:=1/ScalarProduct[p,p] (-FV[p,\[Mu]]*FV[p,\[Alpha]]*MT[\[Nu],\[Beta]]-FV[p,\[Nu]]*FV[p,\[Beta]]*MT[\[Mu],\[Alpha]]+FV[p,\[Mu]]*FV[p,\[Beta]]*MT[\[Nu],\[Alpha]]+FV[p,\[Nu]]*FV[p,\[Alpha]]*MT[\[Mu],\[Beta]])//ExpandScalarProduct*)
 (*FFfinal[p1_,p2_,\[Mu]_,\[Nu]_,\[Alpha]_,\[Beta]_]:=(FV[p1,\[Mu]]*PolarizationVector[p1,\[Nu]]-FV[p1,\[Nu]]*PolarizationVector[p1,\[Mu]])(FV[p2,\[Alpha]]*PolarizationVector[p2,\[Beta]]-FV[p2,\[Beta]]*PolarizationVector[p2,\[Alpha]])*)
 (*MdecayMesonToALPphoton=(1/4 ga\[Gamma]\[Gamma]*g\[Pi]\[Gamma]\[Gamma]*2*LeviCivita[\[Mu]1,\[Nu]1,\[Mu]2,\[Nu]2]*LeviCivita[\[Mu]3,\[Nu]3,\[Mu]4,\[Nu]4](FFvac[p2+p3,\[Mu]1,\[Nu]1,\[Mu]2,\[Nu]2]*FFfinal[p1,p2,\[Mu]3,\[Nu]3,\[Mu]4,\[Nu]4]+FFvac[p2+p3,\[Mu]1,\[Nu]1,\[Mu]3,\[Nu]3]*FFfinal[p1,p2,\[Mu]2,\[Nu]2,\[Mu]4,\[Nu]4]+FFvac[p2+p3,\[Mu]1,\[Nu]1,\[Mu]4,\[Nu]4]*FFfinal[p1,p2,\[Mu]3,\[Nu]3,\[Mu]2,\[Nu]2]+FFvac[p2+p3,\[Mu]2,\[Nu]2,\[Mu]3,\[Nu]3]*FFfinal[p1,p2,\[Mu]1,\[Nu]1,\[Mu]4,\[Nu]4]+FFvac[p2+p3,\[Mu]3,\[Nu]3,\[Mu]4,\[Nu]4]*FFfinal[p1,p2,\[Mu]1,\[Nu]1,\[Mu]2,\[Nu]2]+FFvac[p2+p3,\[Mu]2,\[Nu]2,\[Mu]4,\[Nu]4]*FFfinal[p1,p2,\[Mu]1,\[Nu]1,\[Mu]3,\[Nu]3])//Contract//Simplify);*)
 (*MdecayMesonToALPphotonSquared=(DoPolarizationSums[DoPolarizationSums[MdecayMesonToALPphoton*ComplexConjugate[MdecayMesonToALPphoton],p1],p2]//Contract//Simplify)/.{ScalarProduct[p3,p3]->ProductK3K3,ScalarProduct[p2,p2]->ProductK2K2,ScalarProduct[p1,p1]->ProductK1K1,ScalarProduct[p2,p3]->ProductK2K3energy,ScalarProduct[p1,p3]->ProductK1K3energy,ScalarProduct[p1,p2]-> ProductK1K2energy}/.{m1->0,m2->0,m3->ma,m->mmeson}//Simplify;*)
@@ -1143,7 +1143,7 @@
 (*solsColliders[kzCM_,ma_,EpCM_]=Assuming[ma>0&&kZ>0&&EpCM>0&&kzCM>0,Simplify[Solve[{max1x2Colliders[x1,x2,EpCM]==ma&&kzx1x2Colliders[x1,x2,EpCM]==kzCM},{x1,x2}]]][[2]];*)
 (*{xp1kzColliders[kzCM_,ma_,EpCM_],xp2kzColliders[kzCM_,ma_,EpCM_]}={x1/.solsColliders[kzCM,ma,EpCM],x2/.solsColliders[kzCM,ma,EpCM]};*)
 (*(*Diff. cross-section of the ALP production in terms of Subscript[k, T] and Subscript[k, z] of the ALP*)*)
-(*IntegrandFusionCollidersTemp[ma_,kzCM_,kT_,pT1_,pT2_,EpCM_]=2*kT*2*pT1*2*pT2*ma^2/(32*EpCM*EpCM Sqrt[kzCM^2+ma^2]) (fEPAp[pT1,xp1kzColliders[kzCM,ma,EpCM],\[Alpha]EMval]*fEPAp[pT2,xp2kzColliders[kzCM,ma,EpCM],\[Alpha]EMval])/Sqrt[2*kT^2 (pT1^2+pT2^2)-kT^4-(pT1^2-pT2^2)^2]//Simplify;*)
+(*IntegrandFusionCollidersTemp[ma_,kzCM_,kT_,pT1_,pT2_,EpCM_]=2*kT*2*pT1*2*pT2*ma^2/(32*EpCM*EpCM Sqrt[kzCM^2+ma^2]) ((fEPAp[pT1,xp1kzColliders[kzCM,ma,EpCM],\[Alpha]EMval]*fEPAp[pT2,xp2kzColliders[kzCM,ma,EpCM],\[Alpha]EMval])/(Sqrt[2*kT^2 (pT1^2+pT2^2)-kT^4-(pT1^2-pT2^2)^2]))//Simplify;*)
 (*kTto\[Theta]aCMEaCM[ma_,\[Theta]a_,Ea_]=Sqrt[Ea^2-ma^2]Sin[\[Theta]a];*)
 (*kzCMto\[Theta]aCMEaCM[ma_,\[Theta]a_,Ea_]=Sqrt[Ea^2-ma^2]Cos[\[Theta]a];*)
 (*JacobiankTkzCMto\[Theta]aCMEaCM[ma_,\[Theta]a_,Ea_]=D[kTto\[Theta]aCMEaCM[ma,\[Theta]a,Ea],\[Theta]a]*D[kzCMto\[Theta]aCMEaCM[ma,\[Theta]a,Ea],Ea]-D[kTto\[Theta]aCMEaCM[ma,\[Theta]a,Ea],Ea]*D[kzCMto\[Theta]aCMEaCM[ma,\[Theta]a,Ea],\[Theta]a]//Simplify;*)
@@ -1203,7 +1203,7 @@
 (*tttt2=Take[SortBy[tabb,-Abs[(#[[5,2]]-#[[7,2]])/#[[5,2]]]&],{1,Min[50,Length[tabb]]}]*)*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*ALP-fermion*)
 
 
@@ -1223,7 +1223,7 @@
 (*LLPname//Clear*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*DP*)
 
 
@@ -1298,7 +1298,7 @@
 (**)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*B-Subscript[L, \[Alpha]]*)
 
 
@@ -1368,7 +1368,7 @@
 (*,{fipname,BLlist},{Facility,FacilitiesList}];*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Scalar*)
 
 
@@ -1462,7 +1462,7 @@
 (**)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*MCPs*)
 
 
@@ -1497,7 +1497,7 @@
 (*LLPname//Clear*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Common definitions*)
 
 
@@ -1585,11 +1585,11 @@
 (*Null*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Preliminary code: PDFs of LLPs*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Production via decays: sampling boosted LLPs*)
 
 
@@ -1912,7 +1912,7 @@
 (*]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Production via decays: converting boosted LLPs data into PDF*)
 
 
@@ -2029,7 +2029,7 @@
 (*]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Production via mixing: PDF*)
 
 
@@ -2145,7 +2145,7 @@
 (*]*)*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Production via bremsstrahlung: PDF and normalization*)
 
 
@@ -2167,7 +2167,7 @@
 (*]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Production via Primakov process: PDF and normalization*)
 
 
@@ -2191,7 +2191,7 @@
 (*]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Production via photon fusion: PDF and normalization*)
 
 
@@ -2218,11 +2218,11 @@
 (*]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Choose LLP and run*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Some definitions*)
 
 
@@ -2259,7 +2259,7 @@
 (*Do[If[!DirectoryQ[dir],CreateDirectory[dir]],{dir,directories}]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Selecting LLP, facility, and production channels*)
 
 
@@ -2293,7 +2293,7 @@
 (*Null*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Computing the distributions of LLPs*)
 
 

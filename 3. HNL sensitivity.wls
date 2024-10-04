@@ -1,7 +1,7 @@
 #!/usr/bin/env wolframscript
 (* ::Package:: *)
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Just launch the code below to run the notebook (shift+enter)*)
 
 
@@ -27,11 +27,11 @@
 (*BlockEvaluation[tagselected]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Preliminary definitions (launch first)*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Various directories*)
 
 
@@ -50,7 +50,7 @@
 (*directory["Decays"]=FileNameJoin[{NotebookDirectory[],"phenomenology",LLPdirName,"decay widths"}]; *)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Parameters and various functions*)
 
 
@@ -65,7 +65,7 @@
 (*{mSM["e"],mSM["mu"],mSM["PiCharged"]}={0.5*10^-3,0.105,0.139};*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*LLP phenomenology: prodution probabilities, decay widths*)
 
 
@@ -121,7 +121,7 @@
 (**)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Loading necessary routines*)
 
 
@@ -133,11 +133,11 @@
 (*]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Specifying the experiment and HNL*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*HNL*)
 
 
@@ -154,7 +154,7 @@
 (*ldecayLLP[mLLP_,U2_,EN_]=Sqrt[EN^2-mLLP^2]/mLLP*c\[Tau]LLP[mLLP,U2];*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Experiments*)
 
 
@@ -177,7 +177,7 @@
 (**)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Running block for next sections*)
 
 
@@ -199,11 +199,11 @@
 (*]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Number of events*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Particular experiment*)
 
 
@@ -211,7 +211,7 @@
 (*SelectedExperiment=SelectedExperimentList[[icounter++]];*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Cross-sections, acceptances*)
 
 
@@ -260,7 +260,7 @@
 (*{FullAcceptanceData,DecayAcceptanceInt[mLLP_,\[Theta]LLP_,ELLP_,zLLP_],FullAcceptanceInt[mLLP_,\[Theta]LLP_,ELLP_,zLLP_],InGridm\[Epsilon],InGrid\[Theta]\[Epsilon],InGridE\[Epsilon],InGridz\[Epsilon],\[Epsilon]vals,\[Epsilon]azvals,mmin\[Epsilon],mmax\[Epsilon]}=Block\[Epsilon]Decay[FullAcceptanceData0,zminExp,BrVis];*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Angle-energy distributions for the given experiment*)
 
 
@@ -342,7 +342,7 @@
 (*Style[Row[{ptprodprob,ptenergies}],ImageSizeMultipliers->{1, 1}]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Number of events*)
 
 
@@ -542,11 +542,11 @@
 (*plotdiff=LogLogPlot[Evaluate[Table[NdiffInt[X,prod],{prod,LegendList}]],{X,QuantityMinMax[[1]],QuantityMinMax[[2]]},Frame->True,ImageSize->Large,PlotRange->{All,{10^-5,2ValueMinMax}},PlotStyle->{{Thick,Black},{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green},{Thick,Darker@Cyan},{Thick,Magenta},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green,Dashing[0.02]}},PlotLegends->Placed[Style[#,20]&/@LegendList,Right],FrameLabel->{LegendX[quantity] ,LegendY[quantity]},FrameStyle->Directive[Black, 18],PlotLabel->Style[Row[{SelectedExperiment,". \!\(\*SubscriptBox[\(m\), \(N\)]\) = ",mvaltest," GeV, \!\(\*SuperscriptBox[\(U\), \(2\)]\) = ",couplingvaltest//N}],14,Black]]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Exporting tabulated number of events*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Definitions*)
 
 
@@ -573,7 +573,7 @@
 (*mRangeExport["D"]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Exporting*)
 
 
@@ -591,11 +591,11 @@
 (*If[icounter>Length[SelectedExperimentList],BlockEvaluation["Sensitivity"]]*)
 
 
-(* ::Title:: *)
+(* ::Title::Closed:: *)
 (*Computing sensitivities*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Basic definitions*)
 
 
@@ -626,7 +626,7 @@
 (*]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Specifying the experiment and the HNL model, importing and interpolations*)
 
 
@@ -694,7 +694,7 @@
 (*pt[1.5]*)
 
 
-(* ::Chapter:: *)
+(* ::Chapter::Closed:: *)
 (*Sensitivity*)
 
 
